@@ -17,15 +17,14 @@
 - repo: glepnir/galaxyline.nvim
 
 - repo: glepnir/dashboard-nvim
-  hook_source: |-
-    lua << EOF
-    vim.g:dashboard_preview_command = 'cat'
-    -- vim.g:dashboard_preview_pipeline = 'lolcat'
-    vim.g:dashboard_preview_file = require('global').static_dir .. "pokemon.txt"
-    vim.g:dashboard_preview_file_height = 14
-    vim.g:dashboard_preview_file_width = 80
-    vim.g:dashboard_default_executive ='telescope'
-    vim.g:dashboard_custom_section = {
+  hook_source: |
+    let g:dashboard_preview_command = 'cat'
+    let g:dashboard_preview_pipeline = 'lolcat'
+    let g:dashboard_preview_file = getenv('HOME') . '/.config/nvim/static/logo.txt'
+    let g:dashboard_preview_file_height = 14
+    let g:dashboard_preview_file_width = 80
+    let g:dashboard_default_executive ='telescope'
+    let g:dashboard_custom_section = {
       \ 'last_session'        :{
           \ 'description': ['  Recently laset session                  SPC s l'],
           \ 'command': 'SessionLoad'},
@@ -42,10 +41,12 @@
           \ 'description': ['  Find  word                              SPC f w'],
           \ 'command': 'DashboardFindWord'},
       \ 'find_dotfiles'       :{
-          \ 'description': ['  Open dotfiles                           SPC f d'],
-          \ 'command': 'Telescope dotfiles},
+          \ 'description': ['  Open Personal dotfiles                  SPC f d'],
+          \ 'command': 'Telescope dotfiles path='.getenv('HOME').'/.dotfiles'},
+      \ 'go_source'           :{
+          \ 'description': ['  Find Go Source Code                     SPC f s'],
+          \ 'command': 'Telescope gosource'},
       \}
-    EOF
 
 - repo: kyazdani42/nvim-tree.lua
   hook_source: |
