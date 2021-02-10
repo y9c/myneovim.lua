@@ -45,7 +45,7 @@
       \ }
 
 - repo: mhartington/formatter.nvim
-  on_ft: [typescript, typescriptreact, lua, yaml, python]
+  on_ft: [typescript, typescriptreact, lua, yaml, python, snakemake]
   on_cmd: Format
   hook_source: |-
     lua <<EOF
@@ -87,6 +87,16 @@
           function()
               return {
                 exe = "black",
+                args = {"-"},
+                stdin = true
+              }
+            end
+        },
+        snakemake = {
+          -- snakefmt
+          function()
+              return {
+                exe = "snakefmt",
                 args = {"-"},
                 stdin = true
               }

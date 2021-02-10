@@ -37,7 +37,7 @@
   on_event: InsertCharPre
   hook_source: |-
     lua <<EOF
-    vim.g.vsnip_snippet_dir = require('global').snippet_dir
+    vim.g.vsnip_snippet_dir = require('domain.global').snippet_dir
     EOF
 
 - repo: mattn/vim-sonictemplate
