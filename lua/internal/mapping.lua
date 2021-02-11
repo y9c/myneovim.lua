@@ -50,6 +50,7 @@ function mapping:load_vim_define()
     ["n|<C-l>"] = map_cmd("<C-w>l"):with_noremap(),
     ["n|<C-j>"] = map_cmd("<C-w>j"):with_noremap(),
     ["n|<C-k>"] = map_cmd("<C-w>k"):with_noremap(),
+    ["n|U"] = map_cmd("<C-r>"):with_noremap(),
     ["n|<A-[>"] = map_cr("vertical resize -5"),
     ["n|<A-]>"] = map_cr("vertical resize +5"),
     ["n|<C-q>"] = map_cmd(":wq<CR>"),
@@ -128,7 +129,6 @@ function mapping:load_plugin_define()
     -- Plugin Floaterm
     ["n|<A-d>"] = map_cu("Lspsaga open_floaterm"):with_noremap():with_silent(),
     ["t|<A-d>"] = map_cu([[<C-\><C-n>:Lspsaga close_floaterm<CR>]]):with_noremap():with_silent(),
-    ["n|<Leader>g"] = map_cu("Lspsaga open_floaterm lazygit"):with_noremap():with_silent(),
     -- Far.vim
     ["n|<Leader>fz"] = map_cr("Farf"):with_noremap():with_silent(),
     ["v|<Leader>fz"] = map_cr("Farf"):with_noremap():with_silent(),

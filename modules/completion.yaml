@@ -46,7 +46,7 @@
   hook_source: |-
     lua <<EOF
     vim.g.sonictemplate_postfix_key = '<C-k>'
-    vim.g.sonictemplate_vim_template_dir = require('global').template_dir
+    vim.g.sonictemplate_vim_template_dir = require('domain.global').template_dir
     EOF
 
 - repo: Raimondi/delimitMate
