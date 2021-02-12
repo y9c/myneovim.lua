@@ -56,6 +56,8 @@ function mapping:load_vim_define()
     ["n|<C-q>"] = map_cmd(":wq<CR>"),
     ["n|<Leader>ss"] = map_cu("SessionSave"):with_noremap(),
     ["n|<Leader>sl"] = map_cu("SessionLoad"):with_noremap(),
+    ["v|>"] = map_cmd(">gv"):with_noremap(),
+    ["v|<"] = map_cmd("<gv"):with_noremap(),
     -- Insert
     ["i|<C-w>"] = map_cmd("<C-[>diwa"):with_noremap(),
     ["i|<C-h>"] = map_cmd("<BS>"):with_noremap(),

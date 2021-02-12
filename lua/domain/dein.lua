@@ -29,7 +29,7 @@ function dein:load_repos()
   if vim.fn.has("vim_starting") then
     vim.api.nvim_set_var("dein#auto_recache", 1)
     vim.api.nvim_set_var("dein#install_max_processes", 12)
-    vim.api.nvim_set_var("dein#install_progress_type", "title")
+    vim.api.nvim_set_var("dein#install_progress_type", "tabline")
     vim.api.nvim_set_var("dein#enable_notification", 1)
     vim.api.nvim_set_var("dein#lazy_rplugins", 1)
     vim.api.nvim_set_var("dein#install_log_filename", global.cache_dir .. "dein.log")

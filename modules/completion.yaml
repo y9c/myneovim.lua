@@ -49,6 +49,14 @@
     vim.g.sonictemplate_vim_template_dir = require('domain.global').template_dir
     EOF
 
+- repo: aperezdc/vim-template
+  hook_source: |
+    let g:templates_directory=['~/.config/nvim/templates']
+    let g:templates_user_variables=[]
+    let g:username="Ye Chang"
+    let g:email="yech1990@gmail.com"
+    let g:license="MIT"
+
 - repo: Raimondi/delimitMate
   on_event: InsertEnter
   hook_source: |
