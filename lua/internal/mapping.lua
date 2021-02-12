@@ -116,7 +116,8 @@ function mapping:load_plugin_define()
     ["n|<Leader>ce"] = map_cr("Lspsaga show_line_diagnostics"):with_noremap():with_silent(),
     ["n|<Leader>ct"] = map_args("Template"),
     -- dein
-    ["n|<Leader>tr"] = map_cr("call dein#recache_runtimepath()"):with_noremap():with_silent(),
+    ["n|<Leader>du"] = map_cr("call dein#update()"):with_noremap():with_silent(),
+    ["n|<Leader>dr"] = map_cr("call dein#recache_runtimepath()"):with_noremap():with_silent(),
     ["n|<Leader>tf"] = map_cu("DashboardNewFile"):with_noremap():with_silent(),
     -- mhinz/vim-signify
     ["n|[g"] = map_cmd("<plug>(signify-next-hunk)"),

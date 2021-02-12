@@ -35,7 +35,7 @@
     EOF
 
 - repo: itchyny/vim-cursorword
-  on_event: [BufReadPre,BufNewFile]
+  on_event: [BufReadPre, BufNewFile]
   hook_source: |
     augroup user_plugin_cursorword
       autocmd!
@@ -63,7 +63,7 @@
     endfunction
 
 - repo: mhinz/vim-signify
-  on_event: [BufReadPre,BufNewFile]
+  on_event: [BufReadPre, BufNewFile]
   hook_source: |-
     let g:signify_sign_add = '▋'
     let g:signify_sign_change = '▋'
