@@ -41,8 +41,7 @@
     EOF
 
 - repo: aperezdc/vim-template
-  on_event: [BufReadPre, BufNewFile]
-  hook_add: |
+  hook_add: |-
     let g:templates_directory=['~/.config/nvim/templates']
     let g:templates_user_variables=[]
     let g:username="Ye Chang"
