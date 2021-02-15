@@ -57,7 +57,21 @@ return require("packer").startup(
         use "nvim-treesitter/nvim-treesitter-refactor"
 
 	-- lua keymap
-        use 'tjdevries/astronauta.nvim'
+        use "tjdevries/astronauta.nvim"
+
+	-- speed up jk
+	use "rhysd/accelerated-jk"
+
+	-- Indent Guides
+	use {
+		"glepnir/indent-guides.nvim",
+		config = function() require('indent_guides').setup({ 
+			indent_levels = 30,
+			indent_guide_size = 1,
+			indent_start_level = 1,
+			indent_space_guides = true,
+			indent_tab_guides = false,
+		}) end}
 
     end
 )
