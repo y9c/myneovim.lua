@@ -127,6 +127,17 @@ return require("packer").startup(
       end
     }
 
+    -- Version control
+    use {
+      "lewis6991/gitsigns.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim"
+      },
+      config = function()
+        require("gitsigns").setup()
+      end
+    }
+
     -- LSP
 
     use {

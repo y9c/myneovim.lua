@@ -37,6 +37,10 @@ nnoremap {"<leader>e", "<CMD>NvimTreeToggle<CR>"}
 noremap {"u", ":undo<CR>"}
 noremap {"U", ":redo<CR>"}
 
+-- visual indent
+vnoremap {">", ">gv"}
+vnoremap {"<", "<gv"}
+
 -- toggle commentary
 nnoremap {"<leader>bc", "gcc"}
 
