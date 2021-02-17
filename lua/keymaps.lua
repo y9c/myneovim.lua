@@ -1,3 +1,6 @@
+-- local remap = vim.api.nvim_set_keymap
+-- local options = {noremap = true}
+
 local k = require "astronauta.keymap"
 
 local noremap = k.noremap
@@ -31,7 +34,7 @@ nnoremap {"]b", ":BufferLineCycleNext<CR>"}
 nnoremap {"[b", ":BufferLineCyclePrev<CR>"}
 
 -- toggle nvimtree
-nnoremap {"<leader>e", "<CMD>NvimTreeToggle<CR>"}
+nnoremap {"<leader>e", "<cmd>NvimTreeToggle<CR>"}
 
 -- undo and redo
 noremap {"u", ":undo<CR>"}
@@ -44,103 +47,136 @@ vnoremap {"<", "<gv"}
 -- toggle commentary
 nnoremap {"<leader>bc", "gcc"}
 
+-- toggle explorer
+nnoremap {"<F3>", "<cmd>NvimTreeToggle<cr>"}
+
+-- Version control
+-- mappings
+nnoremap {"<Leader>gd", "<cmd>SignifyDiff<cr>"}
+nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<cr>"}
+nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<cr>"}
+nnoremap {"<Leader>gt", "<cmd>SignifyToggle<cr>"}
+-- hunk jumping
+nnoremap {"]g", "<plug>(signify-next-hunk)"}
+nnoremap {"[g", "<plug>(signify-prev-hunk)"}
+
+-- Packer
+nnoremap {"<leader>pc", "<cmd>PackerCompile<CR>"}
+nnoremap {"<leader>pi", "<cmd>PackerInstall<CR>"}
+nnoremap {"<leader>pu", "<cmd>PackerUpdate<CR>"}
+
 -- LSP
-vim.api.nvim_buf_set_keymap(0, "n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "K", "<cmd>Lspsaga hover_doc<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "ga", "<cmd>Lspsaga code_action<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "gd", "<cmd>Lspsaga preview_definition<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "gs", "<cmd>Lspsaga signature_help<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "gr", "<cmd>Lspsaga rename<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "gh", "<cmd>Lspsaga lsp_finder<CR>", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "<Leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>", {noremap = true})
+nnoremap {"<leader>li", "<cmd>LspInfo<CR>"}
+nnoremap {"<leader>lu", "<cmd>LspUpdate<CR>"}
+nnoremap {"[e", "<cmd>Lspsaga diagnostic_jump_next<CR>"}
+nnoremap {"]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>"}
+nnoremap {"K", "<cmd>Lspsaga hover_doc<CR>"}
+nnoremap {"ga", "<cmd>Lspsaga code_action<CR>"}
+nnoremap {"gd", "<cmd>Lspsaga preview_definition<CR>"}
+nnoremap {"gs", "<cmd>Lspsaga signature_help<CR>"}
+nnoremap {"gr", "<cmd>Lspsaga rename<CR>"}
+nnoremap {"gh", "<cmd>Lspsaga lsp_finder<CR>"}
+nnoremap {"<Leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
 
 vim.api.nvim_buf_set_keymap(0, "v", "ga", "<cmd><C-U>Lspsaga range_code_action", {noremap = true})
 
 -- Formatter
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
 
+-- Complete
+inoremap {"<silent><expr> <C-Space>", "compe#complete()"}
+inoremap {"<silent><expr> <CR>", "compe#confirm('<CR>')"}
+inoremap {"<silent><expr> <C-e>", "compe#close('<C-e>')"}
+inoremap {"<silent><expr> <C-f>", "compe#scroll({ 'delta': +4 })"}
+inoremap {"<silent><expr> <C-d>", "compe#scroll({ 'delta': -4 })"}
+-- --
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
 -- Terminal
-vim.api.nvim_buf_set_keymap(0, "n", "<A-d>", "<cmd>Lspsaga open_floaterm", {noremap = true})
-vim.api.nvim_buf_set_keymap(0, "n", "<A-d>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", {noremap = true})
+vim.api.nvim_buf_set_keymap(0, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", {noremap = true})
+-- vim.api.nvim_buf_set_keymap(0, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {noremap = true})
+vim.fn.nvim_set_keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
 -- telescope finder
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>ff",
-  '<CMD>lua require("telescope.builtin").find_files()<CR>',
+  '<cmd>lua require("telescope.builtin").find_files()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fb",
-  '<CMD>lua require("telescope.builtin").buffers()<CR>',
+  '<cmd>lua require("telescope.builtin").buffers()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fw",
-  '<CMD>lua require("telescope.builtin").windows()<CR>',
+  '<cmd>lua require("telescope.builtin").windows()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>f:",
-  '<CMD>lua require("telescope.builtin").command_history()<CR>',
+  '<cmd>lua require("telescope.builtin").command_history()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fgs",
-  '<CMD>lua require("telescope.builtin").git_status()<CR>',
+  '<cmd>lua require("telescope.builtin").git_status()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fgr",
-  '<CMD>lua require("my-telescope").git_recents()<CR>',
+  '<cmd>lua require("my-telescope").git_recents()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fgb",
-  '<CMD>lua require("telescope.builtin").git_branches()<CR>',
+  '<cmd>lua require("telescope.builtin").git_branches()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fgc",
-  '<CMD>lua require("telescope.builtin").git_commits()<CR>',
+  '<cmd>lua require("telescope.builtin").git_commits()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>flr",
-  '<CMD>lua require("telescope.builtin").lsp_references()<CR>',
+  '<cmd>lua require("telescope.builtin").lsp_references()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fld",
-  '<CMD>lua require("telescope.builtin").lsp_document_symbols()<CR>',
+  '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>flw",
-  '<CMD>lua require("telescope.builtin").lsp_workspace_symbols()<CR>',
+  '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "n",
   "<Leader>fla",
-  '<CMD>lua require("telescope.builtin").lsp_code_actions()<CR>',
+  '<cmd>lua require("telescope.builtin").lsp_code_actions()<CR>',
   {noremap = true, silent = true}
 )
 vim.api.nvim_set_keymap(
   "v",
   "<Leader>fla",
-  '<CMD>lua require("telescope.builtin").lsp_range_code_actions()<CR>',
+  '<cmd>lua require("telescope.builtin").lsp_range_code_actions()<CR>',
   {noremap = true, silent = true}
 )
 

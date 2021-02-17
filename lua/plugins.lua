@@ -17,7 +17,20 @@ if not packer_exists then
   return
 end
 
-return require("packer").startup(
+local packer = require("packer")
+
+packer.init(
+  {
+    ensure_dependencies = true,
+    git = {
+      cmd = "git",
+      depth = 1,
+      clone_timeout = 600
+    }
+  }
+)
+
+return packer.startup(
   function()
     -- Packer can manage itself as an optional plugin
     use {"wbthomason/packer.nvim", opt = true}
@@ -127,29 +140,48 @@ return require("packer").startup(
       end
     }
 
+    -- File explorer
+    use {
+      "kyazdani42/nvim-tree.lua",
+      cmd = {"NvimTreeToggle", "NvimTreeOpen"},
+      requires = {"kyazdani42/nvim-web-devicons"},
+      config = function()
+        vim.g.nvim_tree_follow = 1
+        vim.g.nvim_tree_hide_dotfiles = 1
+        vim.g.nvim_tree_indent_markers = 1
+        vim.g.nvim_tree_bindings = {
+          edit = {"<CR>", "l"},
+          edit_vsplit = "s",
+          edit_split = "i"
+        }
+        vim.g.nvim_tree_icons = {
+          default = "",
+          symlink = "",
+          git = {
+            unstaged = "✚",
+            staged = "✚",
+            unmerged = "≠",
+            renamed = "≫",
+            untracked = "★"
+          }
+        }
+      end
+    }
+
     -- Version control
     use {
-      "lewis6991/gitsigns.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim"
-      },
+      "mhinz/vim-signify",
+      event = {"BufReadPre *", "BufNewFile *"},
       config = function()
-        require("gitsigns").setup(
-          {
-            signs = {
-              add = {hl = "GitGutterAdd", text = "+"},
-              change = {hl = "GitGutterChange", text = "~"},
-              delete = {hl = "GitGutterDelete", text = "_"},
-              topdelete = {hl = "GitGutterDelete", text = "‾"},
-              changedelete = {hl = "GitGutterChange", text = "~"}
-            }
-          }
-        )
+        vim.g.signify_sign_add = "▋"
+        vim.g.signify_sign_change = "▋"
+        vim.g.signify_sign_delete = "▋"
+        vim.g.signify_sign_delete_first_line = "▘"
+        vim.g.signify_sign_show_count = 0
       end
     }
 
     -- LSP
-
     use {
       "neovim/nvim-lspconfig",
       config = function()
@@ -167,6 +199,20 @@ return require("packer").startup(
       config = function()
         require("conf.formatter")
       end
+    }
+
+    -- Complete
+    use {
+      "hrsh7th/nvim-compe",
+      event = "InsertEnter *",
+      config = function()
+        require("conf.complete")
+      end
+    }
+
+    use {
+      "hrsh7th/vim-vsnip",
+      event = "InsertCharPre *"
     }
   end
 )
