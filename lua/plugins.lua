@@ -41,6 +41,7 @@ return packer.startup(
     -- Load on an autocommand event
     use {"andymass/vim-matchup", event = "VimEnter *"}
 
+    -- Buffer Line (top)
     use {
       "akinsho/nvim-bufferline.lua",
       config = function()
@@ -49,6 +50,7 @@ return packer.startup(
       requires = {"kyazdani42/nvim-web-devicons"}
     }
 
+    -- Status Line (bottom)
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
@@ -58,6 +60,7 @@ return packer.startup(
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
+    -- Startup window
     use {
       "glepnir/dashboard-nvim",
       config = function()
@@ -65,6 +68,7 @@ return packer.startup(
       end
     }
 
+    -- Syntax
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-refactor"
 

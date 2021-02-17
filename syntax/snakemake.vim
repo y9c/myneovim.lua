@@ -8,7 +8,7 @@
 " copy to $HOME/.vim/syntax directory and add:
 "
 " au BufNewFile,BufRead Snakefile set syntax=snakemake
-" au BufNewFile,BufRead *.snake set syntax=snakemake
+" au BufNewFile,BufRead *.smk set syntax=snakemake
 "
 " to your $HOME/.vimrc file
 "
@@ -17,7 +17,7 @@
 " :set syntax=snakemake
 "
 
-" load settings from system python.vim (7.4)
+" load settings from system python.vim
 source $VIMRUNTIME/syntax/python.vim
 
 "
