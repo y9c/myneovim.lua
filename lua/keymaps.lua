@@ -3,6 +3,7 @@
 
 local k = require "astronauta.keymap"
 
+local nmap = k.nmap
 local noremap = k.noremap
 local nnoremap = k.nnoremap
 local inoremap = k.inoremap
@@ -30,11 +31,12 @@ noremap {"<C-x>", ":bd<CR>"}
 -- vim.api.nvim_set_keymap('i', '<C-k>', [[\<C-p>]], {expr = true, noremap = true})
 
 -- moving tabs
-nnoremap {"]b", ":BufferLineCycleNext<CR>"}
-nnoremap {"[b", ":BufferLineCyclePrev<CR>"}
+nnoremap {"]b", "<cmd>BufferLineCycleNext<CR>"}
+nnoremap {"[b", "<cmd>BufferLineCyclePrev<CR>"}
 
--- toggle nvimtree
+-- toggle nvimtree explorer
 nnoremap {"<leader>e", "<cmd>NvimTreeToggle<CR>"}
+nnoremap {"<F3>", "<cmd>NvimTreeToggle<cr>"}
 
 -- undo and redo
 noremap {"u", ":undo<CR>"}
@@ -44,11 +46,8 @@ noremap {"U", ":redo<CR>"}
 vnoremap {">", ">gv"}
 vnoremap {"<", "<gv"}
 
--- toggle commentary
-nnoremap {"<leader>bc", "gcc"}
-
--- toggle explorer
-nnoremap {"<F3>", "<cmd>NvimTreeToggle<cr>"}
+-- toggle commentary (gcc is a map key, so noremap won't work!)
+nmap {"<leader>bc", "gcc"}
 
 -- Version control
 -- mappings
@@ -57,8 +56,8 @@ nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<cr>"}
 nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<cr>"}
 nnoremap {"<Leader>gt", "<cmd>SignifyToggle<cr>"}
 -- hunk jumping
-nnoremap {"]g", "<plug>(signify-next-hunk)"}
-nnoremap {"[g", "<plug>(signify-prev-hunk)"}
+nmap {"]g", "<plug>(signify-next-hunk)"}
+nmap {"[g", "<plug>(signify-prev-hunk)"}
 
 -- Packer
 nnoremap {"<leader>pc", "<cmd>PackerCompile<CR>"}

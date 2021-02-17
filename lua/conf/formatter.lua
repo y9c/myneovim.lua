@@ -37,7 +37,7 @@ require("formatter").setup(
         function()
           return {
             exe = "black",
-            args = {"-"},
+            args = {"-l", 79, "-"},
             stdin = true
           }
         end
@@ -62,7 +62,7 @@ require("formatter").setup(
               "--no-restore",
               "--no-save",
               "-e",
-              "con<-file('stdin');styler::style_text(readLines(con));close(con)",
+              "con<-file('stdin');out<-styler::style_text(readLines(con));close(con);print(out)",
               "2>/dev/null"
             },
             stdin = true

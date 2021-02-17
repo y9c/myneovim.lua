@@ -21,3 +21,19 @@ vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.signcolumn = "number"
 vim.wo.wrap = false
+
+-- clipboard speedup
+if vim.env.TMUX then
+  vim.g.clipboard = {
+    name = "tmux-clipboard",
+    copy = {
+      ["+"] = {"tmux", "load-buffer", "-"},
+      ["*"] = {"tmux", "load-buffer", "-"}
+    },
+    paste = {
+      ["+"] = {"tmux", "save-buffer", "-"},
+      ["*"] = {"tmux", "save-buffer", "-"}
+    },
+    cache_enabled = 1
+  }
+end
