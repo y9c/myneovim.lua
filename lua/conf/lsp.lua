@@ -9,9 +9,10 @@ local servers = {
   "gopls",
   "rust_analyzer",
   "bashls",
-  "perlls",
   "pyright",
   "r_language_server",
+  "julials",
+  "perlls",
   "vimls"
 }
 
