@@ -49,6 +49,7 @@ vnoremap {"<", "<gv"}
 
 -- toggle commentary (gcc is a map key, so noremap won't work!)
 nmap {"<leader>bc", "gcc"}
+vmap {"<leader>bc", "gc"}
 
 -- Version control
 -- mappings

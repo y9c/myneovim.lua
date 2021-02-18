@@ -60,6 +60,9 @@ function autocmd.load_autocmds()
     },
     yank = {
       {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}
+    },
+    ["vimrc-remember-cursor-position"] = {
+      {"BufReadPost", [[* if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
     }
   }
 

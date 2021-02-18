@@ -47,6 +47,22 @@ require("formatter").setup(
         end
       },
       python = {
+        -- isort
+        function()
+          return {
+            exe = "isort",
+            args = {"-"},
+            stdin = true
+          }
+        end,
+        -- docformatter
+        function()
+          return {
+            exe = "docformatter",
+            args = {"-"},
+            stdin = true
+          }
+        end,
         -- black
         function()
           return {

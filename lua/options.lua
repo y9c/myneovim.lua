@@ -17,10 +17,23 @@ vim.o.showmode = false
 
 vim.o.clipboard = "unnamedplus"
 
-vim.wo.number = true
-vim.wo.relativenumber = true
 vim.wo.signcolumn = "number"
 vim.wo.wrap = false
+
+-- indent
+vim.b.tabstop = 2
+vim.bo.tabstop = 2
+vim.b.shiftwidth = 2
+vim.bo.shiftwidth = 2
+vim.b.expandtab = true
+vim.bo.expandtab = true
+-- FileType autocommands
+vim.cmd("autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab")
+-- vim.cmd("autocmd FileType lua setlocal shiftwidth=2 tabstop=8 softtabstop=4 expandtab")
+
+-- line number
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- undo
 vim.o.undofile = true
