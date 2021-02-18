@@ -35,9 +35,6 @@ return packer.startup(
     -- Packer can manage itself as an optional plugin
     use {"wbthomason/packer.nvim", opt = true}
 
-    -- Load on specific commands
-    use {"tpope/vim-dispatch", opt = true, cmd = {"Dispatch", "Make", "Focus", "Start"}}
-
     -- Load on an autocommand event
     use {"andymass/vim-matchup", event = "VimEnter *"}
 
@@ -69,8 +66,36 @@ return packer.startup(
     }
 
     -- Syntax
-    use "nvim-treesitter/nvim-treesitter"
-    use "nvim-treesitter/nvim-treesitter-refactor"
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      event = "BufRead *",
+      after = "telescope.nvim",
+      config = function()
+        vim.api.nvim_command("set foldmethod=expr")
+        vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
+        require "nvim-treesitter.configs".setup {
+          highlight = {
+            enable = true
+          },
+          textobjects = {
+            select = {
+              enable = true,
+              keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner"
+              }
+            }
+          },
+          ensure_installed = "all"
+        }
+      end
+    }
+    use {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      after = "nvim-treesitter"
+    }
 
     -- lua keymap
     use "tjdevries/astronauta.nvim"
@@ -197,6 +222,18 @@ return packer.startup(
     }
     use "glepnir/lspsaga.nvim"
 
+    -- markdown language
+    if (vim.env.DISPLAY) then
+      use {
+        "iamcco/markdown-preview.nvim",
+        ft = "markdown",
+        run = "cd app && yarn install",
+        config = function()
+          vim.g.mkdp_auto_start = 0
+        end
+      }
+    end
+
     -- Formatter
     use {
       "mhartington/formatter.nvim",
@@ -217,6 +254,17 @@ return packer.startup(
     use {
       "hrsh7th/vim-vsnip",
       event = "InsertCharPre *"
+    }
+
+    -- use { "tzachar/compe-tabnine", run = "./install.sh" }
+
+    -- Translator
+    use {
+      "voldikss/vim-translator",
+      config = function()
+        vim.g.translator_history_enable = true
+        vim.g.translator_default_engines = {"bing", "haici", "youdao"}
+      end
     }
   end
 )

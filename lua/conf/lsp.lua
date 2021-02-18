@@ -5,8 +5,9 @@ local enhance_attach = function(_, bufnr)
 end
 
 local servers = {
-  "rust_analyzer",
+  "ccls",
   "gopls",
+  "rust_analyzer",
   "bashls",
   "perlls",
   "pyright",

@@ -3,9 +3,10 @@ require("compe").setup {
   autocomplete = true,
   debug = false,
   min_length = 1,
-  preselect = "enable",
+  preselect = "always",
+  allow_prefix_unmatch = false,
   throttle_time = 80,
-  source_timeout = 200,
+  source_timeout = 250,
   incomplete_delay = 400,
   max_abbr_width = 100,
   max_kind_width = 100,
@@ -17,11 +18,13 @@ require("compe").setup {
     calc = true,
     vsnip = true,
     nvim_lsp = true,
-    nvim_lua = true,
+    nvim_lua = false,
     spell = true,
     tags = true,
     snippets_nvim = true,
-    treesitter = true
+    treesitter = true,
+    omni = true,
+    tabnine = true
   }
 }
 
@@ -52,6 +55,7 @@ _G.tab_complete = function()
     return vim.fn["compe#complete"]()
   end
 end
+
 _G.s_tab_complete = function()
   if vim.fn.pumvisible() == 1 then
     return t "<C-p>"
@@ -61,3 +65,19 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
+
+-- vsnip
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.rust_analyzer.setup {
+  capabilities = capabilities,
+}
+vim.g.vsnip_snippet_dir = os.getenv("HOME") .. "/.config/nvim/snippets"
+vim.g.vsnip_filetypes = {
+  javascriptreact = {"javascript", "html"},
+  typescriptreact = {"typescript", "html"},
+  vue = {"vue", "javascript", "html"},
+  snakemake = {"snakemake", "python"},
+  sbatch = {"sbatch", "sh"}
+}

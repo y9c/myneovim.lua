@@ -22,6 +22,21 @@ vim.wo.relativenumber = true
 vim.wo.signcolumn = "number"
 vim.wo.wrap = false
 
+-- undo
+vim.o.undofile = true
+vim.bo.undofile = true
+-- undodir default: $XDG_DATA_HOME/nvim/undo
+-- vim.o.undodir = os.getenv('HOME') .. "/.cache/vim/undo"
+
+-- Complete
+vim.o.completeopt = "menuone,noselect"
+
+-- Spelling
+-- vim.wo.spell = true
+vim.o.spellsuggest = "fast,12"
+vim.o.spelloptions = "camel"
+vim.o.fileformats = "unix,mac,dos"
+
 -- clipboard speedup
 if vim.env.TMUX then
   vim.g.clipboard = {

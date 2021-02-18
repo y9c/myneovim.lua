@@ -4,6 +4,7 @@
 local k = require "astronauta.keymap"
 
 local nmap = k.nmap
+local vmap = k.vmap
 local noremap = k.noremap
 local nnoremap = k.nnoremap
 local inoremap = k.inoremap
@@ -21,7 +22,7 @@ nnoremap {"<C-l>", "<C-w>l"}
 
 -- save file
 noremap {"<F2>", ":w<CR>"}
-inoremap {"<F2>", "<ESC>:w<CR>"}
+inoremap {"<F2>", "<ESC>:w<CR>a"}
 
 -- kill current buffer
 noremap {"<C-x>", ":bd<CR>"}
@@ -51,7 +52,7 @@ nmap {"<leader>bc", "gcc"}
 
 -- Version control
 -- mappings
-nnoremap {"<Leader>gd", "<cmd>SignifyDiff<cr>"}
+nnoremap {"<F7>", "<cmd>SignifyDiff<cr>"}
 nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<cr>"}
 nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<cr>"}
 nnoremap {"<Leader>gt", "<cmd>SignifyToggle<cr>"}
@@ -70,12 +71,12 @@ nnoremap {"<leader>lu", "<cmd>LspUpdate<CR>"}
 nnoremap {"[e", "<cmd>Lspsaga diagnostic_jump_next<CR>"}
 nnoremap {"]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>"}
 nnoremap {"K", "<cmd>Lspsaga hover_doc<CR>"}
-nnoremap {"ga", "<cmd>Lspsaga code_action<CR>"}
 nnoremap {"gd", "<cmd>Lspsaga preview_definition<CR>"}
+nnoremap {"gr", "<cmd>Lspsaga lsp_finder<CR>"} -- press `q` to close float term
+nnoremap {"<leader>rn", "<cmd>Lspsaga rename<CR>"}
+nnoremap {"ga", "<cmd>Lspsaga code_action<CR>"}
 nnoremap {"gs", "<cmd>Lspsaga signature_help<CR>"}
-nnoremap {"gr", "<cmd>Lspsaga rename<CR>"}
-nnoremap {"gh", "<cmd>Lspsaga lsp_finder<CR>"}
-nnoremap {"<Leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
+nnoremap {"<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
 
 vim.api.nvim_buf_set_keymap(0, "v", "ga", "<cmd><C-U>Lspsaga range_code_action", {noremap = true})
 
@@ -83,19 +84,41 @@ vim.api.nvim_buf_set_keymap(0, "v", "ga", "<cmd><C-U>Lspsaga range_code_action",
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
 
 -- Complete
-inoremap {"<silent><expr> <C-Space>", "compe#complete()"}
-inoremap {"<silent><expr> <CR>", "compe#confirm('<CR>')"}
-inoremap {"<silent><expr> <C-e>", "compe#close('<C-e>')"}
-inoremap {"<silent><expr> <C-f>", "compe#scroll({ 'delta': +4 })"}
-inoremap {"<silent><expr> <C-d>", "compe#scroll({ 'delta': -4 })"}
+vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true, silent = true})
+vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true, silent = true})
 -- --
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+-- Plugin MarkdownPreview
+nmap {"<leader>om", "<plug>MarkdownPreviewToggle"}
+
+-- Translator
+-- Echo translation in the cmdline
+nmap {"<Leader>te", "<Plug>Translate"}
+vmap {"<Leader>te", "<Plug>TranslateV"}
+-- Display translation in a window
+nmap {"T", "<Plug>TranslateW"}
+vmap {"T", "<Plug>TranslateWV"}
+-- Replace the text with translation
+nmap {"<Leader>tr", "<Plug>TranslateR"}
+vmap {"<Leader>tr", "<Plug>TranslateRV"}
+-- Translate the text in clipboard
+nmap {"<Leader>ty", "<Plug>TranslateX"}
+
 -- Terminal
-vim.api.nvim_buf_set_keymap(0, "n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", {noremap = true})
+vim.api.nvim_buf_set_keymap(
+  0,
+  "n",
+  "<A-d>",
+  "<cmd>lua require('lspsaga.floaterm').open_float_terminal('',1)<CR>",
+  {noremap = true}
+)
 -- vim.api.nvim_buf_set_keymap(0, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {noremap = true})
 vim.fn.nvim_set_keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
