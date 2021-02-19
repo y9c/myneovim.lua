@@ -13,6 +13,7 @@ if not packer_exists then
   local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
   execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
   execute "packadd packer.nvim"
+  execute "PackerSync"
 
   return
 end
