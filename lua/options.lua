@@ -31,6 +31,9 @@ vim.bo.expandtab = true
 vim.cmd("autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab")
 -- vim.cmd("autocmd FileType lua setlocal shiftwidth=2 tabstop=8 softtabstop=4 expandtab")
 
+-- fold
+vim.cmd("set nofoldenable")
+
 -- line number
 vim.wo.number = true
 vim.wo.relativenumber = true
