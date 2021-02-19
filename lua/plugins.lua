@@ -2,19 +2,16 @@
 
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
+local execute = vim.api.nvim_command
+
 if not packer_exists then
-  if vim.fn.input("Download Packer? (y for yes)") ~= "y" then
+  if vim.fn.input("Download Packer? (y for yes): ") ~= "y" then
     return
   end
 
-  local execute = vim.api.nvim_command
-  local fn = vim.fn
-
-  local install_path = fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
+  local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
   execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-  execute "packadd packer.nvim"
-  execute "PackerSync"
-
+  execute("packadd packer.nvim")
   return
 end
 
@@ -31,7 +28,7 @@ packer.init(
   }
 )
 
-return packer.startup(
+packer.startup(
   function()
     -- Packer can manage itself as an optional plugin
     use {"wbthomason/packer.nvim", opt = true}
@@ -291,3 +288,7 @@ return packer.startup(
     }
   end
 )
+
+if not packer_exists then
+  packer.sync()
+end
