@@ -37,7 +37,10 @@ nnoremap {"[b", "<cmd>BufferLineCyclePrev<CR>"}
 
 -- toggle nvimtree explorer
 nnoremap {"<leader>e", "<cmd>NvimTreeToggle<CR>"}
-nnoremap {"<F3>", "<cmd>NvimTreeToggle<cr>"}
+nnoremap {"<F3>", "<cmd>NvimTreeToggle<CR>"}
+
+-- toggle vista viewer
+nnoremap {"<F4>", "<cmd>Vista!!<CR>"}
 
 -- undo and redo
 noremap {"u", ":undo<CR>"}
@@ -53,10 +56,10 @@ vmap {"<leader>bc", "gc"}
 
 -- Version control
 -- mappings
-nnoremap {"<F7>", "<cmd>SignifyDiff<cr>"}
-nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<cr>"}
-nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<cr>"}
-nnoremap {"<Leader>gt", "<cmd>SignifyToggle<cr>"}
+nnoremap {"<F7>", "<cmd>SignifyDiff<CR>"}
+nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<CR>"}
+nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<CR>"}
+nnoremap {"<Leader>gt", "<cmd>SignifyToggle<CR>"}
 -- hunk jumping
 nmap {"]g", "<plug>(signify-next-hunk)"}
 nmap {"[g", "<plug>(signify-prev-hunk)"}
@@ -206,6 +209,6 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap(
   "n",
   "<leader><leader>c",
-  '<cmd>lua require("telescope.builtin").git_files({cwd = "~/.config"})<cr>',
+  '<cmd>lua require("telescope.builtin").git_files({cwd = "~/.config"})<CR>',
   {noremap = true, silent = true}
 )

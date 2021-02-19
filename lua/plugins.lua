@@ -113,7 +113,9 @@ return packer.startup(
             indent_guide_size = 1,
             indent_start_level = 1,
             indent_space_guides = true,
-            indent_tab_guides = false
+            indent_tab_guides = false,
+            even_colors = {fg = "#ABB0BA", bg = "#34383F"},
+            odd_colors = {fg = "#BBC2CF", bg = "#2E323A"}
           }
         )
       end
@@ -193,6 +195,26 @@ return packer.startup(
             renamed = "≫",
             untracked = "★"
           }
+        }
+      end
+    }
+    -- view LSP symbol and tags
+    use {
+      "liuchengxu/vista.vim",
+      cmd = "Vista",
+      config = function()
+        vim.g["vista#renderer#enable_icon"] = 1
+        vim.g.vista_disable_statusline = 1
+        vim.g.vista_icon_indent = {"╰─▸ ", "├─▸ "}
+        vim.g.vista_default_executive = "ctags"
+        vim.g.vista_echo_cursor_strategy = "floating_win"
+        vim.g.vista_vimwiki_executive = "markdown"
+        vim.g.vista_executive_for = {
+          vimwiki = "markdown",
+          pandoc = "markdown",
+          markdown = "toc",
+          typescript = "nvim_lsp",
+          typescriptreact = "nvim_lsp"
         }
       end
     }
