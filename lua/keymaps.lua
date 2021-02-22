@@ -126,89 +126,16 @@ vim.api.nvim_buf_set_keymap(
 -- vim.api.nvim_buf_set_keymap(0, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {noremap = true})
 vim.fn.nvim_set_keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
--- telescope finder
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>ff",
-  '<cmd>lua require("telescope.builtin").find_files()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fb",
-  '<cmd>lua require("telescope.builtin").buffers()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fw",
-  '<cmd>lua require("telescope.builtin").windows()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>f:",
-  '<cmd>lua require("telescope.builtin").command_history()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fgs",
-  '<cmd>lua require("telescope.builtin").git_status()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fgr",
-  '<cmd>lua require("my-telescope").git_recents()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fgb",
-  '<cmd>lua require("telescope.builtin").git_branches()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fgc",
-  '<cmd>lua require("telescope.builtin").git_commits()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>flr",
-  '<cmd>lua require("telescope.builtin").lsp_references()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fld",
-  '<cmd>lua require("telescope.builtin").lsp_document_symbols()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>flw",
-  '<cmd>lua require("telescope.builtin").lsp_workspace_symbols()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Leader>fla",
-  '<cmd>lua require("telescope.builtin").lsp_code_actions()<CR>',
-  {noremap = true, silent = true}
-)
-vim.api.nvim_set_keymap(
-  "v",
-  "<Leader>fla",
-  '<cmd>lua require("telescope.builtin").lsp_range_code_actions()<CR>',
-  {noremap = true, silent = true}
-)
-
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader><leader>c",
-  '<cmd>lua require("telescope.builtin").git_files({cwd = "~/.config"})<CR>',
-  {noremap = true, silent = true}
-)
+-- Telescope File Pickers
+nnoremap {"<leader>ff", "<cmd>Telescope find_files<CR>"} -- "<cmd>DashboardFindFile<CR>" is a similar one
+nnoremap {"<leader>gg", "<cmd>Telescope live_grep<CR>"} -- "<cmd>DashboardFindWord<CR>" is a similar one
+nnoremap {"<leader>fw", "<cmd>Telescope grep_string<CR>"}
+-- Telescope vim Pickers
+nnoremap {"<leader>cc", "<cmd>Telescope commands<CR>"}
+nnoremap {"<leader>fb", "<cmd>Telescope buffers<CR>"}
+nnoremap {"<leader>fo", "<cmd>Telescope oldfiles<CR>"}
+nnoremap {"<leader>fg", "<cmd>Telescope current_buffer_fuzzy_find<CR>"}
+-- Telescope Git Pickers
+nnoremap {"<leader>gf", "<cmd>Telescope git_files<CR>"}
+nnoremap {"<leader>gc", "<cmd>Telescope git_commits<CR>"}
+nnoremap {"<leader>gs", "<cmd>Telescope git_status<CR>"}

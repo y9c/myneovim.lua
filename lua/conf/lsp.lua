@@ -22,6 +22,18 @@ for _, server in ipairs(servers) do
   }
 end
 
+lspconfig.efm.setup {
+  filetypes = {"yaml", "snakemake"},
+  cmd = {
+    "efm-langserver",
+    "-c",
+    vim.fn.stdpath("config") .. "/lua/conf/efm.yaml"
+  },
+  root_dir = function()
+    return vim.fn.getcwd()
+  end
+}
+
 lspconfig.sumneko_lua.setup {
   cmd = {
     os.getenv("HOME") .. "/Tools/lua-language-server/bin/Linux/lua-language-server",
