@@ -1,83 +1,42 @@
-local finders = require("telescope.finders")
-local make_entry = require("telescope.make_entry")
-local pickers = require("telescope.pickers")
-local utils = require("telescope.utils")
-
-local conf = require("telescope.config").values
-
--- Built-in actions
-local actions = require("telescope.actions")
-
--- Setup    =================================================================================
-require("telescope").setup {
+require('telescope').setup{
   defaults = {
-    set_env = {["COLORTERM"] = "truecolor"},
-    -- Global remapping
-    mappings = {
-      i = {
-        ["<CR>"] = actions.goto_file_selection_edit + actions.center
-      },
-      n = {
-        ["<esc>"] = actions.close
-      }
-    }
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
+    },
+    prompt_position = "bottom",
+    prompt_prefix = ">",
+    initial_mode = "insert",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_defaults = {
+      -- TODO add builtin options.
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.8,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require'telescope.previewers'.cat.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_cat.new`
+    grep_previewer = require'telescope.previewers'.vimgrep.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_vimgrep.new`
+    qflist_previewer = require'telescope.previewers'.qflist.new, -- For buffer previewer use `require'telescope.previewers'.vim_buffer_qflist.new`
+
+    -- Developer configurations: Not meant for general override
+    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker
   }
 }
-
--- Styles   =================================================================================
-
-local M = {}
-
-M.setupTelescopeHighlight = function()
-  local palette = vim.g.momiji_palette
-  local highlight = vim.fn["MomijiHighlight"]
-  highlight("TelescopeSelection", {fg = palette.black, bg = palette.blue})
-  highlight("TelescopeMultiSelection", {fg = palette.black, bg = palette.lightblue})
-  highlight("TelescopeMatching", {fg = palette.lightyellow})
-end
-
-if vim.g.colors_name == "momiji" then
-  M.setupTelescopeHighlight()
-else
-  vim.cmd [[ autocmd ColorScheme momiji ++once lua require('my-galaxyline').setupTelescopeHighlight() ]]
-end
-
--- Commands =================================================================================
-
-vim.cmd [[
-  command! ConfigEdit lua require("telescope.builtin").git_files({cwd = "~/.config"})
-]]
-
-vim.cmd [[
-  command! PackerEdit lua require("telescope.builtin").find_files({search_dirs = {"~/.local/share/nvim/site/pack/packer"}})
-]]
-vim.api.nvim_set_keymap(
-  "n",
-  "<leader><leader>p",
-  '<cmd>lua require("telescope.builtin").find_files({search_dirs = {"~/.local/share/nvim/site/pack/packer"}})<cr>',
-  {noremap = true, silent = true}
-)
-
-local my = {}
-my.git_recents = function(opts)
-  local opts = opts or {}
-  local depth = utils.get_default(opts.depth, 5)
-
-  if opts.cwd then
-    opts.cwd = vim.fn.expand(opts.cwd)
-  end
-
-  opts.entry_maker = opts.entry_maker or make_entry.gen_from_file(opts)
-
-  pickers.new(
-    opts,
-    {
-      prompt_title = "Git Recents",
-      finder = finders.new_oneshot_job({"git", "diff", "--name-only", depth and "HEAD~" .. depth or "HEAD"}, opts),
-      previewer = conf.file_previewer(opts),
-      sorter = conf.file_sorter(opts)
-    }
-  ):find()
-end
-
-return my
