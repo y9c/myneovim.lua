@@ -55,6 +55,7 @@ function autocmd.load_autocmds()
       {"FileType", "dashboard", "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"},
       {"BufNewFile,BufRead", "*.toml", " setf toml"},
       {"BufNewFile,BufRead", "*.jl", " setf julia"},
+      {"BufNewFile,BufRead", "*.ipynb", " setf ipynb"},
       {"BufNewFile,BufRead", "Snakefile,*.smk", " setf snakemake"},
       {"BufNewFile,BufRead", "*.sbatch,*.sbatch.sh", " setf sbatch"}
     },
