@@ -21,7 +21,7 @@ require("compe").setup {
     nvim_lua = false,
     spell = true,
     tags = true,
-    snippets_nvim = true,
+    snippets_nvim = false,
     treesitter = true,
     omni = true,
     tabnine = true
@@ -70,10 +70,10 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.rust_analyzer.setup {
-  capabilities = capabilities,
+require "lspconfig".rust_analyzer.setup {
+  capabilities = capabilities
 }
-vim.g.vsnip_snippet_dir = os.getenv("HOME") .. "/.config/nvim/snippets"
+vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets"
 vim.g.vsnip_filetypes = {
   javascriptreact = {"javascript", "html"},
   typescriptreact = {"typescript", "html"},

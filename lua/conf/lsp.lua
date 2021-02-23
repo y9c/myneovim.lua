@@ -23,7 +23,8 @@ for _, server in ipairs(servers) do
 end
 
 lspconfig.efm.setup {
-  filetypes = {"yaml", "snakemake"},
+  -- filetypes = {"yaml", "snakemake"},
+  filetypes = {"yaml"},
   cmd = {
     "efm-langserver",
     "-c",
