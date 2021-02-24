@@ -107,11 +107,6 @@ return packer.startup(
       config = function()
         require("indent_guides").setup(
           {
-            indent_levels = 30,
-            indent_guide_size = 1,
-            indent_start_level = 1,
-            indent_space_guides = true,
-            indent_tab_guides = false,
             even_colors = {fg = "NONE", bg = "#23272E"},
             odd_colors = {fg = "NONE", bg = "#23272E"}
           }
