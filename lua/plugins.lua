@@ -112,8 +112,8 @@ return packer.startup(
             indent_start_level = 1,
             indent_space_guides = true,
             indent_tab_guides = false,
-            even_colors = {fg = "#ABB0BA", bg = "#34383F"},
-            odd_colors = {fg = "#BBC2CF", bg = "#2E323A"}
+            even_colors = {fg = "NONE", bg = "#23272E"},
+            odd_colors = {fg = "NONE", bg = "#23272E"}
           }
         )
       end
@@ -178,10 +178,11 @@ return packer.startup(
         vim.g.nvim_tree_follow = 1
         vim.g.nvim_tree_hide_dotfiles = 1
         vim.g.nvim_tree_indent_markers = 1
+
         vim.g.nvim_tree_bindings = {
-          edit = {"<CR>", "l"},
-          edit_vsplit = "s",
-          edit_split = "i"
+          ["l"] = ":lua require'nvim-tree'.on_keypress('edit')<CR>",
+          ["s"] = ":lua require'nvim-tree'.on_keypress('vsplit')<CR>",
+          ["i"] = ":lua require'nvim-tree'.on_keypress('split')<CR>"
         }
         vim.g.nvim_tree_icons = {
           default = "",
