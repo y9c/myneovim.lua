@@ -113,7 +113,12 @@ return packer.startup(
     --     )
     --   end
     -- }
-    use 'Yggdroot/indentLine'
+    use {
+      "Yggdroot/indentLine",
+      config = function()
+        vim.g.indentLine_fileTypeExclude = {"help", "dashboard", "dashpreview", "NvimTree", "vista", "sagahover"}
+      end
+    }
 
     -- Commentary
     use "tomtom/tcomment_vim"
