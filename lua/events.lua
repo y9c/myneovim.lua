@@ -64,6 +64,10 @@ function autocmd.load_autocmds()
     },
     ["vimrc-remember-cursor-position"] = {
       {"BufReadPost", [[* if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
+    },
+    -- auto close quickfix
+    ["autoclose-quickfix"] = {
+      {"WinEnter", "*", [[if winnr('$') == 1 && &buftype == "quickfix"|q|endif]]}
     }
   }
 

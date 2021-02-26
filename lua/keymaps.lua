@@ -5,6 +5,9 @@ local k = require "astronauta.keymap"
 
 local nmap = k.nmap
 local vmap = k.vmap
+local omap = k.omap
+local xmap = k.xmap
+
 local noremap = k.noremap
 local nnoremap = k.nnoremap
 local inoremap = k.inoremap
@@ -68,6 +71,7 @@ nmap {"[g", "<plug>(signify-prev-hunk)"}
 nnoremap {"<leader>pc", "<cmd>PackerCompile<CR>"}
 nnoremap {"<leader>pi", "<cmd>PackerInstall<CR>"}
 nnoremap {"<leader>pu", "<cmd>PackerUpdate<CR>"}
+nnoremap {"<leader>ps", "<cmd>PackerSync<CR>"}
 
 -- LSP
 nnoremap {"<leader>li", "<cmd>LspInfo<CR>"}
@@ -98,6 +102,35 @@ vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Quick Jump
+_G.enhance_ft_move = function(key)
+  if not packer_plugins["vim-eft"].loaded then
+    vim.cmd [[packadd vim-eft]]
+  end
+  local map = {
+    f = "<Plug>(eft-f)",
+    F = "<Plug>(eft-F)",
+    [","] = "<Plug>(eft-repeat)"
+  }
+  return vim.api.nvim_replace_termcodes(map[key], true, true, true)
+end
+
+vim.api.nvim_set_keymap("n", "f", "v:lua.enhance_ft_move('f')", {expr = true})
+vim.api.nvim_set_keymap("x", "f", "v:lua.enhance_ft_move('f')", {expr = true})
+vim.api.nvim_set_keymap("o", "f", "v:lua.enhance_ft_move('f')", {expr = true})
+vim.api.nvim_set_keymap("n", "F", "v:lua.enhance_ft_move('F')", {expr = true})
+vim.api.nvim_set_keymap("x", "F", "v:lua.enhance_ft_move('F')", {expr = true})
+vim.api.nvim_set_keymap("o", "F", "v:lua.enhance_ft_move('F')", {expr = true})
+
+-- Quick Run
+vim.api.nvim_set_keymap("n", "<localleader>r", "<plug>QuickRun -mode n<cr>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("v", "<localleader>r", "<plug>QuickRun -mode v<cr>", {silent = true, noremap = true})
+
+nnoremap {"<localleader>r", "<cmd>QuickRun -mode n<CR>"}
+vnoremap {"<localleader>r", "<cmd>QuickRun -mode v<CR>"}
+nnoremap {"<F5>", "<cmd>QuickRun -mode n<CR>"}
+vnoremap {"<F5>", "<cmd>QuickRun -mode v<CR>"}
 
 -- Plugin MarkdownPreview
 nmap {"<leader>om", "<plug>MarkdownPreviewToggle"}

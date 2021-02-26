@@ -125,15 +125,36 @@ return packer.startup(
       end
     }
 
+    -- Qucik Jump
+    use {
+      "hrsh7th/vim-eft",
+      opt = true,
+      config = function()
+        vim.g.eft_ignorecase = true
+        vim.g.eft_highlight = {
+          ["1"] = {
+            highlight = "EftChar",
+            allow_space = true,
+            allow_operator = true
+          },
+          ["2"] = {
+            highlight = "EftSubChar",
+            allow_space = false,
+            allow_operator = false
+          },
+          ["n"] = {
+            highlight = "EftSubChar",
+            allow_space = false,
+            allow_operator = false
+          }
+        }
+      end
+    }
     -- QuickRun
     use {
       "thinca/vim-quickrun",
       setup = function()
         vim.g.quickrun_no_default_key_mappings = 1
-      end,
-      config = function()
-        vim.api.nvim_set_keymap("n", "<leader>r", "<plug>QuickRun -mode n<cr>", {silent = true, noremap = true})
-        vim.api.nvim_set_keymap("v", "<leader>r", "<plug>QuickRun -mode v<cr>", {silent = true, noremap = true})
       end
     }
 
