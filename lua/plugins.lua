@@ -102,17 +102,18 @@ return packer.startup(
     use "rhysd/accelerated-jk"
 
     -- Indent Guides
-    use {
-      "glepnir/indent-guides.nvim",
-      config = function()
-        require("indent_guides").setup(
-          {
-            even_colors = {fg = "NONE", bg = "#23272E"},
-            odd_colors = {fg = "NONE", bg = "#23272E"}
-          }
-        )
-      end
-    }
+    -- use {
+    --   "glepnir/indent-guides.nvim",
+    --   config = function()
+    --     require("indent_guides").setup(
+    --       {
+    --         even_colors = {fg = "NONE", bg = "#23272E"},
+    --         odd_colors = {fg = "NONE", bg = "#23272E"}
+    --       }
+    --     )
+    --   end
+    -- }
+    use 'Yggdroot/indentLine'
 
     -- Commentary
     use "tomtom/tcomment_vim"
