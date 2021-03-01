@@ -131,6 +131,11 @@ return packer.startup(
       end
     }
 
+    use {
+      "itchyny/vim-cursorword",
+      event = {"BufReadPre *", "BufNewFile *"}
+    }
+
     -- Qucik Jump
     use {
       "hrsh7th/vim-eft",
@@ -161,6 +166,10 @@ return packer.startup(
       "thinca/vim-quickrun",
       setup = function()
         vim.g.quickrun_no_default_key_mappings = 1
+        vim.g.quickrun_config = {
+          -- _ = {outputter = "message"}
+          rust = {type = "rust/cargo"}
+        }
       end
     }
 

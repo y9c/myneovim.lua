@@ -34,6 +34,10 @@ vim.cmd("autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab")
 -- fold
 vim.cmd("set nofoldenable")
 
+-- show special(list) charaters
+vim.o.listchars = "tab:»·,nbsp:+,trail:·,extends:☛,precedes:☚"
+vim.cmd("set list")
+
 -- line number
 vim.wo.number = true
 vim.wo.relativenumber = true

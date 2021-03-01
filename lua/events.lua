@@ -28,9 +28,9 @@ function autocmd.load_autocmds()
       {"BufWritePre", "COMMIT_EDITMSG", "setlocal noundofile"},
       {"BufWritePre", "MERGE_MSG", "setlocal noundofile"},
       {"BufWritePre", "*.tmp", "setlocal noundofile"},
-      {"BufWritePre", "*.bak", "setlocal noundofile"},
-      {"BufWritePre", "*.tsx", "lua vim.api.nvim_command('Format')"},
-      {"BufWritePre", "*.go", "lua require('internal.golines').golines_format()"}
+      {"BufWritePre", "*.bak", "setlocal noundofile"}
+      -- Format before write buffer
+      -- {"BufWritePre", "*.tsx", "lua vim.api.nvim_command('Format')"},
     },
     wins = {
       -- Highlight current line only on focused window
@@ -68,6 +68,12 @@ function autocmd.load_autocmds()
     -- auto close quickfix
     ["autoclose-quickfix"] = {
       {"WinEnter", "*", [[if winnr('$') == 1 && &buftype == "quickfix"|q|endif]]}
+    },
+    ["plugin-cursorword"] = {
+      {"FileType", "defx,denite,fern,clap,vista", "let b:cursorword = 0"},
+      {"WinEnter", "*", "if &diff || &pvw | let b:cursorword = 0 | endif"},
+      {"InsertEnter", "*", "let b:cursorword = 0"},
+      {"InsertLeave", "*", "let b:cursorword = 1"}
     }
   }
 

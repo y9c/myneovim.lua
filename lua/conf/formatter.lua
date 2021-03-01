@@ -108,6 +108,25 @@ require("formatter").setup(
             stdin = true
           }
         end
+      },
+      rust = {
+        -- rustfmt-nightly
+        function()
+          return {
+            exe = "rustfmt",
+            args = {"--emit=stdout"},
+            stdin = true
+          }
+        end
+      },
+      go = {
+        -- gofmt
+        function()
+          return {
+            exe = "gofmt",
+            stdin = true
+          }
+        end
       }
     }
   }
