@@ -30,3 +30,7 @@ git clone https://github.com/yech1990/myneovim.lua.git ~/.config.nvim --depth 1
 ```vim
 :TSUpdate
 ```
+
+## REFERENCE
+
+- https://github.com/glepnir/nvim

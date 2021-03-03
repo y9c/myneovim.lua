@@ -166,7 +166,7 @@ gls.right[6] = {
   DiffModified = {
     provider = "DiffModified",
     condition = condition.hide_in_width,
-    icon = " 柳",
+    icon = "  ",
     highlight = {colors.orange, colors.bg}
   }
 }
@@ -180,6 +180,22 @@ gls.right[7] = {
 }
 
 gls.right[8] = {
+  ShowLspClient = {
+    provider = "GetLspClient",
+    separator = " ",
+    condition = function()
+      local tbl = {["dashboard"] = true, [""] = true}
+      if tbl[vim.bo.filetype] then
+        return false
+      end
+      return true
+    end,
+    icon = " ",
+    highlight = {colors.cyan, colors.bg, "bold"}
+  }
+}
+
+gls.right[9] = {
   RainbowBlue = {
     provider = function()
       return " ▊"
