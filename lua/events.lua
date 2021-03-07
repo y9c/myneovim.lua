@@ -70,7 +70,7 @@ function autocmd.load_autocmds()
       {"WinEnter", "*", [[if winnr('$') == 1 && &buftype == "quickfix"|q|endif]]}
     },
     ["plugin-cursorword"] = {
-      {"FileType", "defx,denite,fern,clap,vista", "let b:cursorword = 0"},
+      {"FileType", "defx,denite,fern,clap,vista,packer,NvimTree", "let b:cursorword = 0"},
       {"WinEnter", "*", "if &diff || &pvw | let b:cursorword = 0 | endif"},
       {"InsertEnter", "*", "let b:cursorword = 0"},
       {"InsertLeave", "*", "let b:cursorword = 1"}

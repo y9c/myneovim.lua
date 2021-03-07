@@ -296,16 +296,26 @@ return packer.startup(
 
     -- Complete
     use {
+      "hrsh7th/vim-vsnip",
+      event = "InsertCharPre *",
+      config = function()
+        vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets"
+        vim.g.vsnip_filetypes = {
+          javascriptreact = {"javascript", "html"},
+          typescriptreact = {"typescript", "html"},
+          vue = {"vue", "javascript", "html"},
+          snakemake = {"snakemake", "python"},
+          sbatch = {"sbatch", "sh"}
+        }
+      end
+    }
+
+    use {
       "hrsh7th/nvim-compe",
       event = "InsertEnter *",
       config = function()
         require("conf.complete")
       end
-    }
-
-    use {
-      "hrsh7th/vim-vsnip",
-      event = "InsertCharPre *"
     }
 
     -- use { "tzachar/compe-tabnine", run = "./install.sh" }

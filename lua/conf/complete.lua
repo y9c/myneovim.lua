@@ -13,18 +13,23 @@ require("compe").setup {
   max_menu_width = 100,
   documentation = true,
   source = {
-    path = true,
+    -- Common
     buffer = true,
+    path = true,
+    tags = true,
     calc = true,
-    vsnip = true,
+    spell = true,
+    omni = false,
+    -- Neovim-specific
     nvim_lsp = true,
     nvim_lua = false,
-    spell = true,
-    tags = true,
-    snippets_nvim = false,
+    -- External-plugin
+    vsnip = true,
     treesitter = true,
-    omni = true,
-    tabnine = true
+    snippets_nvim = false,
+    -- External sources
+    tabnine = false,
+    zsh = false
   }
 }
 
@@ -65,19 +70,3 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
-
--- vsnip
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require "lspconfig".rust_analyzer.setup {
-  capabilities = capabilities
-}
-vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets"
-vim.g.vsnip_filetypes = {
-  javascriptreact = {"javascript", "html"},
-  typescriptreact = {"typescript", "html"},
-  vue = {"vue", "javascript", "html"},
-  snakemake = {"snakemake", "python"},
-  sbatch = {"sbatch", "sh"}
-}

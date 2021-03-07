@@ -4,6 +4,9 @@ local enhance_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 end
 
+local enhance_capabilities = vim.lsp.protocol.make_client_capabilities()
+-- enhance_capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 local servers = {
   "ccls",
   "gopls",
@@ -18,7 +21,8 @@ local servers = {
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup {
-    on_attach = enhance_attach
+    on_attach = enhance_attach,
+    capabilities = enhance_capabilities
   }
 end
 
