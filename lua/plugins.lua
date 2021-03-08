@@ -178,27 +178,26 @@ return packer.startup(
 
     use {
       "nvim-telescope/telescope.nvim",
-      requires = {{"nvim-lua/popup.nvim"}, {"nvim-lua/plenary.nvim"}},
+      cmd = "Telescope",
+      requires = {
+        {"nvim-lua/popup.nvim", opt = true},
+        {"nvim-lua/plenary.nvim", opt = true},
+        {"nvim-telescope/telescope-fzy-native.nvim", opt = true}
+      },
       config = function()
         require("conf.telescope")
       end
     }
 
-    use {
-      "nvim-telescope/telescope-frecency.nvim",
-      requires = {
-        "tami5/sql.nvim"
-      },
-      config = function()
-        require "telescope".load_extension("frecency")
-        vim.api.nvim_set_keymap(
-          "n",
-          "<Leader>fm",
-          "<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>",
-          {noremap = true, silent = true}
-        )
-      end
-    }
+    -- use {
+    --   "nvim-telescope/telescope-frecency.nvim",
+    --   requires = {
+    --     "tami5/sql.nvim"
+    --   },
+    --   config = function()
+    --     require "telescope".load_extension("frecency")
+    --   end
+    -- }
 
     -- File explorer
     use {

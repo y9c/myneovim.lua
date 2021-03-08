@@ -172,3 +172,5 @@ nnoremap {"<leader>fg", "<cmd>Telescope current_buffer_fuzzy_find<CR>"}
 nnoremap {"<leader>gf", "<cmd>Telescope git_files<CR>"}
 nnoremap {"<leader>gc", "<cmd>Telescope git_commits<CR>"}
 nnoremap {"<leader>gs", "<cmd>Telescope git_status<CR>"}
+-- Telescope frequency
+nnoremap {"<leader>fm", "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>"}
