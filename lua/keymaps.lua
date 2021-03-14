@@ -152,12 +152,12 @@ nmap {"<Leader>ty", "<Plug>TranslateX"}
 vim.api.nvim_buf_set_keymap(
   0,
   "n",
-  "<A-d>",
-  "<cmd>lua require('lspsaga.floaterm').open_float_terminal('',1)<CR>",
+  "<A-t>",
+  "<cmd>lua require('lspsaga.floaterm').open_float_terminal('')<CR>",
   {noremap = true}
 )
 -- vim.api.nvim_buf_set_keymap(0, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {noremap = true})
-vim.fn.nvim_set_keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
+vim.fn.nvim_set_keymap("t", "<A-t>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
 -- Telescope File Pickers
 nnoremap {"<leader>ff", "<cmd>Telescope find_files<CR>"} -- "<cmd>DashboardFindFile<CR>" is a similar one
