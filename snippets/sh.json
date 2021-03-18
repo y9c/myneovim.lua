@@ -1,0 +1,12 @@
+{
+  "#!/usr/bin/env sh": {
+    "prefix": "env",
+    "body": "#!/usr/bin/env sh\n$0",
+    "description": "Adds shebang line for default sh interpreter."
+  },
+  "#!/usr/bin/env bash": {
+    "prefix": "envb",
+    "body": "#!/usr/bin/env bash\n$0",
+    "description": "Adds shebang line for default bash interpreter."
+  }
+}
