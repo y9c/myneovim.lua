@@ -29,7 +29,7 @@ vim.b.expandtab = true
 vim.bo.expandtab = true
 -- FileType autocommands
 vim.cmd("autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab")
--- vim.cmd("autocmd FileType lua setlocal shiftwidth=2 tabstop=8 softtabstop=4 expandtab")
+vim.cmd("autocmd FileType snakemake setlocal shiftwidth=4 tabstop=4 expandtab")
 
 -- fold
 vim.cmd("set nofoldenable")
