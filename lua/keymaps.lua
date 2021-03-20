@@ -83,10 +83,10 @@ nnoremap {"gd", "<cmd>Lspsaga preview_definition<CR>"}
 nnoremap {"gr", "<cmd>Lspsaga lsp_finder<CR>"} -- press `q` to close float term
 nnoremap {"<leader>rn", "<cmd>Lspsaga rename<CR>"}
 nnoremap {"ga", "<cmd>Lspsaga code_action<CR>"}
+vnoremap {"ga", "<cmd><C-U>Lspsaga range_code_action<CR>"}
 nnoremap {"gs", "<cmd>Lspsaga signature_help<CR>"}
 nnoremap {"<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
 
-vim.api.nvim_buf_set_keymap(0, "v", "ga", "<cmd><C-U>Lspsaga range_code_action", {noremap = true})
 
 -- Formatter
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
@@ -124,9 +124,6 @@ vim.api.nvim_set_keymap("x", "F", "v:lua.enhance_ft_move('F')", {expr = true})
 vim.api.nvim_set_keymap("o", "F", "v:lua.enhance_ft_move('F')", {expr = true})
 
 -- Quick Run
-vim.api.nvim_set_keymap("n", "<localleader>r", "<plug>QuickRun -mode n<cr>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("v", "<localleader>r", "<plug>QuickRun -mode v<cr>", {silent = true, noremap = true})
-
 nnoremap {"<localleader>r", "<cmd>QuickRun -mode n<CR>"}
 vnoremap {"<localleader>r", "<cmd>QuickRun -mode v<CR>"}
 nnoremap {"<F5>", "<cmd>QuickRun -mode n<CR>"}
@@ -156,8 +153,7 @@ vim.api.nvim_buf_set_keymap(
   "<cmd>lua require('lspsaga.floaterm').open_float_terminal('')<CR>",
   {noremap = true}
 )
--- vim.api.nvim_buf_set_keymap(0, "t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {noremap = true})
-vim.fn.nvim_set_keymap("t", "<A-t>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
+vim.api.nvim_set_keymap("t", "<A-t>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
 -- Telescope File Pickers
 nnoremap {"<leader>ff", "<cmd>Telescope find_files<CR>"} -- "<cmd>DashboardFindFile<CR>" is a similar one
