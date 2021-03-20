@@ -294,6 +294,18 @@ return packer.startup(
 
     -- Complete
     use {
+      "windwp/nvim-autopairs",
+      event = "InsertEnter *",
+      config = function()
+        require("nvim-autopairs").setup(
+          {
+            disable_filetype = {"TelescopePrompt", "vim"}
+          }
+        )
+      end
+    }
+
+    use {
       "hrsh7th/vim-vsnip",
       event = "InsertCharPre *",
       config = function()
