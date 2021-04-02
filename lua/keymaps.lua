@@ -87,9 +87,22 @@ vnoremap {"ga", "<cmd><C-U>Lspsaga range_code_action<CR>"}
 nnoremap {"gs", "<cmd>Lspsaga signature_help<CR>"}
 nnoremap {"<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
 
-
 -- Formatter
-vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
+function run_formatter()
+  local filetype = vim.bo.filetype
+  local formatters = require("formatter.config").values.filetype[filetype]
+
+  if vim.bo.modifiable then
+    if not require("formatter.util").isEmpty(formatters) then
+      vim.api.nvim_command("Format")
+    else
+      vim.lsp.buf.formatting()
+    end
+  end
+end
+
+-- vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
+vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<CR>", {noremap = true})
 
 -- Complete
 vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", {expr = true, silent = true})

@@ -27,6 +27,10 @@ require("formatter").setup(
         -- prettier
         prettier_formatter
       },
+      javascript = {
+        -- prettier
+        prettier_formatter
+      },
       typescript = {
         -- prettier
         prettier_formatter
@@ -43,7 +47,7 @@ require("formatter").setup(
         -- shfmt
         -- GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
         function()
-          return {exe = "shfmt", args = {}, stdin = true}
+          return {exe = "shfmt", args = {"-i", 2}, stdin = true}
         end
       },
       python = {
