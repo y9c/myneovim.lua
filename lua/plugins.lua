@@ -328,7 +328,7 @@ return packer.startup(
       end
     }
 
-    -- use { "tzachar/compe-tabnine", run = "./install.sh" }
+    use {"tzachar/compe-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-compe"}
 
     -- Translator
     use {
