@@ -103,6 +103,19 @@ require("formatter").setup(
           }
         end
       },
+      perl = {
+        -- perltidy
+        function()
+          return {
+            exe = "perltidy",
+            args = {
+              "-st",
+              "2>/dev/null"
+            },
+            stdin = true
+          }
+        end
+      },
       lua = {
         -- luafmt
         function()
