@@ -17,7 +17,7 @@ vim.o.showmode = false
 
 vim.o.clipboard = "unnamedplus"
 
-vim.wo.signcolumn = "number"
+-- vim.wo.signcolumn = "number"
 vim.wo.wrap = false
 
 -- indent
