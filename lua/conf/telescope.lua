@@ -16,15 +16,13 @@ require("telescope").setup {
     layout_strategy = "horizontal",
     layout_config = {
       width = 0.75,
-      results_height = 1,
-      results_width = 0.8,
       preview_cutoff = 120,
       prompt_position = "bottom"
     },
     file_sorter = require "telescope.sorters".get_fuzzy_file,
     file_ignore_patterns = {},
     generic_sorter = require "telescope.sorters".get_generic_fuzzy_sorter,
-    shorten_path = true,
+    path_display = true,
     winblend = 0,
     border = {},
     borderchars = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
