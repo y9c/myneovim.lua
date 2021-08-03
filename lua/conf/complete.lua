@@ -28,7 +28,7 @@ require("compe").setup {
     treesitter = true,
     snippets_nvim = false,
     -- External sources
-    tabnine = false,
+    tabnine = true,
     zsh = false
   }
 }

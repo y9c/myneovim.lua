@@ -72,8 +72,10 @@ return packer.startup(
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
         require "nvim-treesitter.configs".setup {
+          ignore_install = {"haskell"},
           highlight = {
-            enable = true
+            enable = true,
+            disable = {"haskell"},
           },
           textobjects = {
             select = {
@@ -395,7 +397,7 @@ return packer.startup(
       end
     }
 
-    -- use { "tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *" }
+    use { "tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *" }
 
     -- Translator
     use {
