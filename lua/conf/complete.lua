@@ -14,7 +14,7 @@ require("compe").setup {
   documentation = true,
   source = {
     -- Common
-    buffer = true,
+    buffer = false,
     path = true,
     tags = true,
     calc = true,
