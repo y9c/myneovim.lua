@@ -118,6 +118,7 @@ require("formatter").setup(
       },
       lua = {
         -- luafmt
+        -- npm install lua-fmt -g
         function()
           return {
             exe = "luafmt",

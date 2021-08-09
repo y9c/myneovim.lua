@@ -75,7 +75,7 @@ return packer.startup(
           ignore_install = {"haskell"},
           highlight = {
             enable = true,
-            disable = {"haskell"},
+            disable = {"haskell"}
           },
           textobjects = {
             select = {
@@ -206,13 +206,16 @@ return packer.startup(
         }
       end
     }
+    -- run code
+    -- use {"CRAG666/code_runner.nvim"}
     -- QuickRun
+    use {"lambdalisue/vim-quickrun-neovim-job"}
     use {
       "thinca/vim-quickrun",
       setup = function()
         vim.g.quickrun_no_default_key_mappings = 1
         vim.g.quickrun_config = {
-          -- _ = {outputter = "message"}
+          _ = {runner = "neovim_job"},
           rust = {type = "rust/cargo"}
         }
       end
@@ -396,7 +399,7 @@ return packer.startup(
       end
     }
 
-    use { "tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *" }
+    use {"tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *"}
 
     -- Translator
     use {
