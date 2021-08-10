@@ -399,7 +399,13 @@ return packer.startup(
       end
     }
 
-    use {"tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *"}
+    use {
+      "tzachar/compe-tabnine",
+      opt = true,
+      after = "nvim-compe",
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-compe"
+    }
 
     -- Translator
     use {
