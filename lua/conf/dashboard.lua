@@ -1,5 +1,7 @@
-vim.g.dashboard_default_executive = "telescope"
-vim.g.dashboard_custom_header = {
+local alpha = require "alpha"
+local dashboard = require "alpha.themes.dashboard"
+
+dashboard.section.header.val = {
   "",
   "       ▓██   ██▓▓█████  ▄████▄",
   "        ▒██  ██▒▓█   ▀ ▒██▀ ▀█",
@@ -14,25 +16,11 @@ vim.g.dashboard_custom_header = {
   ""
 }
 
-vim.g.dashboard_custom_section = {
-  last_session = {
-    description = {"  Last Session                            SPC s l"},
-    command = "SessionLoad"
-  },
-  find_history = {
-    description = {"  Recently Opened Files                   SPC f h"},
-    command = "DashboardFindHistory"
-  },
-  find_file = {
-    description = {"  Find File                               SPC f f"},
-    command = "Telescope find_files find_command=rg,--hidden,--files,--glob,!.git"
-  },
-  new_file = {
-    description = {"  File Browser                            SPC f b"},
-    command = "Telescope file_browser"
-  },
-  find_word = {
-    description = {"  Find Word                               SPC f w"},
-    command = "DashboardFindWord"
-  }
+dashboard.section.buttons.val = {
+  dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
+  dashboard.button("f", "  Find File", ":Telescope find_files find_command=rg,--hidden,--files,--glob,!.git<CR>"),
+  dashboard.button("q", "  Quit NVIM", ":qa<CR>")
 }
+
+-- make the opt run
+alpha.setup(dashboard.opts)

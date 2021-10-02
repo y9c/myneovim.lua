@@ -41,9 +41,10 @@ lspconfig.efm.setup {
 
 lspconfig.sumneko_lua.setup {
   cmd = {
-    os.getenv("HOME") .. "/Tools/lua-language-server/bin/Linux/lua-language-server",
-    "-E",
-    os.getenv("HOME") .. "/Tools/lua-language-server/main.lua"
+    -- os.getenv("HOME") .. "/Tools/lua-language-server/bin/Linux/lua-language-server",
+    -- "-E",
+    -- os.getenv("HOME") .. "/Tools/lua-language-server/main.lua"
+    "lua-language-server"
   },
   settings = {
     Lua = {
