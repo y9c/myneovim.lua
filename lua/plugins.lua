@@ -56,8 +56,14 @@ return packer.startup(
     }
 
     -- Startup window
+    -- use {
+    --   "glepnir/dashboard-nvim",
+    --   config = function()
+    --     require("conf.dashboard")
+    --   end
+    -- }
     use {
-      "glepnir/dashboard-nvim",
+      "goolord/alpha-nvim",
       config = function()
         require("conf.dashboard")
       end
@@ -72,8 +78,10 @@ return packer.startup(
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
         require "nvim-treesitter.configs".setup {
+          ignore_install = {"haskell"},
           highlight = {
-            enable = true
+            enable = true,
+            disable = {"haskell"}
           },
           textobjects = {
             select = {
@@ -204,13 +212,16 @@ return packer.startup(
         }
       end
     }
+    -- run code
+    -- use {"CRAG666/code_runner.nvim"}
     -- QuickRun
+    use {"lambdalisue/vim-quickrun-neovim-job"}
     use {
       "thinca/vim-quickrun",
       setup = function()
         vim.g.quickrun_no_default_key_mappings = 1
         vim.g.quickrun_config = {
-          -- _ = {outputter = "message"}
+          _ = {runner = "neovim_job"},
           rust = {type = "rust/cargo"}
         }
       end
@@ -250,12 +261,6 @@ return packer.startup(
         vim.g.nvim_tree_follow = 1
         vim.g.nvim_tree_hide_dotfiles = 1
         vim.g.nvim_tree_indent_markers = 1
-
-        vim.g.nvim_tree_bindings = {
-          ["l"] = ":lua require'nvim-tree'.on_keypress('edit')<CR>",
-          ["s"] = ":lua require'nvim-tree'.on_keypress('vsplit')<CR>",
-          ["i"] = ":lua require'nvim-tree'.on_keypress('split')<CR>"
-        }
         vim.g.nvim_tree_icons = {
           default = "",
           symlink = "",
@@ -320,15 +325,12 @@ return packer.startup(
             ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
             ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
           },
-          watch_index = {
-            interval = 1000
-          },
           current_line_blame = false,
           sign_priority = 6,
           update_debounce = 100,
-          status_formatter = nil, -- Use default
-          use_decoration_api = true,
-          use_internal_diff = true -- If luajit is present
+          status_formatter = nil,
+          watch_gitdir = {interval = 1000},
+          diff_opts = {interval = true}
         }
       end
     }
@@ -401,7 +403,13 @@ return packer.startup(
       end
     }
 
-    -- use { "tzachar/compe-tabnine", run = "./install.sh", event = "InsertEnter *" }
+    use {
+      "tzachar/compe-tabnine",
+      opt = true,
+      after = "nvim-compe",
+      run = "./install.sh",
+      requires = "hrsh7th/nvim-compe"
+    }
 
     -- Translator
     use {

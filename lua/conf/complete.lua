@@ -14,7 +14,7 @@ require("compe").setup {
   documentation = true,
   source = {
     -- Common
-    buffer = true,
+    buffer = false,
     path = true,
     tags = true,
     calc = true,
@@ -28,7 +28,7 @@ require("compe").setup {
     treesitter = true,
     snippets_nvim = false,
     -- External sources
-    tabnine = false,
+    tabnine = true,
     zsh = false
   }
 }

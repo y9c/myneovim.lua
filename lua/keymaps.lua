@@ -79,12 +79,18 @@ nnoremap {"<leader>lu", "<cmd>LspUpdate<CR>"}
 nnoremap {"[e", "<cmd>Lspsaga diagnostic_jump_next<CR>"}
 nnoremap {"]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>"}
 nnoremap {"K", "<cmd>Lspsaga hover_doc<CR>"}
-nnoremap {"gd", "<cmd>Lspsaga preview_definition<CR>"}
-nnoremap {"gr", "<cmd>Lspsaga lsp_finder<CR>"} -- press `q` to close float term
+
+nnoremap {"vd", "<cmd>Lspsaga preview_definition<CR>"}
+nnoremap {"gd", "<cmd>lua vim.lsp.buf.definition()<CR>"}
+nnoremap {"gD", "<cmd>lua vim.lsp.buf.declaration()<CR>"}
+
+nnoremap {"vr", "<cmd>Lspsaga lsp_finder<CR>"} -- press `q` to close float term
+nnoremap {"gr", "<cmd>lua vim.lsp.buf.references()<CR>"}
+
 nnoremap {"<leader>rn", "<cmd>Lspsaga rename<CR>"}
-nnoremap {"ga", "<cmd>Lspsaga code_action<CR>"}
-vnoremap {"ga", "<cmd><C-U>Lspsaga range_code_action<CR>"}
-nnoremap {"gs", "<cmd>Lspsaga signature_help<CR>"}
+nnoremap {"va", "<cmd>Lspsaga code_action<CR>"}
+vnoremap {"va", "<cmd><C-U>Lspsaga range_code_action<CR>"}
+nnoremap {"vs", "<cmd>Lspsaga signature_help<CR>"}
 nnoremap {"<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
 
 -- Formatter

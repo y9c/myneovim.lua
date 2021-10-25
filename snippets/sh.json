@@ -1,4 +1,9 @@
 {
+  "HEADER and LICENSE": {
+    "prefix": "#!",
+    "body": "#!/usr/bin/env sh\n#\n# Copyright © ${CURRENT_YEAR} Ye Chang yech1990@gmail.com\n# Distributed under terms of the MIT license.\n#\n# Created: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}\n\n$0\n",
+    "description": "Add HEADER and LICENSE."
+  },
   "#!/usr/bin/env sh": {
     "prefix": "env",
     "body": "#!/usr/bin/env sh\n$0",
