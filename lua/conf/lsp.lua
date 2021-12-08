@@ -16,7 +16,8 @@ local servers = {
   "r_language_server",
   "julials",
   "perlls",
-  "vimls"
+  "vimls",
+  "tsserver"
 }
 
 for _, server in ipairs(servers) do

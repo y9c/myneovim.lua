@@ -395,21 +395,23 @@ return packer.startup(
       end
     }
 
-    use {
-      "hrsh7th/nvim-compe",
-      event = "InsertEnter *",
-      config = function()
-        require("conf.complete")
-      end
-    }
+    -- use {
+    --   "hrsh7th/nvim-compe",
+    --   event = "InsertEnter *",
+    --   config = function()
+    --     require("conf.complete")
+    --   end
+    -- }
 
-    use {
-      "tzachar/compe-tabnine",
-      opt = true,
-      after = "nvim-compe",
-      run = "./install.sh",
-      requires = "hrsh7th/nvim-compe"
-    }
+    -- use {
+    --   "tzachar/compe-tabnine",
+    --   opt = true,
+    --   after = "nvim-compe",
+    --   run = "./install.sh",
+    --   requires = "hrsh7th/nvim-compe"
+    -- }
+
+    use "github/copilot.vim"
 
     -- Translator
     use {
