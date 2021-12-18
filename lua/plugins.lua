@@ -38,17 +38,16 @@ return packer.startup(
 
     -- Buffer Line (top)
     use {
-      "akinsho/nvim-bufferline.lua",
+      "akinsho/bufferline.nvim",
       config = function()
         require("conf.bufferline")
       end,
-      requires = {"kyazdani42/nvim-web-devicons"}
+      requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
     -- Status Line (bottom)
     use {
-      "glepnir/galaxyline.nvim",
-      branch = "main",
+      "nvim-lualine/lualine.nvim",
       config = function()
         require("conf.statusline")
       end,
