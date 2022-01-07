@@ -102,9 +102,6 @@ return packer.startup(
       after = "nvim-treesitter"
     }
 
-    -- lua keymap
-    use "tjdevries/astronauta.nvim"
-
     -- speed up jk
     use "rhysd/accelerated-jk"
 

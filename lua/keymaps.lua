@@ -1,97 +1,84 @@
--- local remap = vim.api.nvim_set_keymap
--- local options = {noremap = true}
-
-local k = require "astronauta.keymap"
-
-local nmap = k.nmap
-local vmap = k.vmap
-local omap = k.omap
-local xmap = k.xmap
-
-local noremap = k.noremap
-local nnoremap = k.nnoremap
-local inoremap = k.inoremap
-local vnoremap = k.vnoremap
-
 -- split windows
-nnoremap {"vv", "<C-w>v"}
-nnoremap {"ss", "<C-w>s"}
+vim.api.nvim_set_keymap("n", "vv", "<C-w>v", {noremap = true})
+vim.api.nvim_set_keymap("n", "ss", "<C-w>s", {noremap = true})
 
 -- moving windows
-nnoremap {"<C-j>", "<C-w>j"}
-nnoremap {"<C-k>", "<C-w>k"}
-nnoremap {"<C-h>", "<C-w>h"}
-nnoremap {"<C-l>", "<C-w>l"}
+vim.api.nvim_set_keymap("n", "<C-j>", "<C-w>j", {noremap = true})
+vim.api.nvim_set_keymap("n", "<C-k>", "<C-w>k", {noremap = true})
+vim.api.nvim_set_keymap("n", "<C-h>", "<C-w>h", {noremap = true})
+vim.api.nvim_set_keymap("n", "<C-l>", "<C-w>l", {noremap = true})
 
 -- save file
-noremap {"<F2>", ":w<CR>"}
-inoremap {"<F2>", "<ESC>:w<CR>a"}
+vim.api.nvim_set_keymap("n", "<F2>", ":w<CR>", {noremap = true})
+vim.api.nvim_set_keymap("i", "<F2>", "<ESC>:w<CR>a", {noremap = true})
 
 -- kill current buffer
-noremap {"<C-x>", ":bd<CR>"}
+vim.api.nvim_set_keymap("n", "<C-x>", ":bd<CR>", {noremap = true})
 
 -- Better completion nav
 -- vim.api.nvim_set_keymap('i', '<C-j>', [[\<C-n>]], {expr = true, noremap = true})
 -- vim.api.nvim_set_keymap('i', '<C-k>', [[\<C-p>]], {expr = true, noremap = true})
 
 -- moving tabs
-nnoremap {"]b", "<cmd>BufferLineCycleNext<CR>"}
-nnoremap {"[b", "<cmd>BufferLineCyclePrev<CR>"}
+vim.api.nvim_set_keymap("n", "]b", "<cmd>BufferLineCycleNext<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "[b", "<cmd>BufferLineCyclePrev<CR>", {noremap = true})
 
 -- toggle nvimtree explorer
-nnoremap {"<leader>e", "<cmd>NvimTreeToggle<CR>"}
-nnoremap {"<F3>", "<cmd>NvimTreeToggle<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<F3>", "<cmd>NvimTreeToggle<CR>", {noremap = true})
 
 -- toggle vista viewer
-nnoremap {"<F4>", "<cmd>Vista!!<CR>"}
+vim.api.nvim_set_keymap("n", "<F4>", "<cmd>Vista!!<CR>", {noremap = true})
 
 -- undo and redo
-noremap {"u", ":undo<CR>"}
-noremap {"U", ":redo<CR>"}
+vim.api.nvim_set_keymap("n", "u", ":undo<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "U", ":redo<CR>", {noremap = true})
 
 -- visual indent
-vnoremap {">", ">gv"}
-vnoremap {"<", "<gv"}
+vim.api.nvim_set_keymap("v", ">", ">gv", {noremap = true})
+vim.api.nvim_set_keymap("v", "<", "<gv", {noremap = true})
 
 -- toggle commentary (gcc is a map key, so noremap won't work!)
-nmap {"<leader>bc", "gcc"}
-vmap {"<leader>bc", "gc"}
+vim.api.nvim_set_keymap("n", "<leader>bc", "gcc", {})
+vim.api.nvim_set_keymap("v", "<leader>bc", "gc", {})
 
 -- Version control
 -- mappings
-nnoremap {"<F7>", "<cmd>SignifyDiff<CR>"}
-nnoremap {"<Leader>gh", "<cmd>SignifyHunkDiff<CR>"}
-nnoremap {"<Leader>gu", "<cmd>SignifyHunkUndo<CR>"}
-nnoremap {"<Leader>gt", "<cmd>SignifyToggle<CR>"}
+vim.api.nvim_set_keymap("n", "<F7>", "<cmd>SignifyDiff<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gh", "<cmd>SignifyHunkDiff<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gu", "<cmd>SignifyHunkUndo<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<Leader>gt", "<cmd>SignifyToggle<CR>", {noremap = true})
+
 -- hunk jumping
-nmap {"]g", "<plug>(signify-next-hunk)"}
-nmap {"[g", "<plug>(signify-prev-hunk)"}
+vim.api.nvim_set_keymap("n", "[g", "<plug>(signify-prev-hunk)", {})
+vim.api.nvim_set_keymap("n", "]g", "<plug>(signify-next-hunk)", {})
 
 -- Packer
-nnoremap {"<leader>pc", "<cmd>PackerCompile<CR>"}
-nnoremap {"<leader>pi", "<cmd>PackerInstall<CR>"}
-nnoremap {"<leader>pu", "<cmd>PackerUpdate<CR>"}
-nnoremap {"<leader>ps", "<cmd>PackerSync<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>pc", "<cmd>PackerCompile<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>pi", "<cmd>PackerInstall<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>pu", "<cmd>PackerUpdate<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ps", "<cmd>PackerSync<CR>", {noremap = true})
 
 -- LSP
-nnoremap {"<leader>li", "<cmd>LspInfo<CR>"}
-nnoremap {"<leader>lu", "<cmd>LspUpdate<CR>"}
-nnoremap {"[e", "<cmd>Lspsaga diagnostic_jump_next<CR>"}
-nnoremap {"]e", "<cmd>Lspsaga diagnostic_jump_prev<CR>"}
-nnoremap {"K", "<cmd>Lspsaga hover_doc<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>li", "<cmd>LspInfo<CR>", {noremap = true})
 
-nnoremap {"vd", "<cmd>Lspsaga preview_definition<CR>"}
-nnoremap {"gd", "<cmd>lua vim.lsp.buf.definition()<CR>"}
-nnoremap {"gD", "<cmd>lua vim.lsp.buf.declaration()<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>lu", "<cmd>LspUpdate<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "]e", "n<cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", {noremap = true})
 
-nnoremap {"vr", "<cmd>Lspsaga lsp_finder<CR>"} -- press `q` to close float term
-nnoremap {"gr", "<cmd>lua vim.lsp.buf.references()<CR>"}
+vim.api.nvim_set_keymap("n", "vd", "<cmd>Lspsaga preview_definition<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", {noremap = true})
 
-nnoremap {"<leader>rn", "<cmd>Lspsaga rename<CR>"}
-nnoremap {"va", "<cmd>Lspsaga code_action<CR>"}
-vnoremap {"va", "<cmd><C-U>Lspsaga range_code_action<CR>"}
-nnoremap {"vs", "<cmd>Lspsaga signature_help<CR>"}
-nnoremap {"<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>"}
+vim.api.nvim_set_keymap("n", "vr", "<cmd>Lspsaga lsp_finder<CR>", {noremap = true}) -- press `q` to close float term
+vim.api.nvim_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", {noremap = true})
+
+vim.api.nvim_set_keymap("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "va", "<cmd>Lspsaga code_action<CR>", {noremap = true})
+vim.api.nvim_set_keymap("v", "va", "<cmd><C-U>Lspsaga range_code_action<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "vs", "<cmd>Lspsaga signature_help<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>", {noremap = true})
 
 -- Formatter
 function run_formatter()
@@ -107,7 +94,6 @@ function run_formatter()
   end
 end
 
--- vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua vim.api.nvim_command('Format')<CR>", {noremap = true})
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<CR>", {noremap = true})
 
 -- Complete
@@ -116,7 +102,6 @@ vim.api.nvim_set_keymap("i", "<CR>", "compe#confirm('<CR>')", {expr = true, sile
 vim.api.nvim_set_keymap("i", "<C-e>", "compe#close('<C-e>')", {expr = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-f>", "compe#scroll({ 'delta': +4 })", {expr = true, silent = true})
 vim.api.nvim_set_keymap("i", "<C-d>", "compe#scroll({ 'delta': -4 })", {expr = true, silent = true})
--- --
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
@@ -143,26 +128,26 @@ vim.api.nvim_set_keymap("x", "F", "v:lua.enhance_ft_move('F')", {expr = true})
 vim.api.nvim_set_keymap("o", "F", "v:lua.enhance_ft_move('F')", {expr = true})
 
 -- Quick Run
-nnoremap {"<localleader>r", "<cmd>QuickRun -mode n<CR>"}
-vnoremap {"<localleader>r", "<cmd>QuickRun -mode v<CR>"}
-nnoremap {"<F5>", "<cmd>QuickRun -mode n<CR>"}
-vnoremap {"<F5>", "<cmd>QuickRun -mode v<CR>"}
+vim.api.nvim_set_keymap("n", "<localleader>r", "<cmd>QuickRun -mode n<CR>", {noremap = true})
+vim.api.nvim_set_keymap("v", "<localleader>r", "<cmd>QuickRun -mode v<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<F5>", "<cmd>QuickRun -mode n<CR>", {noremap = true})
+vim.api.nvim_set_keymap("v", "<F5>", "<cmd>QuickRun -mode v<CR>", {noremap = true})
 
 -- Plugin MarkdownPreview
-nmap {"<leader>om", "<plug>MarkdownPreviewToggle"}
+vim.api.nvim_set_keymap("n", "<leader>om", "<plug>MarkdownPreviewToggle", {})
 
 -- Translator
 -- Echo translation in the cmdline
-nmap {"<Leader>te", "<Plug>Translate"}
-vmap {"<Leader>te", "<Plug>TranslateV"}
+vim.api.nvim_set_keymap("n", "<Leader>te", "<Plug>Translate", {})
+vim.api.nvim_set_keymap("n", "<Leader>te", "<Plug>TranslateV", {})
 -- Display translation in a window
-nmap {"T", "<Plug>TranslateW"}
-vmap {"T", "<Plug>TranslateWV"}
+vim.api.nvim_set_keymap("n", "T", "<Plug>TranslateW", {})
+vim.api.nvim_set_keymap("v", "T", "<Plug>TranslateWV", {})
 -- Replace the text with translation
-nmap {"<Leader>tr", "<Plug>TranslateR"}
-vmap {"<Leader>tr", "<Plug>TranslateRV"}
+vim.api.nvim_set_keymap("n", "<Leader>tr", "<Plug>TranslateR", {})
+vim.api.nvim_set_keymap("v", "<Leader>tr", "<Plug>TranslateRV", {})
 -- Translate the text in clipboard
-nmap {"<Leader>ty", "<Plug>TranslateX"}
+vim.api.nvim_set_keymap("n", "<Leader>ty", "<Plug>TranslateX", {})
 
 -- Terminal
 vim.api.nvim_buf_set_keymap(
@@ -175,17 +160,18 @@ vim.api.nvim_buf_set_keymap(
 vim.api.nvim_set_keymap("t", "<A-t>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], {})
 
 -- Telescope File Pickers
-nnoremap {"<leader>ff", "<cmd>Telescope find_files<CR>"} -- "<cmd>DashboardFindFile<CR>" is a similar one
-nnoremap {"<leader>gg", "<cmd>Telescope live_grep<CR>"} -- "<cmd>DashboardFindWord<CR>" is a similar one
-nnoremap {"<leader>fw", "<cmd>Telescope grep_string<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {}) -- "<cmd>DashboardFindFile<CR>" is a similar one
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>Telescope live_grep<CR>", {}) -- "<cmd>DashboardFindWord<CR>" is a similar one
+vim.api.nvim_set_keymap("n", "<leader>fw", "<cmd>Telescope grep_string<CR>", {})
+
 -- Telescope vim Pickers
-nnoremap {"<leader>cc", "<cmd>Telescope commands<CR>"}
-nnoremap {"<leader>fb", "<cmd>Telescope buffers<CR>"}
-nnoremap {"<leader>fo", "<cmd>Telescope oldfiles<CR>"}
-nnoremap {"<leader>fg", "<cmd>Telescope current_buffer_fuzzy_find<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>cc", "<cmd>Telescope commands<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>fb", "<cmd>Telescope buffers<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>fo", "<cmd>Telescope oldfiles<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope current_buffer_fuzzy_find<CR>", {})
 -- Telescope Git Pickers
-nnoremap {"<leader>gf", "<cmd>Telescope git_files<CR>"}
-nnoremap {"<leader>gc", "<cmd>Telescope git_commits<CR>"}
-nnoremap {"<leader>gs", "<cmd>Telescope git_status<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>gf", "<cmd>Telescope git_files<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", {})
+vim.api.nvim_set_keymap("n", "<leader>gs", "<cmd>Telescope git_status<CR>", {})
 -- Telescope frequency
-nnoremap {"<leader>fm", "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>"}
+vim.api.nvim_set_keymap("n", "<leader>fm", "<cmd>lua require('telescope').extensions.frecency.frecency()<CR>", {})
