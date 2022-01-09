@@ -36,6 +36,14 @@ return packer.startup(
     -- Load on an autocommand event
     use {"andymass/vim-matchup", event = "VimEnter *"}
 
+    -- NerdIcons
+    use {
+      "kyazdani42/nvim-web-devicons",
+      config = function()
+        require("conf.devicons")
+      end,
+    }
+
     -- Buffer Line (top)
     use {
       "akinsho/bufferline.nvim",
