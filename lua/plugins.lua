@@ -41,7 +41,7 @@ return packer.startup(
       "kyazdani42/nvim-web-devicons",
       config = function()
         require("conf.devicons")
-      end,
+      end
     }
 
     -- Buffer Line (top)
