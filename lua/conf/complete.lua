@@ -1,72 +1,67 @@
-require("compe").setup {
-  enabled = true,
-  autocomplete = true,
-  debug = false,
-  min_length = 1,
-  preselect = "always",
-  allow_prefix_unmatch = false,
-  throttle_time = 80,
-  source_timeout = 250,
-  incomplete_delay = 400,
-  max_abbr_width = 100,
-  max_kind_width = 100,
-  max_menu_width = 100,
-  documentation = true,
-  source = {
-    -- Common
-    buffer = false,
-    path = true,
-    tags = true,
-    calc = true,
-    spell = true,
-    omni = false,
-    -- Neovim-specific
-    nvim_lsp = true,
-    nvim_lua = false,
-    -- External-plugin
-    vsnip = true,
-    treesitter = true,
-    snippets_nvim = false,
-    -- External sources
-    tabnine = true,
-    zsh = false
+local cmp = require "cmp"
+
+cmp.setup(
+  {
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end
+    },
+    mapping = {
+      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
+      ["<C-2>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
+      ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ["<C-e>"] = cmp.mapping(
+        {
+          i = cmp.mapping.abort(),
+          c = cmp.mapping.close()
+        }
+      ),
+      ["<CR>"] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources(
+      {
+        {name = "nvim_lsp"},
+        {name = "vsnip"}
+      },
+      {
+        {name = "buffer"},
+        {name = "path"}
+      }
+    )
   }
-}
+)
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(
+  "/",
+  {
+    sources = {
+      {name = "buffer"}
+    }
+  }
+)
 
-local check_back_space = function()
-  local col = vim.fn.col(".") - 1
-  if col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-    return true
-  else
-    return false
-  end
-end
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(
+  ":",
+  {
+    sources = cmp.config.sources(
+      {
+        {name = "path"}
+      },
+      {
+        {name = "cmdline"}
+      }
+    )
+  }
+)
 
--- Use (s-)tab to:
---- move to prev/next item in completion menuone
---- jump to prev/next snippet's placeholder
-_G.tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-n>"
-  elseif vim.fn.call("vsnip#available", {1}) == 1 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  elseif check_back_space() then
-    return t "<Tab>"
-  else
-    return vim.fn["compe#complete"]()
-  end
-end
-
-_G.s_tab_complete = function()
-  if vim.fn.pumvisible() == 1 then
-    return t "<C-p>"
-  elseif vim.fn.call("vsnip#jumpable", {-1}) == 1 then
-    return t "<Plug>(vsnip-jump-prev)"
-  else
-    return t "<S-Tab>"
-  end
-end
+-- Setup lspconfig.
+-- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- vim.lsp.callbacks['textDocument/publishDiagnostics'] = require("cmp_nvim_lsp").diagnostics_handler
