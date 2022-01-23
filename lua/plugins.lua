@@ -85,7 +85,7 @@ return packer.startup(
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
         require "nvim-treesitter.configs".setup {
-          ignore_install = {"haskell"},
+          ignore_install = {"haskell", "phpdoc"},
           highlight = {
             enable = true,
             disable = {"haskell"}
@@ -384,8 +384,6 @@ return packer.startup(
       end
     }
 
-    -- use "hrsh7th/cmp-path"
-
     use {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
@@ -394,28 +392,10 @@ return packer.startup(
       end
     }
 
-    -- use {
-    --   "tzachar/compe-tabnine",
-    --   opt = true,
-    --   after = "nvim-compe",
-    --   run = "./install.sh",
-    --   requires = "hrsh7th/nvim-compe"
-    -- }
-
-    -- use {
-    --   "hrsh7th/vim-vsnip",
-    --   event = "InsertCharPre *",
-    --   config = function()
-    --     vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets"
-    --     vim.g.vsnip_filetypes = {
-    --       javascriptreact = {"javascript", "html"},
-    --       typescriptreact = {"typescript", "html"},
-    --       vue = {"vue", "javascript", "html"},
-    --       snakemake = {"snakemake", "python"},
-    --       sbatch = {"sbatch", "sh"}
-    --     }
-    --   end
-    -- }
+    use {
+      "hrsh7th/cmp-path",
+      after = "nvim-cmp"
+    }
 
     use "github/copilot.vim"
 

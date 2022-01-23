@@ -1,67 +1,86 @@
-local cmp = require "cmp"
+local present, cmp = pcall(require, "cmp")
+if not present then
+  return
+end
 
-cmp.setup(
-  {
-    snippet = {
-      -- REQUIRED - you must specify a snippet engine
-      expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+vim.opt.completeopt = "menuone,noselect"
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_tab_fallback = ""
+
+-- nvim-cmp setup
+cmp.setup {
+  formatting = {
+    format = function(entry, vim_item)
+      vim_item.menu =
+        ({
+        rg = "rg",
+        nvim_lsp = "LSP",
+        nvim_lua = "Lua",
+        Path = "Path",
+        luasnip = "LuaSnip",
+        orgmode = "Org",
+        treesitter = "ts",
+        copilot = "co"
+      })[entry.source.name]
+      vim_item.kind =
+        ({
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+      })[vim_item.kind]
+      return vim_item
+    end
+  },
+  mapping = {
+    ["<C-p>"] = cmp.mapping.select_prev_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    },
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
       end
-    },
-    mapping = {
-      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), {"i", "c"}),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), {"i", "c"}),
-      ["<C-2>"] = cmp.mapping(cmp.mapping.complete(), {"i", "c"}),
-      ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-      ["<C-e>"] = cmp.mapping(
-        {
-          i = cmp.mapping.abort(),
-          c = cmp.mapping.close()
-        }
-      ),
-      ["<CR>"] = cmp.mapping.confirm({select = true}) -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    },
-    sources = cmp.config.sources(
-      {
-        {name = "nvim_lsp"},
-        {name = "vsnip"}
-      },
-      {
-        {name = "buffer"},
-        {name = "path"}
-      }
-    )
+    end,
+    ["<S-Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end
+  },
+  sources = {
+    {name = "path"}
   }
-)
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(
-  "/",
-  {
-    sources = {
-      {name = "buffer"}
-    }
-  }
-)
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(
-  ":",
-  {
-    sources = cmp.config.sources(
-      {
-        {name = "path"}
-      },
-      {
-        {name = "cmdline"}
-      }
-    )
-  }
-)
-
--- Setup lspconfig.
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- vim.lsp.callbacks['textDocument/publishDiagnostics'] = require("cmp_nvim_lsp").diagnostics_handler
+}
