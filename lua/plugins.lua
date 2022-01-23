@@ -349,7 +349,7 @@ return packer.startup(
     use {
       "alexaandru/nvim-lspupdate"
     }
-    use "glepnir/lspsaga.nvim"
+    use "tami5/lspsaga.nvim"
 
     -- markdown language
     if (vim.env.DISPLAY) then
