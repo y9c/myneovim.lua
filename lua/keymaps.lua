@@ -108,24 +108,11 @@ vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<
 -- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
 -- Quick Jump
-_G.enhance_ft_move = function(key)
-  if not packer_plugins["vim-eft"].loaded then
-    vim.cmd [[packadd vim-eft]]
-  end
-  local map = {
-    f = "<Plug>(eft-f)",
-    F = "<Plug>(eft-F)",
-    [","] = "<Plug>(eft-repeat)"
-  }
-  return vim.api.nvim_replace_termcodes(map[key], true, true, true)
-end
 
-vim.api.nvim_set_keymap("n", "f", "v:lua.enhance_ft_move('f')", {expr = true})
-vim.api.nvim_set_keymap("x", "f", "v:lua.enhance_ft_move('f')", {expr = true})
-vim.api.nvim_set_keymap("o", "f", "v:lua.enhance_ft_move('f')", {expr = true})
-vim.api.nvim_set_keymap("n", "F", "v:lua.enhance_ft_move('F')", {expr = true})
-vim.api.nvim_set_keymap("x", "F", "v:lua.enhance_ft_move('F')", {expr = true})
-vim.api.nvim_set_keymap("o", "F", "v:lua.enhance_ft_move('F')", {expr = true})
+vim.api.nvim_set_keymap("n", "f", "<cmd>Pounce<CR>", {})
+vim.api.nvim_set_keymap("n", "F", "<cmd>PounceRepeat<CR>", {})
+vim.api.nvim_set_keymap("v", "f", "<cmd>Pounce<CR>", {})
+-- omap gs <cmd>Pounce<CR>
 
 -- Quick Run
 vim.api.nvim_set_keymap("n", "<localleader>r", "<cmd>QuickRun -mode n<CR>", {noremap = true})

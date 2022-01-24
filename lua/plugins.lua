@@ -53,7 +53,7 @@ return packer.startup(
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
-    -- Status Line (bottom)
+    -- UI: Status Line (bottom)
     use {
       "nvim-lualine/lualine.nvim",
       config = function()
@@ -62,17 +62,19 @@ return packer.startup(
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
-    -- Startup window
-    -- use {
-    --   "glepnir/dashboard-nvim",
-    --   config = function()
-    --     require("conf.dashboard")
-    --   end
-    -- }
+    -- UI: Startup window
     use {
       "goolord/alpha-nvim",
       config = function()
         require("conf.dashboard")
+      end
+    }
+
+    -- UI: Scroll bar
+    use {
+      "petertriho/nvim-scrollbar",
+      config = function()
+        require("scrollbar").setup()
       end
     }
 
@@ -191,31 +193,9 @@ return packer.startup(
       event = {"BufReadPre *", "BufNewFile *"}
     }
 
-    -- Qucik Jump
-    use {
-      "hrsh7th/vim-eft",
-      opt = true,
-      config = function()
-        vim.g.eft_ignorecase = true
-        vim.g.eft_highlight = {
-          ["1"] = {
-            highlight = "EftChar",
-            allow_space = true,
-            allow_operator = true
-          },
-          ["2"] = {
-            highlight = "EftSubChar",
-            allow_space = false,
-            allow_operator = false
-          },
-          ["n"] = {
-            highlight = "EftSubChar",
-            allow_space = false,
-            allow_operator = false
-          }
-        }
-      end
-    }
+    -- Qucik Jump (move cursor)
+    use "rlane/pounce.nvim"
+
     -- run code
     -- use {"CRAG666/code_runner.nvim"}
     -- QuickRun
