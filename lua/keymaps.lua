@@ -62,7 +62,7 @@ vim.api.nvim_set_keymap("n", "<leader>ps", "<cmd>PackerSync<CR>", {noremap = tru
 -- LSP
 vim.api.nvim_set_keymap("n", "<leader>li", "<cmd>LspInfo<CR>", {noremap = true})
 
-vim.api.nvim_set_keymap("n", "<leader>lu", "<cmd>LspUpdate<CR>", {noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>ll", "<cmd>LspInstallInfo<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "]e", "n<cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true})
 vim.api.nvim_set_keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", {noremap = true})
