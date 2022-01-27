@@ -29,7 +29,7 @@ packer.init(
 )
 
 return packer.startup(
-  function()
+  function(use)
     -- Packer can manage itself as an optional plugin
     use {"wbthomason/packer.nvim", opt = true}
 
@@ -327,7 +327,7 @@ return packer.startup(
       end
     }
     use {
-      "alexaandru/nvim-lspupdate"
+      "williamboman/nvim-lsp-installer"
     }
     use "tami5/lspsaga.nvim"
 

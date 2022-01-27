@@ -121,7 +121,7 @@ vim.api.nvim_set_keymap("n", "<F5>", "<cmd>QuickRun -mode n<CR>", {noremap = tru
 vim.api.nvim_set_keymap("v", "<F5>", "<cmd>QuickRun -mode v<CR>", {noremap = true})
 
 -- Plugin MarkdownPreview
-vim.api.nvim_set_keymap("n", "<leader>om", "<plug>MarkdownPreviewToggle", {})
+vim.api.nvim_set_keymap("n", "<C-p>", "<plug>MarkdownPreviewToggle", {})
 
 -- Translator
 -- Echo translation in the cmdline
