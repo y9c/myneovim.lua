@@ -7,18 +7,17 @@ end
 local enhance_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- enhance_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local servers = {
-  "ccls",
-  "gopls",
-  "rust_analyzer",
-  "bashls",
-  "pyright",
-  "r_language_server",
-  "julials",
-  "perlls",
-  "vimls",
-  "tsserver"
-}
+-- "ccls",
+-- "gopls",
+-- "rust_analyzer",
+-- "bashls",
+-- "pyright",
+-- "r_language_server",
+-- "julials",
+-- "perlls",
+-- "vimls",
+-- "tsserver"
+local servers = {}
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup {

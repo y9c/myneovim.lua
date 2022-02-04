@@ -242,19 +242,9 @@ return packer.startup(
       cmd = {"NvimTreeToggle", "NvimTreeOpen"},
       requires = {"kyazdani42/nvim-web-devicons"},
       config = function()
-        vim.g.nvim_tree_follow = 1
-        vim.g.nvim_tree_hide_dotfiles = 1
-        vim.g.nvim_tree_indent_markers = 1
-        vim.g.nvim_tree_icons = {
-          default = "",
-          symlink = "",
-          git = {
-            unstaged = "✚",
-            staged = "✚",
-            unmerged = "≠",
-            renamed = "≫",
-            untracked = "★"
-          }
+        require "nvim-tree".setup {
+          auto_close = true,
+          open_on_tab = false
         }
       end
     }
@@ -327,7 +317,17 @@ return packer.startup(
       end
     }
     use {
-      "williamboman/nvim-lsp-installer"
+      "williamboman/nvim-lsp-installer",
+      config = function()
+        local lsp_installer = require "nvim-lsp-installer"
+        lsp_installer.on_server_ready(
+          function(server)
+            local opts = {}
+            server:setup(opts)
+            vim.cmd [[ do User LspAttachBuffers ]]
+          end
+        )
+      end
     }
     use "tami5/lspsaga.nvim"
 
