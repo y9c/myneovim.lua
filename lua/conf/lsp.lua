@@ -39,25 +39,4 @@ lspconfig.efm.setup {
   end
 }
 
-lspconfig.sumneko_lua.setup {
-  cmd = {
-    -- os.getenv("HOME") .. "/Tools/lua-language-server/bin/Linux/lua-language-server",
-    -- "-E",
-    -- os.getenv("HOME") .. "/Tools/lua-language-server/main.lua"
-    "lua-language-server"
-  },
-  settings = {
-    Lua = {
-      diagnostics = {
-        enable = true,
-        globals = {"vim"}
-      },
-      runtime = {version = "LuaJIT"},
-      workspace = {
-        library = vim.list_extend({[vim.fn.expand("$VIMRUNTIME/lua")] = true}, {})
-      }
-    }
-  }
-}
-
 -- https://github.com/glepnir/lspsaga.nvim
