@@ -331,7 +331,7 @@ return packer.startup(
     }
     use "tami5/lspsaga.nvim"
 
-    -- markdown language
+    -- language: markdown
     if (vim.env.DISPLAY) then
       use {
         "iamcco/markdown-preview.nvim",
@@ -342,6 +342,12 @@ return packer.startup(
         end
       }
     end
+
+    -- language: singularity def
+    use {
+      "singularityware/singularity.lang",
+      rtp = "vim"
+    }
 
     -- Formatter
     use {
