@@ -96,6 +96,10 @@ end
 
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<CR>", {noremap = true})
 
+-- Auto header
+-- vim.api.nvim_set_keymap("n", "<F7>", "<cmd>AddHeader<CR>", {noremap = true})
+-- vim.api.nvim_set_keymap("i", "<F7>", "<cmd>AddHeader<CR>", {noremap = true})
+
 -- Complete
 -- vim.api.nvim_set_keymap("i", "<C-Space>", "cmp#complete()", {expr = true, silent = true})
 -- vim.api.nvim_set_keymap("i", "<CR>", "cmp#confirm('<CR>')", {expr = true, silent = true})

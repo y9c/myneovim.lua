@@ -54,6 +54,12 @@ cmp.setup {
       return vim_item
     end
   },
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+    end
+  },
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -64,23 +70,24 @@ cmp.setup {
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true
-    },
-    ["<Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      else
-        fallback()
-      end
-    end,
-    ["<S-Tab>"] = function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      else
-        fallback()
-      end
-    end
+    }
+    -- ["<Tab>"] = function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_next_item()
+    --   else
+    --     fallback()
+    --   end
+    -- end,
+    -- ["<S-Tab>"] = function(fallback)
+    --   if cmp.visible() then
+    --     cmp.select_prev_item()
+    --   else
+    --     fallback()
+    --   end
+    -- end
   },
   sources = {
+    {name = "vsnip"},
     {name = "path"}
   }
 }

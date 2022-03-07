@@ -346,7 +346,8 @@ return packer.startup(
     -- language: singularity def
     use {
       "singularityware/singularity.lang",
-      rtp = "vim"
+      rtp = "vim",
+      ft = "singularity"
     }
 
     -- Formatter
@@ -356,6 +357,21 @@ return packer.startup(
         require("conf.formatter")
       end
     }
+
+    -- Auto header completion
+    -- use {
+    --   "alpertuna/vim-header",
+    --   event = "BufRead",
+    --   config = function()
+    --     vim.g.header_field_author = ""
+    --     vim.g.header_field_author_email = ""
+    --     vim.g.header_field_timestamp_format = "%Y-%m-%d %H:%M"
+    --     vim.g.field_modified_date = "xxxxx:"
+    --     vim.g.header_auto_add_header = 1
+    --     vim.g.header_field_filename = 0
+    --     vim.g.header_field_modified_by = 0
+    --   end
+    -- }
 
     -- Complete
     use {
@@ -381,6 +397,18 @@ return packer.startup(
     use {
       "hrsh7th/cmp-path",
       after = "nvim-cmp"
+    }
+
+    use {
+      "hrsh7th/cmp-vsnip",
+      after = "nvim-cmp"
+    }
+    use {
+      "hrsh7th/vim-vsnip",
+      after = "nvim-cmp",
+      config = function()
+        vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets/"
+      end
     }
 
     use "github/copilot.vim"
