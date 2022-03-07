@@ -111,6 +111,33 @@ vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<
 -- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 
+-- Snippets Jump
+--
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-n>",
+  [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "s",
+  "<C-n>",
+  [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-p>",
+  [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "s",
+  "<C-p>",
+  [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']],
+  {noremap = false, expr = true}
+)
+
 -- Quick Jump
 
 vim.api.nvim_set_keymap("n", "f", "<cmd>Pounce<CR>", {})
