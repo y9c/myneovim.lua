@@ -1,8 +1,7 @@
 " Vim syntax file
 " Language:	Snakemake (extended from python.vim)
 " Maintainer:	Jay Hesselberth (jay.hesselberth@gmail.com)
-" Modified by:	Chang Ye
-" Last Change:	2021-03-14
+" Last Change:	2016 Jan 23
 "
 " Usage
 "
@@ -18,29 +17,45 @@
 " :set syntax=snakemake
 "
 
-if exists("b:current_syntax")
-  finish
-endif
-
-" Extend python.vim's syntax for use with Snakemake
-runtime! syntax/python.vim
 " load settings from system python.vim
-" source $VIMRUNTIME/syntax/python.vim
+source $VIMRUNTIME/syntax/python.vim
 
-syn keyword pythonStatement	include workdir onstart onsuccess onerror
+"
+" Snakemake rules, as of version 3.3
+"
+" XXX N.B. several of the new defs are missing from this table i.e.
+" subworkflow, touch etc
+"
+" rule       = "rule" (identifier | "") ":" ruleparams
+" include    = "include:" stringliteral
+" workdir    = "workdir:" stringliteral
+" ni         = NEWLINE INDENT
+" ruleparams = [ni input] [ni output] [ni params] [ni message] [ni threads] [ni (run | shell)] NEWLINE snakemake
+" input      = "input" ":" parameter_list
+" output     = "output" ":" parameter_list
+" params     = "params" ":" parameter_list
+" message    = "message" ":" stringliteral
+" threads    = "threads" ":" integer
+" resources  = "resources" ":" parameter_list
+" version    = "version" ":" statement
+" run        = "run" ":" ni statement
+" shell      = "shell" ":" stringliteral
+
+syn keyword pythonStatement	include workdir onsuccess onerror
 syn keyword pythonStatement	ruleorder localrules configfile
 syn keyword pythonStatement	touch protected temp wrapper
-syn keyword pythonStatement	dynamic ancient directory
-syn keyword pythonStatement	input output params message shadow
-syn keyword pythonStatement	threads resources priority
+syn keyword pythonStatement	input output params message threads resources wildcard_constraints
 syn keyword pythonStatement	version run shell benchmark snakefile log script
-syn keyword pythonStatement	rule subworkflow checkpoint nextgroup=pythonFunction skipwhite
+syn keyword pythonStatement	rule subworkflow nextgroup=pythonFunction skipwhite
 
-" Similar to special def and class treatment from python.vim, except
+" similar to special def and class treatment from python.vim, except
 " parenthetical part of def and class
-syn match pythonFunction
-      \ "\%(\%(rule\s\|subworkflow\s\|checkpoint\s\)\s*\)\@<=\h\w*" contained
+syn match   pythonFunction
+      \ "\%(\%(rule\s\|subworkflow\s\)\s*\)\@<=\h\w*" contained
 
-syn sync match pythonSync grouphere NONE "^\s*\%(rule\|subworkflow\|checkpoint\)\s\+\h\w*\s*"
+syn sync match pythonSync grouphere NONE "^\s*\%(rule\|subworkflow\)\s\+\h\w*\s*"
 
 let b:current_syntax = "snakemake"
+
+" vim:set sw=2 sts=2 ts=8 noet:
+
