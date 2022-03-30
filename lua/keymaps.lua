@@ -96,6 +96,10 @@ end
 
 vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<CR>", {noremap = true})
 
+-- Auto header
+-- vim.api.nvim_set_keymap("n", "<F7>", "<cmd>AddHeader<CR>", {noremap = true})
+-- vim.api.nvim_set_keymap("i", "<F7>", "<cmd>AddHeader<CR>", {noremap = true})
+
 -- Complete
 -- vim.api.nvim_set_keymap("i", "<C-Space>", "cmp#complete()", {expr = true, silent = true})
 -- vim.api.nvim_set_keymap("i", "<CR>", "cmp#confirm('<CR>')", {expr = true, silent = true})
@@ -106,6 +110,33 @@ vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<
 -- vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 -- vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
 -- vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+
+-- Snippets Jump
+--
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-n>",
+  [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "s",
+  "<C-n>",
+  [[vsnip#jumpable(1)  ? '<Plug>(vsnip-jump-next)' : '<Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-p>",
+  [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']],
+  {noremap = false, expr = true}
+)
+vim.api.nvim_set_keymap(
+  "s",
+  "<C-p>",
+  [[vsnip#jumpable(-1) ? '<Plug>(vsnip-jump-prev)' : '<S-Tab>']],
+  {noremap = false, expr = true}
+)
 
 -- Quick Jump
 
