@@ -394,17 +394,11 @@ return packer.startup(
       end
     }
 
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
     use {
-      "tzachar/cmp-fuzzy-path",
-      requires = {"hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim"},
+      "hrsh7th/cmp-path",
       after = "nvim-cmp"
     }
 
-    use {
-      "hrsh7th/cmp-vsnip",
-      after = "nvim-cmp"
-    }
     use {
       "hrsh7th/vim-vsnip",
       after = "nvim-cmp",
