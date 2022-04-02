@@ -400,6 +400,10 @@ return packer.startup(
     }
 
     use {
+      "hrsh7th/cmp-vsnip",
+      after = "nvim-cmp"
+    }
+    use {
       "hrsh7th/vim-vsnip",
       after = "nvim-cmp",
       config = function()
