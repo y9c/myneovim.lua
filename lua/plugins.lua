@@ -88,6 +88,10 @@ return packer.startup(
           }
         )
         require("scrollbar.handlers.search").setup()
+        vim.cmd([[
+          highlight HlSearchLensNear guifg=#DDDDDD guibg=#000000 gui=italic
+          highlight HlSearchLens     guifg=#999999 guibg=#202020 gui=italic
+        ]])
       end
     }
 
