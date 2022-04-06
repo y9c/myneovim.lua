@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#97be65! /usr/bin/env lua
 
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
@@ -73,8 +73,25 @@ return packer.startup(
     -- UI: Scroll bar
     use {
       "petertriho/nvim-scrollbar",
+      requires = {"kevinhwang91/nvim-hlslens"},
       config = function()
-        require("scrollbar").setup()
+        require("scrollbar").setup(
+          {
+            handle = {
+              text = " ",
+              color = "#f8f8f2",
+              cterm = nil
+            },
+            marks = {
+              Search = {color = "#97be65"},
+            }
+          }
+        )
+        require("scrollbar.handlers.search").setup()
+        vim.cmd([[
+          highlight HlSearchLensNear guifg=#DDDDDD guibg=#000000 gui=italic
+          highlight HlSearchLens     guifg=#999999 guibg=#202020 gui=italic
+        ]])
       end
     }
 
@@ -350,6 +367,9 @@ return packer.startup(
       ft = "singularity"
     }
 
+    -- Language checker
+    use { "dvdsk/prosesitter" }
+
     -- Formatter
     use {
       "mhartington/formatter.nvim",
@@ -394,10 +414,8 @@ return packer.startup(
       end
     }
 
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
     use {
-      "tzachar/cmp-fuzzy-path",
-      requires = {"hrsh7th/nvim-cmp", "tzachar/fuzzy.nvim"},
+      "hrsh7th/cmp-path",
       after = "nvim-cmp"
     }
 

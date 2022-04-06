@@ -88,7 +88,7 @@ cmp.setup {
   },
   sources = {
     {name = "vsnip"},
-    {name = "fuzzy_path"}
+    {name = "path"}
   }
 }
 
@@ -97,7 +97,7 @@ cmp.setup.cmdline(
   {
     sources = {
       {name = "buffer"},
-      {name = "fuzzy_path"}
+      {name = "path"}
     }
   }
 )
