@@ -367,9 +367,6 @@ return packer.startup(
       ft = "singularity"
     }
 
-    -- Language checker
-    use { "dvdsk/prosesitter" }
-
     -- Formatter
     use {
       "mhartington/formatter.nvim",
