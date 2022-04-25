@@ -1,4 +1,4 @@
-#97be65! /usr/bin/env lua
+#! /usr/bin/env lua
 
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
 
@@ -83,15 +83,17 @@ return packer.startup(
               cterm = nil
             },
             marks = {
-              Search = {color = "#97be65"},
+              Search = {color = "#97be65"}
             }
           }
         )
         require("scrollbar.handlers.search").setup()
-        vim.cmd([[
+        vim.cmd(
+          [[
           highlight HlSearchLensNear guifg=#DDDDDD guibg=#000000 gui=italic
           highlight HlSearchLens     guifg=#999999 guibg=#202020 gui=italic
-        ]])
+        ]]
+        )
       end
     }
 
@@ -349,7 +351,7 @@ return packer.startup(
     use "tami5/lspsaga.nvim"
 
     -- language: markdown
-    if (vim.env.DISPLAY) then
+    if (vim.env.DISPLAY or vim.fn.has("macunix")) then
       use {
         "iamcco/markdown-preview.nvim",
         ft = "markdown",
