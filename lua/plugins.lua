@@ -338,14 +338,15 @@ return packer.startup(
     use {
       "williamboman/nvim-lsp-installer",
       config = function()
-        local lsp_installer = require "nvim-lsp-installer"
-        lsp_installer.on_server_ready(
-          function(server)
-            local opts = {}
-            server:setup(opts)
-            vim.cmd [[ do User LspAttachBuffers ]]
-          end
-        )
+        require("nvim-lsp-installer").setup {
+          ui = {
+            icons = {
+              server_installed = "✓",
+              server_pending = "➜",
+              server_uninstalled = "✗"
+            }
+          }
+        }
       end
     }
     use "tami5/lspsaga.nvim"
