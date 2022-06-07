@@ -30,6 +30,7 @@ vim.bo.expandtab = true
 -- FileType autocommands
 vim.cmd("autocmd FileType python setlocal shiftwidth=4 tabstop=4 expandtab")
 vim.cmd("autocmd FileType snakemake setlocal shiftwidth=4 tabstop=4 expandtab")
+vim.cmd("autocmd FileType yaml setlocal foldmethod=indent foldlevelstart=1 foldnestmax=1 foldopen=all foldclose=all")
 
 -- fold
 vim.cmd("set nofoldenable")

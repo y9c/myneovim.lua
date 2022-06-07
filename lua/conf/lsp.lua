@@ -1,4 +1,5 @@
-local lspconfig = require "lspconfig"
+local lspconfig = require("lspconfig")
+-- lspconfig.sumneko_lua.setup {}
 
 local enhance_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -17,7 +18,8 @@ local enhance_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- "perlls",
 -- "vimls",
 -- "tsserver"
-local servers = {}
+-- local servers = {}
+local servers = require "nvim-lsp-installer.servers".get_installed_server_names()
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup {

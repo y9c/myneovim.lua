@@ -330,25 +330,16 @@ return packer.startup(
 
     -- LSP
     use {
-      "neovim/nvim-lspconfig",
-      config = function()
-        require "conf.lsp"
-      end
-    }
-    use {
       "williamboman/nvim-lsp-installer",
-      config = function()
-        require("nvim-lsp-installer").setup {
-          ui = {
-            icons = {
-              server_installed = "✓",
-              server_pending = "➜",
-              server_uninstalled = "✗"
-            }
-          }
-        }
-      end
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("nvim-lsp-installer").setup {}
+          require "conf.lsp"
+        end
+      }
     }
+
     use "tami5/lspsaga.nvim"
 
     -- language: markdown
