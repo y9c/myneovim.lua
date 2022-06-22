@@ -86,7 +86,7 @@ function run_formatter()
   local formatters = require("formatter.config").values.filetype[filetype]
 
   if vim.bo.modifiable then
-    if not require("formatter.util").isEmpty(formatters) then
+    if not require("formatter.util").is_empty(formatters) then
       vim.api.nvim_command("Format")
     else
       vim.lsp.buf.formatting()

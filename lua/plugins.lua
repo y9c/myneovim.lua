@@ -73,7 +73,7 @@ return packer.startup(
     -- UI: Scroll bar
     use {
       "petertriho/nvim-scrollbar",
-      requires = {"kevinhwang91/nvim-hlslens"},
+      -- requires = {"kevinhwang91/nvim-hlslens"},
       config = function()
         require("scrollbar").setup(
           {
@@ -87,7 +87,7 @@ return packer.startup(
             }
           }
         )
-        require("scrollbar.handlers.search").setup()
+        -- require("scrollbar.handlers.search").setup()
         vim.cmd(
           [[
           highlight HlSearchLensNear guifg=#DDDDDD guibg=#000000 gui=italic
