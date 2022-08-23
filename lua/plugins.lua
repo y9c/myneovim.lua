@@ -106,7 +106,7 @@ return packer.startup(
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
         require "nvim-treesitter.configs".setup {
-          ignore_install = {"haskell", "phpdoc"},
+          ignore_install = {"haskell", "phpdoc", "swift"},
           highlight = {
             enable = true,
             disable = {"haskell"}
