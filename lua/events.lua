@@ -57,7 +57,9 @@ function autocmd.load_autocmds()
       {"BufNewFile,BufRead", "*.jl", " setf julia"},
       {"BufNewFile,BufRead", "*.ipynb", " setf ipynb"},
       {"BufNewFile,BufRead", "Snakefile,*.smk", " setf snakemake"},
-      {"BufNewFile,BufRead", "*.sbatch,*.sbatch.sh", " setf sbatch"}
+      {"BufNewFile,BufRead", "*.sbatch,*.sbatch.sh", " setf sbatch"},
+      {"BufNewFile,BufRead", "*.qmd,*.rmd", " setf markdown"},
+      {"BufNewFile,BufRead", "*.ojs", " setf javascript"}
     },
     yank = {
       {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}

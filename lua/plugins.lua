@@ -340,7 +340,7 @@ return packer.startup(
       }
     }
 
-    use "tami5/lspsaga.nvim"
+    use "glepnir/lspsaga.nvim"
 
     -- language: markdown
     if (vim.env.DISPLAY or vim.fn.has("macunix")) then
