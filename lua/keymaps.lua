@@ -89,7 +89,7 @@ function run_formatter()
     if not require("formatter.util").is_empty(formatters) then
       vim.api.nvim_command("Format")
     else
-      vim.lsp.buf.format({async = true})
+      vim.lsp.buf.formatting({})
     end
   end
 end

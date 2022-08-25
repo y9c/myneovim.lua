@@ -110,7 +110,7 @@ require("formatter").setup(
               "--no-restore",
               "--no-save",
               "-e",
-              '\'con <- file("stdin"); styler::style_text(readLines(con)); close(con)\'',
+              '\'options(styler.colored_print.vertical = FALSE); con <- file("stdin"); styler::style_text(readLines(con)); close(con)\'',
               "2>/dev/null"
             },
             stdin = true
