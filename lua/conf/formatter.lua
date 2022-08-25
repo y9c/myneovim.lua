@@ -21,7 +21,21 @@ require("formatter").setup(
       },
       markdown = {
         -- prettier
-        prettier_formatter
+        function()
+          return {
+            exe = "prettier",
+            args = {"--parser", "markdown", "--single-quote"},
+            stdin = true
+          }
+        end,
+        -- cbfmt
+        function()
+          return {
+            exe = "cbfmt",
+            args = {"--config", vim.fn.stdpath("config") .. "/lua/conf/cbfmt.toml", "--parser", "markdown"},
+            stdin = true
+          }
+        end
       },
       typescriptreact = {
         -- prettier
