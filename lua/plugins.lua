@@ -422,7 +422,26 @@ return packer.startup(
       end
     }
 
-    use "github/copilot.vim"
+    -- use "github/copilot.vim"
+    use {
+      "zbirenbaum/copilot.lua",
+      event = {"VimEnter"},
+      config = function()
+        vim.defer_fn(
+          function()
+            require("copilot").setup()
+          end,
+          100
+        )
+      end
+    }
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = {"copilot.lua"},
+      config = function()
+        require("copilot_cmp").setup()
+      end
+    }
 
     -- Translator
     use {
