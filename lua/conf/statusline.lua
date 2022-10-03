@@ -6,7 +6,7 @@ local function lsp_servers()
     table.insert(result, "...")
   else
     for _, v in ipairs(servers) do
-      if not vim.tbl_contains(result, v.name) and vim.tbl_contains(v.config.filetypes, buf_ft) then
+      if not vim.tbl_contains(result, v.name) then
         table.insert(result, v.name)
       end
     end
