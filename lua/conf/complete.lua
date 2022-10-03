@@ -18,6 +18,10 @@ end
 
 -- nvim-cmp setup
 cmp.setup {
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered()
+  },
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu =
@@ -79,10 +83,6 @@ cmp.setup {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
     end
-  },
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered()
   },
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
