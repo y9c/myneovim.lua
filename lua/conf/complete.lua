@@ -3,7 +3,6 @@ if not present then
   return
 end
 
-vim.opt.completeopt = "menuone,noselect"
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_tab_fallback = ""
@@ -18,6 +17,14 @@ end
 
 -- nvim-cmp setup
 cmp.setup {
+  completion = {
+    autocomplete = {
+      cmp.TriggerEvent.TextChanged,
+      cmp.TriggerEvent.InsertEnter
+    },
+    completeopt = "menuone,noinsert,noselect",
+    keyword_length = 0
+  },
   window = {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered()
