@@ -3,9 +3,11 @@ if not present then
   return
 end
 
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_tab_fallback = ""
+-- vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_assume_mapped = true
+-- vim.g.copilot_tab_fallback = ""
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", {link = "CmpItemKindDefault", default = true})
 
 local has_words_before = function()
   if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
@@ -33,18 +35,16 @@ cmp.setup {
     format = function(entry, vim_item)
       vim_item.menu =
         ({
-        rg = "rg",
         nvim_lsp = "LSP",
-        nvim_lua = "Lua",
-        Path = "Path",
-        luasnip = "LuaSnip",
-        orgmode = "Org",
-        treesitter = "ts"
+        path = "Path",
+        copilot = "AI",
+        buffer = "Buffer",
+        vsnip = "Snip"
       })[entry.source.name]
       vim_item.kind =
         ({
-        Copilot = "",
-        Namespace = "",
+        Copilot = " ",
+        Namespace = " ",
         Text = " ",
         Method = " ",
         Function = " ",
@@ -124,12 +124,13 @@ cmp.setup {
   sources = cmp.config.sources(
     {
       {name = "copilot", keyword_length = 0},
-      {name = "nvim_lsp", keyword_length = 1},
-      {name = "buffer", keyword_length = 1},
       {name = "path", keyword_length = 1},
+      {name = "nvim_lsp", keyword_length = 1},
       {name = "vsnip", keyword_length = 1}
     },
-    {}
+    {
+      {name = "buffer", keyword_length = 1}
+    }
   )
 }
 
