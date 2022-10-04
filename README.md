@@ -2,7 +2,7 @@
 
 ## How to use?
 
-- install the lastest version of neovim from source
+1. install the lastest version of neovim from source
 
 ```bash
 git clone https://github.com/neovim/neovim.git --depth 1
@@ -10,27 +10,36 @@ make CMAKE_BUILD_TYPE=RelWithDebInfo
 make install
 ```
 
-- clone this repo into your nvim config
+2. clone this repo into your nvim config
 
 ```bash
 mv ~/.config/nvim ~/.config/nvim.bak
-git clone https://github.com/yech1990/myneovim.lua.git ~/.config.nvim --depth 1
+git clone https://github.com/y9c/myneovim.lua.git ~/.config/nvim --depth 1
 ```
 
-- run command in nvim
+3. run command in nvim for setup
 
-```vim
+- install all packages by:
+
+````vim
 :PackerUpdate
-```
 
-```vim
-:LspUpdate
-```
+- update tree-sitter parser
 
 ```vim
 :TSUpdate
+````
+
+4. start to use
+
+- Enable Copilot
+
+```vim
+:CopilotAuth
 ```
 
-## REFERENCE
+- Install lsp plugin you want, enter
 
-- https://github.com/glepnir/nvim
+```vim
+<Space> l l
+```
