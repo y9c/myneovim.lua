@@ -21,14 +21,15 @@ git clone https://github.com/y9c/myneovim.lua.git ~/.config/nvim --depth 1
 
 - install all packages by:
 
-````vim
+```vim
 :PackerUpdate
+```
 
 - update tree-sitter parser
 
 ```vim
 :TSUpdate
-````
+```
 
 4. start to use
 
