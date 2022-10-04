@@ -43,7 +43,7 @@ cmp.setup {
       })[entry.source.name]
       vim_item.kind =
         ({
-        Copilot = "",
+        Copilot = "",
         Namespace = "",
         Text = " ",
         Method = " ",
@@ -100,7 +100,7 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping.close(),
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
-      select = true
+      select = false
     },
     ["<Tab>"] = vim.schedule_wrap(
       function(fallback)
@@ -121,13 +121,16 @@ cmp.setup {
       end
     )
   },
-  sources = {
-    {name = "copilot", group_index = 1},
-    {name = "vsnip", group_index = 2},
-    {name = "nvim_lsp", group_index = 2},
-    {name = "path", group_index = 2},
-    {name = "buffer", group_index = 3}
-  }
+  sources = cmp.config.sources(
+    {
+      {name = "copilot", keyword_length = 0},
+      {name = "nvim_lsp", keyword_length = 1},
+      {name = "buffer", keyword_length = 1},
+      {name = "path", keyword_length = 1},
+      {name = "vsnip", keyword_length = 1}
+    },
+    {}
+  )
 }
 
 cmp.setup.cmdline(

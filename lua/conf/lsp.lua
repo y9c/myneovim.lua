@@ -1,5 +1,4 @@
 local lspconfig = require("lspconfig")
--- lspconfig.sumneko_lua.setup {}
 
 local enhance_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -39,6 +38,17 @@ lspconfig.efm.setup {
   root_dir = function()
     return vim.fn.getcwd()
   end
+}
+
+lspconfig.sumneko_lua.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {"vim"}
+      }
+    }
+  }
 }
 
 -- https://github.com/glepnir/lspsaga.nvim

@@ -39,8 +39,8 @@ vim.keymap.set("v", ">", ">gv", {noremap = true})
 vim.keymap.set("v", "<", "<gv", {noremap = true})
 
 -- toggle commentary (gcc is a map key, so noremap won't work!)
-vim.keymap.set("n", "<leader>bc", "gcc", {})
-vim.keymap.set("v", "<leader>bc", "gc", {})
+vim.keymap.set("n", "<Localleader>c", ":CommentToggle<CR>", {noremap = true, silent = true})
+vim.keymap.set("v", "<Localleader>c", ":CommentToggle<CR>", {noremap = true, silent = true})
 
 -- Version control
 -- mappings

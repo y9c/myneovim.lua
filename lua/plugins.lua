@@ -197,7 +197,12 @@ return packer.startup(
     }
 
     -- Commentary
-    use "tomtom/tcomment_vim"
+    use {
+      "terrortylor/nvim-comment",
+      config = function()
+        require("nvim_comment").setup()
+      end
+    }
 
     -- Color highlighter
     use {
@@ -404,12 +409,18 @@ return packer.startup(
         require("conf.complete")
       end
     }
-
     use {
       "hrsh7th/cmp-path",
       after = "nvim-cmp"
     }
-
+    use {
+      "hrsh7th/cmp-nvim-lsp",
+      after = "nvim-cmp"
+    }
+    use {
+      "hrsh7th/cmp-buffer",
+      after = "nvim-cmp"
+    }
     use {
       "hrsh7th/cmp-vsnip",
       after = "nvim-cmp"
@@ -421,7 +432,6 @@ return packer.startup(
         vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets/"
       end
     }
-
     -- use "github/copilot.vim"
     use {
       "zbirenbaum/copilot.lua",
@@ -439,7 +449,11 @@ return packer.startup(
       "zbirenbaum/copilot-cmp",
       after = {"copilot.lua"},
       config = function()
-        require("copilot_cmp").setup()
+        require("copilot_cmp").setup(
+          {
+            clear_after_cursor = true
+          }
+        )
       end
     }
 
