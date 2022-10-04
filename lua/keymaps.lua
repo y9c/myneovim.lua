@@ -67,7 +67,7 @@ vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = tr
 vim.keymap.set("n", "]e", "n<cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true})
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", {noremap = true})
 
-vim.keymap.set("n", "vd", "<cmd>Lspsaga preview_definition<CR>", {noremap = true})
+vim.keymap.set("n", "vd", "<cmd>Lspsaga peek_definition<CR>", {noremap = true})
 vim.keymap.set("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {noremap = true})
 vim.keymap.set("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", {noremap = true})
 

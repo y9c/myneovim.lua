@@ -135,11 +135,14 @@ cmp.setup {
 }
 
 cmp.setup.cmdline(
-  "/",
+  {"/", "?"},
   {
-    sources = {
-      {name = "buffer"},
-      {name = "path"}
-    }
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources(
+      {
+        {name = "buffer"},
+        {name = "path"}
+      }
+    )
   }
 )

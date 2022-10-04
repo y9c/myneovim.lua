@@ -1,17 +1,19 @@
 #! /usr/bin/env lua
 
 local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-
-local execute = vim.api.nvim_command
+local packer_bootstrap = nil
 
 if not packer_exists then
-  if vim.fn.input("Download Packer? (y for yes): ") ~= "y" then
+  if vim.fn.input("Download Packer? (y for yes) ") ~= "y" then
+    print("Please install Packer first!")
     return
   end
 
+  print(" Downloading packer.nvim...")
   local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-  execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
-  execute("packadd packer.nvim")
+  packer_bootstrap =
+    vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
+  vim.cmd [[packadd packer.nvim]]
   return
 end
 
@@ -122,7 +124,24 @@ return packer.startup(
               }
             }
           },
-          ensure_installed = "all"
+          -- ensure_installed = "all"
+          ensure_installed = {
+            "c",
+            "cpp",
+            "go",
+            "rust",
+            "lua",
+            "python",
+            "perl",
+            "r",
+            "bash",
+            "typescript",
+            "javascript",
+            "html",
+            "json",
+            "toml",
+            "yaml"
+          }
         }
       end
     }
@@ -406,7 +425,7 @@ return packer.startup(
 
     use {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
+      event = {"InsertEnter", "CmdlineEnter"},
       config = function()
         require("conf.complete")
       end
@@ -467,5 +486,11 @@ return packer.startup(
         vim.g.translator_default_engines = {"bing", "haici", "youdao"}
       end
     }
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
+    if packer_bootstrap then
+      require("packer").sync()
+    end
   end
 )

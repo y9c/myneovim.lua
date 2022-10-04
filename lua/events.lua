@@ -68,9 +68,10 @@ function autocmd.load_autocmds()
       {"BufReadPost", [[* if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
     },
     -- auto close  the tab/vim when it is the last window
-    -- quickfix, NvimTree, packer
+    -- quickfix, NvimTree, packer, vista
     ["autoclose-quickfix"] = {
       {"WinEnter", "*", [[ if winnr('$') == 1 && &buftype == "quickfix" | q | endif ]]},
+      {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '__vista__' | quit | endif ]]},
       {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '[packer]' | quit | endif ]]},
       {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]]}
     },
