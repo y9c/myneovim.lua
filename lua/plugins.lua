@@ -267,7 +267,9 @@ return packer.startup(
       requires = {"kyazdani42/nvim-web-devicons"},
       config = function()
         require "nvim-tree".setup {
-          auto_close = true,
+          view = {
+            adaptive_size = true
+          },
           open_on_tab = false
         }
       end

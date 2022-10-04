@@ -67,9 +67,12 @@ function autocmd.load_autocmds()
     ["vimrc-remember-cursor-position"] = {
       {"BufReadPost", [[* if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
     },
-    -- auto close quickfix
+    -- auto close  the tab/vim when it is the last window
+    -- quickfix, NvimTree, packer
     ["autoclose-quickfix"] = {
-      {"WinEnter", "*", [[if winnr('$') == 1 && &buftype == "quickfix"|q|endif]]}
+      {"WinEnter", "*", [[ if winnr('$') == 1 && &buftype == "quickfix" | q | endif ]]},
+      {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '[packer]' | quit | endif ]]},
+      {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]]}
     },
     ["plugin-cursorword"] = {
       {"FileType", "defx,denite,fern,clap,vista,packer,NvimTree", "let b:cursorword = 0"},

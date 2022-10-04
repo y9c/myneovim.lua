@@ -101,6 +101,7 @@ vim.api.nvim_buf_set_keymap(0, "n", "<Localleader>f", "<cmd>lua run_formatter()<
 -- vim.keymap.set("i", "<F7>", "<cmd>AddHeader<CR>", {noremap = true})
 
 -- Complete
+vim.keymap.set("i", "<A-c>", "<cmd>CopilotPanel<CR>", {silent = true, noremap = true})
 -- vim.keymap.set("i", "<C-Space>", "cmp#complete()", {expr = true, silent = true})
 -- vim.keymap.set("i", "<CR>", "cmp#confirm('<CR>')", {expr = true, silent = true})
 -- vim.keymap.set("i", "<C-e>", "cmp#close('<C-e>')", {expr = true, silent = true})
