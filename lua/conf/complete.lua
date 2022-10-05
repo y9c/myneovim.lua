@@ -31,6 +31,9 @@ cmp.setup {
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered()
   },
+  experimental = {
+    ghost_text = true
+  },
   formatting = {
     format = function(entry, vim_item)
       vim_item.menu =
@@ -98,10 +101,10 @@ cmp.setup {
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false
-    },
+    ["<CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false}),
+    -- Shift+Enter works as Enter in windows terminal by default, so you have to reset the keybinding in setting.json
+    -- Ref: https://github.com/microsoft/terminal/issues/530#issuecomment-755917602
+    ["<S-CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
     ["<Tab>"] = vim.schedule_wrap(
       function(fallback)
         if cmp.visible() and has_words_before() then
@@ -123,10 +126,10 @@ cmp.setup {
   },
   sources = cmp.config.sources(
     {
-      {name = "copilot", keyword_length = 0},
-      {name = "path", keyword_length = 1},
-      {name = "nvim_lsp", keyword_length = 1},
-      {name = "vsnip", keyword_length = 1}
+      {name = "copilot", keyword_length = 0, priority = 100},
+      {name = "path", keyword_length = 1, priority = 2},
+      {name = "nvim_lsp", keyword_length = 2, priority = 2},
+      {name = "vsnip", keyword_length = 1, priority = 2}
     },
     {
       {name = "buffer", keyword_length = 1}

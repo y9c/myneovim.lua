@@ -455,7 +455,7 @@ return packer.startup(
     }
     -- use "github/copilot.vim"
     use {
-      "zbirenbaum/copilot.lua",
+      "y9c/copilot.lua",
       event = {"VimEnter"},
       config = function()
         vim.defer_fn(
