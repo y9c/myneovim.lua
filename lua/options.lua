@@ -72,4 +72,30 @@ if vim.env.TMUX then
     },
     cache_enabled = 1
   }
+elseif vim.loop.os_uname().sysname == "Darwin" then
+  vim.g.clipboard = {
+    name = "macOS-clipboard",
+    copy = {
+      ["+"] = "pbcopy",
+      ["*"] = "pbcopy"
+    },
+    paste = {
+      ["+"] = "pbpaste",
+      ["*"] = "pbpaste"
+    },
+    cache_enabled = 0
+  }
+else
+  vim.g.clipboard = {
+    name = "xsel-clipboard",
+    copy = {
+      ["+"] = "xsel -i -b",
+      ["*"] = "xsel -i -p"
+    },
+    paste = {
+      ["+"] = "xsel -o -b",
+      ["*"] = "xsel -o -p"
+    },
+    cache_enabled = 0
+  }
 end

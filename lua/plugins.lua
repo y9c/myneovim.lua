@@ -9,11 +9,12 @@ if not packer_exists then
     return
   end
 
-  print(" Downloading packer.nvim...")
+  print("Downloading packer.nvim...")
   local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
   packer_bootstrap =
     vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
   vim.cmd [[packadd packer.nvim]]
+  print("packer.nvim added! close and reopen Neovim to install plugins..")
   return
 end
 
@@ -455,7 +456,7 @@ return packer.startup(
     }
     -- use "github/copilot.vim"
     use {
-      "y9c/copilot.lua",
+      "zbirenbaum/copilot.lua",
       event = {"VimEnter"},
       config = function()
         vim.defer_fn(

@@ -105,6 +105,7 @@ cmp.setup {
     -- Shift+Enter works as Enter in windows terminal by default, so you have to reset the keybinding in setting.json
     -- Ref: https://github.com/microsoft/terminal/issues/530#issuecomment-755917602
     ["<S-CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
+    ["<Right>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
     ["<Tab>"] = vim.schedule_wrap(
       function(fallback)
         if cmp.visible() and has_words_before() then
