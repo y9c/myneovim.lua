@@ -32,7 +32,7 @@ syn keyword pythonStatement	ruleorder localrules configfile
 syn keyword pythonStatement	touch protected temp wrapper
 syn keyword pythonStatement	dynamic ancient directory
 syn keyword pythonStatement	input output params message shadow
-syn keyword pythonStatement	threads resources priority
+syn keyword pythonStatement	threads resources priority wildcard_constraints
 syn keyword pythonStatement	version run shell benchmark snakefile log script
 syn keyword pythonStatement	rule subworkflow checkpoint nextgroup=pythonFunction skipwhite
 
