@@ -1,0 +1,7 @@
+{
+  "COPYRIGHT and ICENSE": {
+    "prefix": "Cop",
+    "body": "&nbsp;\n\n<p align=\"center\"> \n  <img \n    src=\"https://raw.githubusercontent.com/catppuccin/catppuccin/dev/assets/footers/gray0_ctp_on_line.svg?sanitize=true\" \n  /> \n</p> \n<p align=\"center\"> \n  Copyright &copy; ${2:${CURRENT_YEAR}}-present \n  <a href=\"https://github.com/y9c\" target=\"_blank\">Chang Y</a> \n</p> \n<p align=\"center\"> \n  <a href=\"https://github.com/y9c/${1:repo_name}/blob/master/LICENSE\" \n    ><img \n      src=\"https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=d9e0ee&colorA=282a36&colorB=c678dd\" \n  /></a> \n</p>",
+    "description": "Add COPYRIGHT and LICENSEi into footers."
+  }
+}
