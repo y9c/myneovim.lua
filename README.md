@@ -54,10 +54,10 @@ git clone https://github.com/y9c/myneovim.lua.git ~/.config/nvim --depth 1
 </p>
 <p align="center">
   Copyright &copy; 2020-present
-  <a href="https://github.com/glepnir" target="_blank">Chang Y</a>
+  <a href="https://github.com/y9c" target="_blank">Chang Y</a>
 </p>
 <p align="center">
-  <a href="https://github.com/glepnir/zephyr-nvim/blob/master/LICENSE"
+  <a href="https://github.com/y9c/myneovim.lua/blob/master/LICENSE"
     ><img
       src="https://img.shields.io/static/v1.svg?style=for-the-badge&label=License&message=MIT&logoColor=d9e0ee&colorA=282a36&colorB=c678dd"
   /></a>
