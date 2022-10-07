@@ -1,1 +1,1 @@
-require("conf.zephyr")
+require("conf.theme")
