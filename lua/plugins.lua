@@ -14,7 +14,7 @@ if not packer_exists then
   packer_bootstrap =
     vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
   vim.cmd [[packadd packer.nvim]]
-  print("packer.nvim added! close and reopen Neovim to install plugins..")
+  print("packer.nvim added! Reopen Neovim and run :PackerSync to install plugins..")
   return
 end
 
@@ -37,7 +37,7 @@ return packer.startup(
     use {"wbthomason/packer.nvim", opt = true}
 
     -- Load on an autocommand event
-    use {"andymass/vim-matchup", event = "VimEnter *"}
+    use {"andymass/vim-matchup", event = "VimEnter"}
 
     -- NerdIcons
     use {
@@ -103,7 +103,7 @@ return packer.startup(
     -- Syntax
     use {
       "nvim-treesitter/nvim-treesitter",
-      event = "BufRead *",
+      event = "BufRead",
       after = "telescope.nvim",
       config = function()
         vim.api.nvim_command("set foldmethod=expr")
@@ -234,7 +234,7 @@ return packer.startup(
 
     use {
       "itchyny/vim-cursorword",
-      event = {"BufReadPre *", "BufNewFile *"}
+      event = {"BufReadPre", "BufNewFile"}
     }
 
     -- Qucik Jump (move cursor)
@@ -414,7 +414,7 @@ return packer.startup(
     -- Complete
     use {
       "windwp/nvim-autopairs",
-      event = "InsertEnter *",
+      event = "InsertEnter",
       config = function()
         require("nvim-autopairs").setup(
           {
