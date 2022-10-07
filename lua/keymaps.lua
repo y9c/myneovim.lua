@@ -44,14 +44,19 @@ vim.keymap.set("v", "<Localleader>c", ":CommentToggle<CR>", {noremap = true, sil
 
 -- Version control
 -- mappings
-vim.keymap.set("n", "<F7>", "<cmd>SignifyDiff<CR>", {noremap = true})
-vim.keymap.set("n", "<Leader>gh", "<cmd>SignifyHunkDiff<CR>", {noremap = true})
-vim.keymap.set("n", "<Leader>gu", "<cmd>SignifyHunkUndo<CR>", {noremap = true})
-vim.keymap.set("n", "<Leader>gt", "<cmd>SignifyToggle<CR>", {noremap = true})
-
--- hunk jumping
-vim.keymap.set("n", "[g", "<plug>(signify-prev-hunk)", {})
-vim.keymap.set("n", "]g", "<plug>(signify-next-hunk)", {})
+vim.keymap.set("n", "<F7>", "<cmd>Gitsigns preview_hunk<CR>", {noremap = true})
+vim.keymap.set("n", "[g", "<cmd>Gitsigns prev_hunk<CR>", {})
+vim.keymap.set("n", "]g", "<cmd>Gitsigns next_hunk<CR>", {})
+vim.keymap.set("n", "<Leader>gh", "<cmd>Gitsigns diffthis<CR>", {noremap = true})
+vim.keymap.set("n", "<Leader>gu", "<cmd>Gitsigns reset_hunk<CR>", {noremap = true})
+vim.keymap.set("n", "<Leader>gt", "<cmd>Gitsings SignifyToggle<CR>", {noremap = true})
+-- signify plugins (legacy)
+-- vim.keymap.set("n", "<F7>", "<cmd>SignifyDiff<CR>", {noremap = true})
+-- vim.keymap.set("n", "[g", "<plug>(signify-prev-hunk)", {})
+-- vim.keymap.set("n", "]g", "<plug>(signify-next-hunk)", {})
+-- vim.keymap.set("n", "<Leader>gh", "<cmd>SignifyHunkDiff<CR>", {noremap = true})
+-- vim.keymap.set("n", "<Leader>gu", "<cmd>SignifyHunkUndo<CR>", {noremap = true})
+-- vim.keymap.set("n", "<Leader>gt", "<cmd>SignifyToggle<CR>", {noremap = true})
 
 -- Packer
 vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<CR>", {noremap = true})
@@ -79,6 +84,7 @@ vim.keymap.set("n", "va", "<cmd>Lspsaga code_action<CR>", {noremap = true})
 vim.keymap.set("v", "va", "<cmd><C-U>Lspsaga range_code_action<CR>", {noremap = true})
 vim.keymap.set("n", "vs", "<cmd>Lspsaga signature_help<CR>", {noremap = true})
 vim.keymap.set("n", "<leader>ce", "<cmd>Lspsaga show_line_diagnostics<CR>", {noremap = true})
+vim.keymap.set({"n", "v"}, "<leader>ca", "<cmd>Lspsaga code_action<CR>", {silent = true})
 
 -- Formatter
 function run_formatter()

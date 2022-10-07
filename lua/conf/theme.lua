@@ -74,7 +74,7 @@ local color_palettes = {
   }
 }
 
-local cs = color_palettes.mocha
+local cs = color_palettes.zephyr
 
 function cs.terminal_color()
   vim.g.terminal_color_0 = cs.bg

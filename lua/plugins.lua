@@ -367,7 +367,41 @@ return packer.startup(
       }
     }
 
-    use "glepnir/lspsaga.nvim"
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      config = function()
+        local nls = require("null-ls")
+        nls.setup(
+          {
+            sources = {
+              nls.builtins.completion.spell,
+              nls.builtins.code_actions.gitsigns
+            }
+          }
+        )
+      end
+    }
+    use {
+      "glepnir/lspsaga.nvim",
+      config = function()
+        require("lspsaga").init_lsp_saga(
+          {
+            symbol_in_winbar = {
+              enable = true
+            },
+            code_action_lightbulb = {
+              enable = true,
+              enable_in_insert = true,
+              cache_code_action = true,
+              sign = false,
+              update_time = 100,
+              sign_priority = 20,
+              virtual_text = true
+            }
+          }
+        )
+      end
+    }
 
     -- language: markdown
     if (vim.env.DISPLAY or vim.fn.has("macunix")) then
