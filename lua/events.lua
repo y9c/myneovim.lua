@@ -52,20 +52,25 @@ function autocmd.load_autocmds()
       {"FocusGained", "* checktime"}
     },
     ft = {
+      {"BufNewFile,BufRead", "*.toml", "setf toml"},
+      {"BufNewFile,BufRead", "*.jl", "setf julia"},
+      {"BufNewFile,BufRead", "*.ipynb", "setf ipynb"},
+      {"BufNewFile,BufRead", "Snakefile,*.smk", "setf snakemake"},
+      {"BufNewFile,BufRead", "*.sbatch,*.sbatch.sh", "setf sbatch"},
+      {"BufNewFile,BufRead", "*.qmd,*.rmd", "setf markdown"},
+      {"BufNewFile,BufRead", "*.ojs", "setf javascript"},
       {"FileType", "dashboard", "set showtabline=0 | autocmd WinLeave <buffer> set showtabline=2"},
-      {"BufNewFile,BufRead", "*.toml", " setf toml"},
-      {"BufNewFile,BufRead", "*.jl", " setf julia"},
-      {"BufNewFile,BufRead", "*.ipynb", " setf ipynb"},
-      {"BufNewFile,BufRead", "Snakefile,*.smk", " setf snakemake"},
-      {"BufNewFile,BufRead", "*.sbatch,*.sbatch.sh", " setf sbatch"},
-      {"BufNewFile,BufRead", "*.qmd,*.rmd", " setf markdown"},
-      {"BufNewFile,BufRead", "*.ojs", " setf javascript"}
+      {
+        "BufEnter,BufFilePost",
+        "Snakefile,*.smk",
+        [[silent! lua vim.api.nvim_buf_set_option(0, "commentstring", "# %s")]]
+      }
     },
     yank = {
-      {"TextYankPost", [[* silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}
+      {"TextYankPost", "*", [[silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=400})]]}
     },
     ["vimrc-remember-cursor-position"] = {
-      {"BufReadPost", [[* if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
+      {"BufReadPost", "*", [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif]]}
     },
     -- auto close  the tab/vim when it is the last window
     -- quickfix, NvimTree, packer, vista
