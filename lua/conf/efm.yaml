@@ -43,7 +43,7 @@ tools:
       - '%tEVERE %f:%l %m'
 
   yaml-yamllint: &yaml-yamllint
-    lint-command: 'yamllint -f parsable -'
+    lint-command: 'yamllint -d relaxed -f parsable -'
     lint-stdin: true
 
   python-flake8: &python-flake8
