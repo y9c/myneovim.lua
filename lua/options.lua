@@ -87,7 +87,7 @@ elseif vim.loop.os_uname().sysname == "Darwin" then
     },
     cache_enabled = 0
   }
-elseif vim.fn.executable("xsel") then
+elseif vim.fn.executable("xsel") == 1 then
   vim.g.clipboard = {
     name = "xsel-clipboard",
     copy = {
