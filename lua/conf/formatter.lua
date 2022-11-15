@@ -60,8 +60,10 @@ require("formatter").setup(
       sh = {
         -- shfmt
         -- GO111MODULE=on go get mvdan.cc/sh/v3/cmd/shfmt
+        -- 2 spaces indention is following google style:
+        -- https://google.github.io/styleguide/shellguide.html#s5.1-indentation
         function()
-          return {exe = "shfmt", args = {"-i", 2}, stdin = true}
+          return {exe = "shfmt", args = {"-i", 2, "-kp"}, stdin = true}
         end
       },
       python = {
