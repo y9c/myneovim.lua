@@ -7,6 +7,21 @@ local function prettier_formatter()
   }
 end
 
+local function codeblock_formatter()
+  -- support flow|babel|babel-flow|babel-ts|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|mdx|vue|yaml|html|angular|lwc>
+  return {
+    exe = "cbfmt",
+    args = {
+      "--config",
+      vim.fn.stdpath("config") .. "/lua/conf/cbfmt.toml",
+      "--parser",
+      vim.bo.filetype,
+      "--best-effort"
+    },
+    stdin = true
+  }
+end
+
 require("formatter").setup(
   {
     logging = false,
@@ -21,21 +36,13 @@ require("formatter").setup(
       },
       markdown = {
         -- prettier
-        function()
-          return {
-            exe = "prettier",
-            args = {"--parser", "markdown", "--single-quote"},
-            stdin = true
-          }
-        end,
+        prettier_formatter,
         -- cbfmt
-        function()
-          return {
-            exe = "cbfmt",
-            args = {"--config", vim.fn.stdpath("config") .. "/lua/conf/cbfmt.toml", "--parser", "markdown"},
-            stdin = true
-          }
-        end
+        codeblock_formatter
+      },
+      rmd = {
+        -- cbfmt
+        codeblock_formatter
       },
       typescriptreact = {
         -- prettier
