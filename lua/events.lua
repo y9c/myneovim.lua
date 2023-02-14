@@ -77,7 +77,7 @@ function autocmd.load_autocmds()
     ["autoclose-quickfix"] = {
       {"WinEnter", "*", [[ if winnr('$') == 1 && &buftype == "quickfix" | q | endif ]]},
       {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '__vista__' | quit | endif ]]},
-      {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '[packer]' | quit | endif ]]},
+      -- {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == '[packer]' | quit | endif ]]},
       {"BufEnter", "*", [[ ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif ]]}
     },
     ["plugin-cursorword"] = {

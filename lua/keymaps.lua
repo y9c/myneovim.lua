@@ -59,15 +59,15 @@ vim.keymap.set("n", "<Leader>gt", "<cmd>Gitsings SignifyToggle<CR>", {noremap = 
 -- vim.keymap.set("n", "<Leader>gt", "<cmd>SignifyToggle<CR>", {noremap = true})
 
 -- Packer
-vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<CR>", {noremap = true})
-vim.keymap.set("n", "<leader>pi", "<cmd>PackerInstall<CR>", {noremap = true})
-vim.keymap.set("n", "<leader>pu", "<cmd>PackerUpdate<CR>", {noremap = true})
-vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<CR>", {noremap = true})
+-- vim.keymap.set("n", "<leader>pc", "<cmd>PackerCompile<CR>", {noremap = true})
+-- vim.keymap.set("n", "<leader>pi", "<cmd>PackerInstall<CR>", {noremap = true})
+-- vim.keymap.set("n", "<leader>pu", "<cmd>PackerUpdate<CR>", {noremap = true})
+-- vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<CR>", {noremap = true})
 
 -- LSP
 vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {noremap = true})
 
-vim.keymap.set("n", "<leader>ll", "<cmd>LspInstallInfo<CR>", {noremap = true})
+vim.keymap.set("n", "<leader>ll", "<cmd>Mason<CR>", {noremap = true})
 vim.keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<CR>", {noremap = true})
 vim.keymap.set("n", "]e", "n<cmd>Lspsaga diagnostic_jump_prev<CR>", {noremap = true})
 vim.keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", {noremap = true})

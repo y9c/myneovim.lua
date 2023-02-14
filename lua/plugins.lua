@@ -1,82 +1,59 @@
-#! /usr/bin/env lua
-
-local packer_exists = pcall(vim.cmd, [[packadd packer.nvim]])
-local packer_bootstrap = nil
-
-if not packer_exists then
-  if vim.fn.input("Download Packer? (y for yes) ") ~= "y" then
-    print("Please install Packer first!")
-    return
-  end
-
-  print("Downloading packer.nvim...")
-  local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/opt/packer.nvim"
-  packer_bootstrap =
-    vim.fn.system({"git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path})
-  vim.cmd [[packadd packer.nvim]]
-  print("packer.nvim added! Reopen Neovim and run :PackerSync to install plugins..")
-  return
-end
-
-local packer = require("packer")
-
-packer.init(
-  {
-    ensure_dependencies = true,
-    git = {
-      cmd = "git",
-      depth = 1,
-      clone_timeout = 600
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system(
+    {
+      "git",
+      "clone",
+      "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable", -- latest stable release
+      lazypath
     }
-  }
-)
+  )
+end
+vim.opt.rtp:prepend(lazypath)
 
-return packer.startup(
-  function(use)
-    -- Packer can manage itself as an optional plugin
-    use {"wbthomason/packer.nvim", opt = true}
-
+require("lazy").setup(
+  {
+    -- "folke/which-key.nvim",
+    {"folke/neoconf.nvim", cmd = "Neoconf"},
+    "folke/neodev.nvim",
     -- Load on an autocommand event
-    use {"andymass/vim-matchup", event = "VimEnter"}
-
+    {"andymass/vim-matchup", event = "VimEnter"},
     -- NerdIcons
-    use {
+    {
       "kyazdani42/nvim-web-devicons",
       config = function()
         require("conf.devicons")
       end
-    }
-
+    },
     -- Buffer Line (top)
-    use {
+    {
       "akinsho/bufferline.nvim",
       config = function()
         require("conf.bufferline")
       end,
-      requires = {"kyazdani42/nvim-web-devicons", opt = true}
-    }
-
+      dependencies = {"kyazdani42/nvim-web-devicons", lazy = true}
+    },
     -- UI: Status Line (bottom)
-    use {
+    {
       "nvim-lualine/lualine.nvim",
       config = function()
         require("conf.statusline")
       end,
-      requires = {"kyazdani42/nvim-web-devicons", opt = true}
-    }
-
+      dependencies = {"kyazdani42/nvim-web-devicons", lazy = true}
+    },
     -- UI: Startup window
-    use {
+    {
       "goolord/alpha-nvim",
       config = function()
         require("conf.dashboard")
       end
-    }
-
+    },
     -- UI: Scroll bar
-    use {
+    {
       "petertriho/nvim-scrollbar",
-      -- requires = {"kevinhwang91/nvim-hlslens"},
+      -- dependencies = {"kevinhwang91/nvim-hlslens"},
       config = function()
         require("scrollbar").setup(
           {
@@ -98,13 +75,12 @@ return packer.startup(
         ]]
         )
       end
-    }
-
+    },
     -- Syntax
-    use {
+    {
       "nvim-treesitter/nvim-treesitter",
       event = "BufRead",
-      after = "telescope.nvim",
+      dependencies = {"nvim-telescope/telescope.nvim"},
       config = function()
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
@@ -145,17 +121,15 @@ return packer.startup(
           }
         }
       end
-    }
-    use {
+    },
+    {
       "nvim-treesitter/nvim-treesitter-textobjects",
-      after = "nvim-treesitter"
-    }
-
+      dependencies = {"nvim-treesitter"}
+    },
     -- speed up jk
-    use "rhysd/accelerated-jk"
-
+    "rhysd/accelerated-jk",
     -- Indent Guides
-    -- use {
+    --,{
     --   "glepnir/indent-guides.nvim",
     --   config = function()
     --     require("indent_guides").setup(
@@ -166,7 +140,7 @@ return packer.startup(
     --     )
     --   end
     -- }
-    use {
+    {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufRead",
       config = function()
@@ -214,53 +188,47 @@ return packer.startup(
         -- because lazy load indent-blankline so need readd this autocmd
         vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
       end
-    }
-
+    },
     -- Commentary
-    use {
+    {
       "terrortylor/nvim-comment",
       config = function()
         require("nvim_comment").setup()
       end
-    }
-
+    },
     -- Color highlighter
-    use {
+    {
       "norcalli/nvim-colorizer.lua",
       config = function()
         require("colorizer").setup()
       end
-    }
-
-    use {
+    },
+    {
       "itchyny/vim-cursorword",
       event = {"BufReadPre", "BufNewFile"}
-    }
-
+    },
     -- Qucik Jump (move cursor)
-    use "rlane/pounce.nvim"
-
+    "rlane/pounce.nvim",
     -- run code
-    -- use {"CRAG666/code_runner.nvim"}
+    --,{"CRAG666/code_runner.nvim"}
     -- QuickRun
-    use {"lambdalisue/vim-quickrun-neovim-job"}
-    use {
+    {"lambdalisue/vim-quickrun-neovim-job"},
+    {
       "thinca/vim-quickrun",
-      setup = function()
+      config = function()
         vim.g.quickrun_no_default_key_mappings = 1
         vim.g.quickrun_config = {
           _ = {runner = "neovim_job"},
           rust = {type = "rust/cargo"}
         }
       end
-    }
-
+    },
     -- Fuzzy finder
-    -- use {"liuchengxu/vim-clap"}
+    --,{"liuchengxu/vim-clap"}
 
-    use {
+    {
       "nvim-telescope/telescope.nvim",
-      requires = {
+      dependencies = {
         {"nvim-lua/popup.nvim"},
         {"nvim-lua/plenary.nvim"},
         {"nvim-telescope/telescope-fzy-native.nvim"}
@@ -268,11 +236,10 @@ return packer.startup(
       config = function()
         require("conf.telescope")
       end
-    }
-
-    -- use {
+    },
+    --,{
     --   "nvim-telescope/telescope-frecency.nvim",
-    --   requires = {
+    --   dependencies = {
     --     "tami5/sql.nvim"
     --   },
     --   config = function()
@@ -281,10 +248,10 @@ return packer.startup(
     -- }
 
     -- File explorer
-    use {
+    {
       "kyazdani42/nvim-tree.lua",
       cmd = {"NvimTreeToggle", "NvimTreeOpen"},
-      requires = {"kyazdani42/nvim-web-devicons"},
+      dependencies = {"kyazdani42/nvim-web-devicons"},
       config = function()
         require "nvim-tree".setup {
           view = {
@@ -293,9 +260,9 @@ return packer.startup(
           open_on_tab = false
         }
       end
-    }
+    },
     -- view LSP symbol and tags
-    use {
+    {
       "liuchengxu/vista.vim",
       cmd = "Vista",
       config = function()
@@ -313,12 +280,11 @@ return packer.startup(
           typescriptreact = "nvim_lsp"
         }
       end
-    }
-
+    },
     -- Version control
-    use {
+    {
       "lewis6991/gitsigns.nvim",
-      requires = {
+      dependencies = {
         "nvim-lua/plenary.nvim"
       },
       config = function()
@@ -353,21 +319,28 @@ return packer.startup(
           diff_opts = {interval = true}
         }
       end
-    }
-
+    },
     -- LSP
-    use {
-      "williamboman/nvim-lsp-installer",
-      {
-        "neovim/nvim-lspconfig",
-        config = function()
-          require("nvim-lsp-installer").setup {}
-          require "conf.lsp"
-        end
-      }
-    }
-
-    use {
+    "neovim/nvim-lspconfig",
+    "williamboman/mason-lspconfig.nvim",
+    {
+      "williamboman/mason.nvim",
+      config = function()
+        require("mason").setup(
+          {
+            ui = {
+              icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+              }
+            }
+          }
+        )
+        require("conf.lsp")
+      end
+    },
+    {
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
         local nls = require("null-ls")
@@ -380,8 +353,8 @@ return packer.startup(
           }
         )
       end
-    }
-    use {
+    },
+    {
       "glepnir/lspsaga.nvim",
       config = function()
         require("lspsaga").setup(
@@ -401,37 +374,33 @@ return packer.startup(
           }
         )
       end
-    }
-
+    },
     -- language: markdown
-    if (vim.env.DISPLAY or vim.fn.has("macunix")) then
-      use {
-        "iamcco/markdown-preview.nvim",
-        ft = "markdown",
-        run = "cd app && yarn install",
-        config = function()
-          vim.g.mkdp_auto_start = 0
-        end
-      }
-    end
+    -- if (vim.env.DISPLAY or vim.fn.has("macunix")) then
+    --  {
+    --     "iamcco/markdown-preview.nvim",
+    --     ft = "markdown",
+    --     run = "cd app && yarn install",
+    --     config = function()
+    --       vim.g.mkdp_auto_start = 0
+    --     end
+    --   }
+    -- end
 
     -- language: singularity def
-    use {
+    {
       "singularityware/singularity.lang",
-      rtp = "vim",
       ft = "singularity"
-    }
-
+    },
     -- Formatter
-    use {
+    {
       "mhartington/formatter.nvim",
       config = function()
         require("conf.formatter")
       end
-    }
-
+    },
     -- Auto header completion
-    -- use {
+    --,{
     --   "alpertuna/vim-header",
     --   event = "BufRead",
     --   config = function()
@@ -446,7 +415,7 @@ return packer.startup(
     -- }
 
     -- Complete
-    use {
+    {
       "windwp/nvim-autopairs",
       event = "InsertEnter",
       config = function()
@@ -456,40 +425,48 @@ return packer.startup(
           }
         )
       end
-    }
-
-    use {
+    },
+    {
       "hrsh7th/nvim-cmp",
       event = {"InsertEnter", "CmdlineEnter"},
       config = function()
         require("conf.complete")
       end
-    }
-    use {
+    },
+    {
       "hrsh7th/cmp-path",
-      after = "nvim-cmp"
-    }
-    use {
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      }
+    },
+    {
       "hrsh7th/cmp-nvim-lsp",
-      after = "nvim-cmp"
-    }
-    use {
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      }
+    },
+    {
       "hrsh7th/cmp-buffer",
-      after = "nvim-cmp"
-    }
-    use {
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      }
+    },
+    {
       "hrsh7th/cmp-vsnip",
-      after = "nvim-cmp"
-    }
-    use {
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      }
+    },
+    {
       "hrsh7th/vim-vsnip",
-      after = "nvim-cmp",
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      },
       config = function()
         vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets/"
       end
-    }
-    -- use "github/copilot.vim"
-    use {
+    },
+    {
       "zbirenbaum/copilot.lua",
       event = {"VimEnter"},
       config = function()
@@ -500,10 +477,12 @@ return packer.startup(
           100
         )
       end
-    }
-    use {
+    },
+    {
       "zbirenbaum/copilot-cmp",
-      after = {"copilot.lua"},
+      dependencies = {
+        "zbirenbaum/copilot.lua"
+      },
       config = function()
         require("copilot_cmp").setup(
           {
@@ -511,21 +490,14 @@ return packer.startup(
           }
         )
       end
-    }
-
+    },
     -- Translator
-    use {
+    {
       "voldikss/vim-translator",
       config = function()
         vim.g.translator_history_enable = true
         vim.g.translator_default_engines = {"bing", "haici", "youdao"}
       end
     }
-
-    -- Automatically set up your configuration after cloning packer.nvim
-    -- Put this at the end after all plugins
-    if packer_bootstrap then
-      require("packer").sync()
-    end
-  end
+  }
 )

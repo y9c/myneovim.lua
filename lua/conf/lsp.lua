@@ -18,7 +18,7 @@ local enhance_capabilities = vim.lsp.protocol.make_client_capabilities()
 -- "vimls",
 -- "tsserver"
 -- local servers = {}
-local servers = require "nvim-lsp-installer.servers".get_installed_server_names()
+local servers = require("mason-lspconfig").get_installed_servers()
 
 for _, server in ipairs(servers) do
   lspconfig[server].setup {
@@ -40,7 +40,7 @@ lspconfig.efm.setup {
   end
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = {
