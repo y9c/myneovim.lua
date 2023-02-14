@@ -176,8 +176,8 @@ vim.keymap.set("v", "<Leader>tr", "<Plug>TranslateRV", {})
 vim.keymap.set("n", "<Leader>ty", "<Plug>TranslateX", {})
 
 -- Terminal
-vim.keymap.set("n", "<A-t>", "<cmd>Lspsaga open_floaterm<CR>", {silent = true, noremap = true})
-vim.keymap.set("t", "<A-t>", "<C-\\><C-n><cmd>Lspsaga close_floaterm<CR>", {silent = true, noremap = true})
+vim.keymap.set("n", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {silent = true, noremap = true})
+vim.keymap.set("t", "<A-t>", "<cmd>Lspsaga term_toggle<CR>", {silent = true, noremap = true})
 
 -- Telescope File Pickers
 vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<CR>", {}) -- "<cmd>DashboardFindFile<CR>" is a similar one

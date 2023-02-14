@@ -117,7 +117,9 @@ require("lazy").setup(
             "html",
             "json",
             "toml",
-            "yaml"
+            "yaml",
+            "markdown",
+            "markdown_inline"
           }
         }
       end
