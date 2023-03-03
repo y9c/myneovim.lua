@@ -133,7 +133,7 @@ cmp.setup {
       {name = "vsnip", keyword_length = 1, priority = 2}
     },
     {
-      {name = "buffer", keyword_length = 1}
+      {name = "buffer", keyword_length = 0}
     }
   )
 }

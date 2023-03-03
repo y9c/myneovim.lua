@@ -470,27 +470,20 @@ require("lazy").setup(
     },
     {
       "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
       event = {"VimEnter"},
       config = function()
-        vim.defer_fn(
-          function()
-            require("copilot").setup()
-          end,
-          100
-        )
+        require("copilot").setup({})
       end
     },
     {
       "zbirenbaum/copilot-cmp",
       dependencies = {
+        "hrsh7th/nvim-cmp",
         "zbirenbaum/copilot.lua"
       },
       config = function()
-        require("copilot_cmp").setup(
-          {
-            clear_after_cursor = true
-          }
-        )
+        require("copilot_cmp").setup()
       end
     },
     -- Translator

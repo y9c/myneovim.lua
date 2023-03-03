@@ -13,11 +13,13 @@ vim.o.hidden = true
 vim.o.updatetime = 300
 vim.o.scrolloff = 15
 vim.o.sidescrolloff = 5
-vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.showmode = false
 
 vim.o.clipboard = "unnamedplus"
+
+-- Complete
+vim.o.completeopt = "menuone,noinsert,noselect"
 
 -- vim.wo.signcolumn = "number"
 vim.wo.wrap = false
@@ -50,9 +52,6 @@ vim.o.undofile = true
 vim.bo.undofile = true
 -- undodir default: $XDG_DATA_HOME/nvim/undo
 -- vim.o.undodir = os.getenv('HOME') .. "/.cache/vim/undo"
-
--- Complete
-vim.o.completeopt = "menuone,noselect"
 
 -- Spelling
 -- vim.wo.spell = true
