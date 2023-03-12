@@ -64,6 +64,9 @@ vim.keymap.set("n", "<Leader>gt", "<cmd>Gitsings SignifyToggle<CR>", {noremap = 
 -- vim.keymap.set("n", "<leader>pu", "<cmd>PackerUpdate<CR>", {noremap = true})
 -- vim.keymap.set("n", "<leader>ps", "<cmd>PackerSync<CR>", {noremap = true})
 
+-- lazy plugin manager
+vim.keymap.set("n", "<leader>lz", "<cmd>Lazy<CR>", {noremap = true})
+
 -- LSP
 vim.keymap.set("n", "<leader>li", "<cmd>LspInfo<CR>", {noremap = true})
 
