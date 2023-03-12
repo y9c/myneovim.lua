@@ -19,7 +19,12 @@ require("lazy").setup(
     {"folke/neoconf.nvim", cmd = "Neoconf"},
     "folke/neodev.nvim",
     -- Load on an autocommand event
-    {"andymass/vim-matchup", event = "VimEnter"},
+    {
+      "andymass/vim-matchup",
+      config = function()
+        vim.g.matchup_matchparen_offscreen = {method = "popup"}
+      end
+    },
     -- NerdIcons
     {
       "kyazdani42/nvim-web-devicons",
@@ -85,7 +90,6 @@ require("lazy").setup(
         vim.api.nvim_command("set foldmethod=expr")
         vim.api.nvim_command("set foldexpr=nvim_treesitter#foldexpr()")
         require "nvim-treesitter.configs".setup {
-          ignore_install = {"haskell", "phpdoc", "swift"},
           highlight = {
             enable = true,
             disable = {"haskell"}
@@ -101,6 +105,10 @@ require("lazy").setup(
               }
             }
           },
+          matchup = {
+            enable = true
+          },
+          ignore_install = {"haskell", "phpdoc", "swift"},
           -- ensure_installed = "all"
           ensure_installed = {
             "c",
