@@ -27,18 +27,18 @@ for _, server in ipairs(servers) do
   }
 end
 
-lspconfig.efm.setup {
-  -- filetypes = {"yaml", "snakemake"},
-  filetypes = {"yaml"},
-  cmd = {
-    "efm-langserver",
-    "-c",
-    vim.fn.stdpath("config") .. "/lua/conf/efm.yaml"
-  },
-  root_dir = function()
-    return vim.fn.getcwd()
-  end
-}
+-- lspconfig.efm.setup {
+--   -- filetypes = {"yaml", "snakemake"},
+--   filetypes = {"yaml"},
+--   cmd = {
+--     "efm-langserver",
+--     "-c",
+--     vim.fn.stdpath("config") .. "/lua/conf/efm.yaml"
+--   },
+--   root_dir = function()
+--     return vim.fn.getcwd()
+--   end
+-- }
 
 lspconfig.lua_ls.setup {
   settings = {
