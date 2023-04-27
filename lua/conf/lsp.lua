@@ -51,4 +51,12 @@ lspconfig.lua_ls.setup {
   }
 }
 
+lspconfig.yamlls.setup {
+  settings = {
+    yaml = {
+      keyOrdering = false
+    }
+  }
+}
+
 -- https://github.com/glepnir/lspsaga.nvim
