@@ -313,14 +313,6 @@ require("lazy").setup(
           },
           numhl = false,
           linehl = false,
-          keymaps = {
-            -- Default keymap options
-            noremap = true,
-            buffer = true,
-            -- Text objects
-            ["o ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>',
-            ["x ih"] = ':<C-U>lua require"gitsigns".select_hunk()<CR>'
-          },
           current_line_blame = false,
           sign_priority = 6,
           update_debounce = 100,
