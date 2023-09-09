@@ -340,17 +340,12 @@ require("lazy").setup(
       config = function()
         require("lspsaga").setup(
           {
-            symbol_in_winbar = {
-              enable = true
-            },
             code_action_lightbulb = {
               enable = true,
-              enable_in_insert = true,
-              cache_code_action = true,
-              sign = false,
-              update_time = 100,
-              sign_priority = 20,
-              virtual_text = true
+              sign = true,
+              virtual_text = true,
+              sign_priority = 40,
+              debounce = 10
             }
           }
         )
