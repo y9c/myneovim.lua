@@ -338,17 +338,7 @@ require("lazy").setup(
     {
       "glepnir/lspsaga.nvim",
       config = function()
-        require("lspsaga").setup(
-          {
-            code_action_lightbulb = {
-              enable = true,
-              sign = true,
-              virtual_text = true,
-              sign_priority = 40,
-              debounce = 0
-            }
-          }
-        )
+        require("lspsaga").setup({})
       end
     },
     -- language: markdown
