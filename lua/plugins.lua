@@ -345,7 +345,7 @@ require("lazy").setup(
               sign = true,
               virtual_text = true,
               sign_priority = 40,
-              debounce = 10
+              debounce = 0
             }
           }
         )
