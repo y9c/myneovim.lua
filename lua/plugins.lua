@@ -340,8 +340,8 @@ require("lazy").setup(
       config = function()
         require("lspsaga").setup(
           {
-            code_action_lightbulb = {
-              enable = false
+            lightbulb = {
+              sign = false
             }
           }
         )
