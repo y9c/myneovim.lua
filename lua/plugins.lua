@@ -341,11 +341,7 @@ require("lazy").setup(
         require("lspsaga").setup(
           {
             code_action_lightbulb = {
-              enable = true,
-              sign = false,
-              virtual_text = true,
-              sign_priority = 40,
-              debounce = 0
+              enable = false
             }
           }
         )
