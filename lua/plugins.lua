@@ -139,17 +139,6 @@ require("lazy").setup(
     -- speed up jk
     "rainbowhxch/accelerated-jk.nvim",
     -- Indent Guides
-    --,{
-    --   "glepnir/indent-guides.nvim",
-    --   config = function()
-    --     require("indent_guides").setup(
-    --       {
-    --         even_colors = {fg = "NONE", bg = "#23272E"},
-    --         odd_colors = {fg = "NONE", bg = "#23272E"}
-    --       }
-    --     )
-    --   end
-    -- }
     {
       "lukas-reineke/indent-blankline.nvim",
       event = "BufRead",
@@ -195,8 +184,6 @@ require("lazy").setup(
           "for",
           "case"
         }
-        -- because lazy load indent-blankline so need readd this autocmd
-        vim.cmd("autocmd CursorMoved * IndentBlanklineRefresh")
       end
     },
     -- Commentary
