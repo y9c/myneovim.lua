@@ -424,17 +424,6 @@ require("lazy").setup(
       }
     },
     {
-      "tzachar/cmp-fuzzy-path",
-      dependencies = {
-        "hrsh7th/nvim-cmp",
-        "tzachar/fuzzy.nvim",
-        {
-          "nvim-telescope/telescope-fzf-native.nvim",
-          build = "make"
-        }
-      }
-    },
-    {
       "hrsh7th/cmp-nvim-lsp",
       dependencies = {
         "hrsh7th/nvim-cmp"

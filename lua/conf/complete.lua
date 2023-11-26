@@ -128,13 +128,12 @@ cmp.setup {
   sources = cmp.config.sources(
     {
       {name = "copilot", keyword_length = 0, priority = 100},
-      {name = "fuzzy_path", keyword_length = 0, priority = 2},
+      {name = "path", keyword_length = 0, priority = 2},
       {name = "nvim_lsp", keyword_length = 2, priority = 2},
       {name = "vsnip", keyword_length = 1, priority = 2}
     },
     {
-      {name = "buffer", keyword_length = 0},
-      {name = "path", keyword_length = 0, priority = 2}
+      {name = "buffer", keyword_length = 0}
     }
   )
 }
