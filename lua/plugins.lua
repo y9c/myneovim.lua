@@ -289,7 +289,12 @@ require("lazy").setup(
       end
     },
     -- LSP
-    "neovim/nvim-lspconfig",
+    {
+      "neovim/nvim-lspconfig",
+      dependencies = {
+        {"microsoft/python-type-stubs"}
+      }
+    },
     "williamboman/mason-lspconfig.nvim",
     {
       "williamboman/mason.nvim",
