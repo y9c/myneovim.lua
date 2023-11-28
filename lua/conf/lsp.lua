@@ -59,4 +59,27 @@ lspconfig.yamlls.setup {
   }
 }
 
+lspconfig.ruff_lsp.setup {
+  on_attach = function(client, _)
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
+}
+
+lspconfig.pyright.setup {
+  on_attach = function(client, _)
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.executeCommandProvider = false
+  end,
+  capabilities = {
+    textDocument = {
+      publishDiagnostics = {
+        tagSupport = {
+          valueSet = {2}
+        }
+      }
+    }
+  }
+}
 -- https://github.com/glepnir/lspsaga.nvim
