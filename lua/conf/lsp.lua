@@ -66,6 +66,7 @@ lspconfig.ruff_lsp.setup {
   end
 }
 
+<<<<<<< HEAD
 lspconfig.pyright.setup {
   on_attach = function(client, _)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -82,4 +83,6 @@ lspconfig.pyright.setup {
     }
   }
 }
+=======
+>>>>>>> 302abae7dc9e82af0d29753c45356be8e554abc0
 -- https://github.com/glepnir/lspsaga.nvim
