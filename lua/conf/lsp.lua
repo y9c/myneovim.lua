@@ -91,20 +91,4 @@ if vim.tbl_contains({"pyright"}, servers) then
   }
 end
 
-lspconfig.pyright.setup {
-  on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.executeCommandProvider = false
-  end,
-  capabilities = {
-    textDocument = {
-      publishDiagnostics = {
-        tagSupport = {
-          valueSet = {2}
-        }
-      }
-    }
-  }
-}
 -- https://github.com/glepnir/lspsaga.nvim
