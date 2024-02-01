@@ -436,6 +436,11 @@ require("lazy").setup(
         "hrsh7th/nvim-cmp"
       }
     },
+    -- use the stubs to speed up pyright
+    {
+      "microsoft/python-type-stubs",
+      cond = false
+    },
     {
       "hrsh7th/cmp-buffer",
       dependencies = {

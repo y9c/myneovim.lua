@@ -86,7 +86,7 @@ require("formatter").setup(
         function()
           return {
             exe = "docformatter",
-            args = {"-"},
+            args = {"--pre-summary-newline", "--make-summary-multi-line", "--close-quotes-on-newline", "-"},
             stdin = true
           }
         end,
