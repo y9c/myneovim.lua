@@ -75,6 +75,10 @@ tools:
     format-command: 'isort --quiet -'
     format-stdin: true
 
+  python-isort: &python-ruff
+    format-command: 'ruff format -'
+    format-stdin: true
+
   snakemake-lint: &snakemake-lint
     lint-command: 'snakemake --lint text --snakefile ${INPUT}'
     lint-formats:
@@ -176,8 +180,9 @@ languages:
     - <<: *python-mypy
     # - <<: *python-autopep8
     # - <<: *python-yapf
-    - <<: *python-black
-    - <<: *python-isort
+    # - <<: *python-black
+    # - <<: *python-isort
+    - <<: *python-ruff
 
   dockerfile:
     - <<: *dockerfile-hadolint

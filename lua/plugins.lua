@@ -92,7 +92,9 @@ require("lazy").setup(
         require "nvim-treesitter.configs".setup {
           highlight = {
             enable = true,
-            disable = {"haskell"}
+            disable = {"haskell"},
+            -- https://github.com/nvim-treesitter/nvim-treesitter/issues/1573
+            additional_vim_regex_highlighting = {"python"}
           },
           textobjects = {
             select = {
@@ -433,6 +435,11 @@ require("lazy").setup(
       dependencies = {
         "hrsh7th/nvim-cmp"
       }
+    },
+    -- use the stubs to speed up pyright
+    {
+      "microsoft/python-type-stubs",
+      cond = false
     },
     {
       "hrsh7th/cmp-buffer",

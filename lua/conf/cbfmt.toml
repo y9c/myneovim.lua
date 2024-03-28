@@ -1,5 +1,5 @@
 [languages]
 rust = ["rustfmt"]
 go = ["gofmt"]
-python = ["black --fast -"]
+python = ["ruff format -"]
 r = ["R --slave --no-restore --no-save -e options(styler.colored_print.vertical=FALSE);con<-file('stdin');styler::style_text(readLines(con));close(con)"]
