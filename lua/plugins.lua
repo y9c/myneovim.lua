@@ -448,37 +448,26 @@ require("lazy").setup(
       }
     },
     {
-      "hrsh7th/cmp-vsnip",
-      dependencies = {
-        "hrsh7th/nvim-cmp"
-      }
+      "L3MON4D3/LuaSnip",
+      -- follow latest release.
+      version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+      -- install jsregexp (optional!).
+      build = "make install_jsregexp"
+      -- config = function()
+      --   -- require("luasnip.loaders.from_vscode").lazy_load({paths = {vim.fn.stdpath("config") .. "/snippets/"}})
+      -- end
     },
+    -- {
+    --   "zbirenbaum/copilot-cmp",
+    --   dependencies = {"zbirenbaum/copilot.lua"},
+    --   config = function()
+    --     require("copilot_cmp").setup()
+    --   end
+    -- },
     {
-      "hrsh7th/vim-vsnip",
-      dependencies = {
-        "hrsh7th/nvim-cmp"
-      },
-      config = function()
-        vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets/"
-      end
-    },
-    {
-      "zbirenbaum/copilot.lua",
-      cmd = "Copilot",
-      event = {"VimEnter"},
-      config = function()
-        require("copilot").setup({})
-      end
-    },
-    {
-      "zbirenbaum/copilot-cmp",
-      dependencies = {
-        "hrsh7th/nvim-cmp",
-        "zbirenbaum/copilot.lua"
-      },
-      config = function()
-        require("copilot_cmp").setup()
-      end
+      "JosefLitos/cmp-copilot",
+      opts = {},
+      dependencies = "zbirenbaum/copilot.lua"
     },
     -- Translator
     {

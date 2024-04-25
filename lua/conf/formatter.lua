@@ -74,30 +74,44 @@ require("formatter").setup(
         end
       },
       python = {
-        -- isort
         function()
           return {
-            exe = "isort",
-            args = {"-"},
+            exe = "ruff",
+            args = {"check", "--select", "I", "--fix", "-"},
             stdin = true
           }
         end,
-        -- docformatter
         function()
           return {
-            exe = "docformatter",
-            args = {"--pre-summary-newline", "--make-summary-multi-line", "--close-quotes-on-newline", "-"},
-            stdin = true
-          }
-        end,
-        -- black
-        function()
-          return {
-            exe = "black",
-            args = {"-l", 79, "-"},
+            exe = "ruff",
+            args = {"format", "-"},
             stdin = true
           }
         end
+        -- -- isort
+        -- function()
+        --   return {
+        --     exe = "isort",
+        --     args = {"-"},
+        --     stdin = true
+        --   }
+        -- end,
+        -- -- docformatter
+        -- function()
+        --   return {
+        --     exe = "docformatter",
+        --     args = {"--pre-summary-newline", "--make-summary-multi-line", "--close-quotes-on-newline", "-"},
+        --     stdin = true
+        --   }
+        -- end,
+        -- -- black
+        -- function()
+        --   return {
+        --     exe = "black",
+        --     args = {"-l", 79, "-"},
+        --     stdin = true
+        --   }
+        -- end
       },
       snakemake = {
         -- snakefmt

@@ -88,12 +88,6 @@ cmp.setup {
       return vim_item
     end
   },
-  snippet = {
-    -- REQUIRED - you must specify a snippet engine
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-    end
-  },
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
@@ -101,41 +95,95 @@ cmp.setup {
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
-    ["<CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false}),
-    -- Shift+Enter works as Enter in windows terminal by default, so you have to reset the keybinding in setting.json
-    -- Ref: https://github.com/microsoft/terminal/issues/530#issuecomment-755917602
-    ["<S-CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
+    ---
+    -- -- ["<CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = false}),
+    -- -- Shift+Enter works as Enter in windows terminal by default, so you have to reset the keybinding in setting.json
+    -- -- Ref: https://github.com/microsoft/terminal/issues/530#issuecomment-755917602
+    -- -- ["<S-CR>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
+    -- ["<Tab>"] = vim.schedule_wrap(
+    --   function(fallback)
+    --     if cmp.visible() and has_words_before() then
+    --       cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+    --     else
+    --       fallback()
+    --     end
+    --   end
+    -- ),
+    -- ["<S-Tab>"] = vim.schedule_wrap(
+    --   function(fallback)
+    --     if cmp.visible() and has_words_before() then
+    --       cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
+    --     else
+    --       fallback()
+    --     end
+    --   end
+    -- ),
+    ["<CR>"] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true
+    },
     ["<Right>"] = cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true}),
-    ["<Tab>"] = vim.schedule_wrap(
+    ["<Tab>"] = cmp.mapping(
       function(fallback)
         if cmp.visible() and has_words_before() then
-          cmp.select_next_item({behavior = cmp.SelectBehavior.Select})
+          cmp.select_next_item {behavior = cmp.SelectBehavior.Select}
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        elseif require("luasnip").expand_or_jumpable() then
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
         else
           fallback()
         end
-      end
+      end,
+      {
+        "i",
+        "s"
+      }
     ),
-    ["<S-Tab>"] = vim.schedule_wrap(
+    ["<S-Tab>"] = cmp.mapping(
       function(fallback)
-        if cmp.visible() and has_words_before() then
-          cmp.select_prev_item({behavior = cmp.SelectBehavior.Select})
+        if cmp.visible() then
+          cmp.select_prev_item()
+        elseif require("luasnip").jumpable(-1) then
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
         else
           fallback()
         end
-      end
+      end,
+      {
+        "i",
+        "s"
+      }
     )
   },
   sources = cmp.config.sources(
     {
-      {name = "copilot", keyword_length = 0, priority = 100},
+      {name = "copilot", keyword_length = 0, priority = 3},
       {name = "path", keyword_length = 0, priority = 2},
       {name = "nvim_lsp", keyword_length = 2, priority = 2},
-      {name = "vsnip", keyword_length = 1, priority = 2}
+      {name = "luasnip", keyword_length = 1, priority = 2}
     },
     {
       {name = "buffer", keyword_length = 0}
     }
-  )
+  ),
+  sorting = {
+    priority_weight = 2,
+    comparators = {
+      require("cmp_copilot.comparators").prioritize,
+      -- Below is the default comparitor list and order for nvim-cmp
+      cmp.config.compare.offset,
+      -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.locality,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order
+    }
+  }
 }
 
 cmp.setup.cmdline(
@@ -148,5 +196,41 @@ cmp.setup.cmdline(
         {name = "path"}
       }
     )
+  }
+)
+
+require("copilot").setup(
+  {
+    panel = {
+      enabled = true,
+      auto_refresh = true,
+      keymap = {
+        jump_prev = "[[",
+        jump_next = "]]",
+        accept = "<CR>",
+        refresh = "gr",
+        open = "<M-C>"
+      },
+      layout = {
+        position = "right", -- | top | left | right
+        ratio = 0.4
+      }
+    },
+    suggestion = {
+      enabled = false
+    },
+    filetypes = {
+      yaml = true,
+      markdown = true,
+      help = false,
+      gitcommit = false,
+      gitrebase = false,
+      hgcommit = false,
+      svn = false,
+      cvs = false,
+      ["."] = false
+    },
+    copilot_node_command = "node", -- Node.js version must be > 18.x
+    server_opts_overrides = {}
   }
 )

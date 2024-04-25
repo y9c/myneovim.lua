@@ -40,18 +40,17 @@ end
 --   end
 -- }
 
-if vim.tbl_contains({"lua_ls"}, servers) then
-  lspconfig.lua_ls.setup {
-    settings = {
-      Lua = {
-        diagnostics = {
-          -- Get the language server to recognize the `vim` global
-          globals = {"vim"}
-        }
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {"vim"}
       }
     }
   }
-end
+}
+
 
 if vim.tbl_contains({"yamlls"}, servers) then
   lspconfig.yamlls.setup {
