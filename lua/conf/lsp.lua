@@ -62,9 +62,9 @@ if has_value(servers, "yamlls") then
   }
 end
 
-if has_value(servers, "ruff_lsp") then
-  if vim.tbl_contains({"ruff_lsp"}, servers) then
-    lspconfig.ruff_lsp.setup {
+if has_value(servers, "ruff") then
+  if vim.tbl_contains({"ruff"}, servers) then
+    lspconfig.ruff.setup {
       on_attach = function(client, _)
         -- Disable hover in favor of Pyright
         client.server_capabilities.hoverProvider = false
@@ -81,18 +81,16 @@ local function get_python_path(workspace)
 
   -- Find and use virtualenv in workspace directory.
   for _, pattern in ipairs({"*", ".*"}) do
-    -- fint pyenv
-    -- print(workspace)
-    local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
-    if match ~= "" then
-      return path.join(vim.fs.dirname(match), "bin", "python")
-    end
     -- find poetry
     local match = vim.fn.glob(path.join(workspace, "poetry.lock"))
-    print(match)
     if match ~= "" then
       local venv = vim.fn.trim(vim.fn.system("poetry env info -p"))
       return path.join(venv, "bin", "python")
+    end
+    -- find pyenv
+    local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
+    if match ~= "" then
+      return path.join(vim.fs.dirname(match), "bin", "python")
     end
     -- find pipenv
     local match = vim.fn.glob(path.join(workspace, "Pipfile"))
@@ -127,13 +125,16 @@ if has_value(servers, "pyright") then
       }
     },
     settings = {
+      pyright = {
+        -- Using Ruff's import organizer
+        disableOrganizeImports = true
+      },
       python = {
         analysis = {
           -- warnings in factory boy for meta class overide
-          typeCheckingMode = "basic",
-          reportImportCycles = false,
-          reportMissingImports = false,
-          reportUnusedImport = false
+          typeCheckingMode = "basic"
+          -- Ignore all files for analysis to exclusively use Ruff for linting
+          -- ignore = {"*"}
         }
       }
     }
