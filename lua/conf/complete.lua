@@ -42,7 +42,7 @@ cmp.setup {
         path = "Path",
         copilot = "AI",
         buffer = "Buffer",
-        vsnip = "Snip"
+        luasnip = "Snip"
       })[entry.source.name]
       vim_item.kind =
         ({
@@ -156,12 +156,17 @@ cmp.setup {
       }
     )
   },
+  snippet = {
+    expand = function(args)
+      require("luasnip").lsp_expand(args.body)
+    end
+  },
   sources = cmp.config.sources(
     {
       {name = "copilot", keyword_length = 0, priority = 3},
       {name = "path", keyword_length = 0, priority = 2},
       {name = "nvim_lsp", keyword_length = 2, priority = 2},
-      {name = "luasnip", keyword_length = 1, priority = 2}
+      {name = "luasnip", keyword_length = 2, priority = 2}
     },
     {
       {name = "buffer", keyword_length = 0}

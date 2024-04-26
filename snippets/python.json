@@ -1,6 +1,6 @@
 {
   "HEADER and LICENSE": {
-    "prefix": "#!",
+    "prefix": ["#!", "header"],
     "body": "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n#\n# Copyright © ${CURRENT_YEAR} Ye Chang yech1990@gmail.com\n# Distributed under terms of the GNU license.\n#\n# Created: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}\n\n\"\"\"\n$0\n\"\"\"",
     "description": "Add HEADER and LICENSE."
   },

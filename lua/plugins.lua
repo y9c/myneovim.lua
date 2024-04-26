@@ -436,11 +436,6 @@ require("lazy").setup(
         "hrsh7th/nvim-cmp"
       }
     },
-    -- use the stubs to speed up pyright
-    {
-      "microsoft/python-type-stubs",
-      cond = false
-    },
     {
       "hrsh7th/cmp-buffer",
       dependencies = {
@@ -452,10 +447,16 @@ require("lazy").setup(
       -- follow latest release.
       version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
       -- install jsregexp (optional!).
-      build = "make install_jsregexp"
-      -- config = function()
-      --   -- require("luasnip.loaders.from_vscode").lazy_load({paths = {vim.fn.stdpath("config") .. "/snippets/"}})
-      -- end
+      build = "make install_jsregexp",
+      config = function()
+        require("luasnip.loaders.from_vscode").lazy_load({paths = {vim.fn.stdpath("config") .. "/snippets/"}})
+      end
+    },
+    {
+      "saadparwaiz1/cmp_luasnip",
+      dependencies = {
+        "hrsh7th/nvim-cmp"
+      }
     },
     -- {
     --   "zbirenbaum/copilot-cmp",
@@ -468,6 +469,11 @@ require("lazy").setup(
       "JosefLitos/cmp-copilot",
       opts = {},
       dependencies = "zbirenbaum/copilot.lua"
+    },
+    -- use the stubs to speed up pyright
+    {
+      "microsoft/python-type-stubs",
+      cond = false
     },
     -- Translator
     {

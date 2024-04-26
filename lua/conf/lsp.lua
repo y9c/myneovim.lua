@@ -40,17 +40,18 @@ end
 --   end
 -- }
 
-lspconfig.lua_ls.setup {
-  settings = {
-    Lua = {
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim"}
+if vim.tbl_contains({"lua_ls"}, servers) then
+  lspconfig.lua_ls.setup {
+    settings = {
+      Lua = {
+        diagnostics = {
+          -- Get the language server to recognize the `vim` global
+          globals = {"vim"}
+        }
       }
     }
   }
-}
-
+end
 
 if vim.tbl_contains({"yamlls"}, servers) then
   lspconfig.yamlls.setup {
@@ -73,6 +74,9 @@ end
 
 if vim.tbl_contains({"pyright"}, servers) then
   lspconfig.pyright.setup {
+    before_init = function(_, config)
+      config.settings.python.analysis.stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs"
+    end,
     on_attach = function(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
       client.server_capabilities.documentFormattingProvider = false
@@ -84,6 +88,14 @@ if vim.tbl_contains({"pyright"}, servers) then
           tagSupport = {
             valueSet = {2}
           }
+        }
+      }
+    },
+    settings = {
+      python = {
+        analysis = {
+          -- warnings in factory boy for meta class overide
+          typeCheckingMode = "basic"
         }
       }
     }
