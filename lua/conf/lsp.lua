@@ -103,7 +103,7 @@ local function get_python_path(workspace)
   end
 
   -- Fallback to system Python.
-  return exepath("python3") or exepath("python") or "python"
+  return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
 end
 
 if has_value(servers, "pyright") then
