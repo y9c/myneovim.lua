@@ -78,26 +78,24 @@ local function get_python_path(workspace)
   if vim.env.VIRTUAL_ENV then
     return path.join(vim.env.VIRTUAL_ENV, "bin", "python")
   end
-
   -- Find and use virtualenv in workspace directory.
   for _, pattern in ipairs({"*", ".*"}) do
-    -- find poetry
-    local match = vim.fn.glob(path.join(workspace, "poetry.lock"))
-    if match ~= "" then
-      local venv = vim.fn.trim(vim.fn.system("poetry env info -p"))
-      return path.join(venv, "bin", "python")
-    end
-    -- find pyenv
     local match = vim.fn.glob(path.join(workspace, pattern, "pyvenv.cfg"))
     if match ~= "" then
-      return path.join(vim.fs.dirname(match), "bin", "python")
+      return vim.fn.exepath(path.join(vim.fs.dirname(match), "bin", "python"))
     end
-    -- find pipenv
-    local match = vim.fn.glob(path.join(workspace, "Pipfile"))
-    if match ~= "" then
-      local venv = vim.fn.trim(vim.fn.system("pipenv --venv"))
-      return path.join(venv, "bin", "python")
-    end
+  end
+  -- Find poetry
+  local match = vim.fn.glob(path.join(workspace, "poetry.lock"))
+  if match ~= "" then
+    local venv = vim.fn.trim(vim.fn.system("poetry env info -p"))
+    return path.join(venv, "bin", "python")
+  end
+  -- Find pipenv
+  local match = vim.fn.glob(path.join(workspace, "Pipfile"))
+  if match ~= "" then
+    local venv = vim.fn.trim(vim.fn.system("pipenv --venv"))
+    return path.join(venv, "bin", "python")
   end
 
   -- Fallback to system Python.
