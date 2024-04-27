@@ -37,6 +37,40 @@ local color_palettes = {
     bracket = "#80A0C2",
     none = "NONE"
   },
+  nightsky = {
+    base0 = "#1B2229",
+    base1 = "#1c1f24",
+    base2 = "#202328",
+    base3 = "#23272e",
+    base4 = "#3f444a",
+    base5 = "#5B6268",
+    base6 = "#73797e",
+    base7 = "#9ca0a4",
+    base8 = "#b1b1b1",
+    bg = "#141821",
+    bg1 = "#222738",
+    bg_popup = "#14131f",
+    bg_highlight = "#1c202e",
+    bg_visual = "#b3deef",
+    fg = "#cccccc",
+    fg_alt = "#75715E",
+    red = "#ff5f59",
+    orange = "#cc853d",
+    yellow = "#ccad52",
+    lignt_orange = "#fab795",
+    green = "#9eb336",
+    dark_green = "#98be65",
+    cyan = "#52bccc",
+    blue = "#5c95e6",
+    violet = "#9884c4",
+    magenta = "#c678dd",
+    teal = "#47b38f",
+    grey = "#928374",
+    brown = "#c78665",
+    black = "#000000",
+    bracket = "#80A0C2",
+    none = "NONE"
+  },
   mocha = {
     base0 = "#1B2229",
     base1 = "#1c1f24",
@@ -74,7 +108,7 @@ local color_palettes = {
   }
 }
 
-local cs = color_palettes.zephyr
+local cs = color_palettes.nightsky
 
 function cs.terminal_color()
   vim.g.terminal_color_0 = cs.bg
@@ -327,7 +361,7 @@ function cs.colorscheme()
 
   vim.o.background = "dark"
   vim.o.termguicolors = true
-  vim.g.colors_name = "zephyr"
+  vim.g.colors_name = "nightsky"
   set_hl(syntax)
   async_load_plugin:send()
 end
