@@ -330,7 +330,7 @@ require("lazy").setup(
       end
     },
     {
-      "glepnir/lspsaga.nvim",
+      "nvimdev/lspsaga.nvim",
       config = function()
         require("lspsaga").setup(
           {
@@ -339,7 +339,11 @@ require("lazy").setup(
             }
           }
         )
-      end
+      end,
+      dependencies = {
+        "nvim-treesitter/nvim-treesitter", -- optional
+        "nvim-tree/nvim-web-devicons" -- optional
+      }
     },
     -- language: markdown
     -- if (vim.env.DISPLAY or vim.fn.has("macunix")) then
