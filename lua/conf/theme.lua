@@ -55,6 +55,7 @@ local color_palettes = {
     fg = "#cccccc",
     fg_alt = "#75715E",
     red = "#ff5f59",
+    redwine = "#d16d9e",
     orange = "#cc853d",
     yellow = "#ccad52",
     lignt_orange = "#fab795",
@@ -108,7 +109,7 @@ local color_palettes = {
   }
 }
 
-local cs = color_palettes.nightsky
+local cs = color_palettes.zephyr
 
 function cs.terminal_color()
   vim.g.terminal_color_0 = cs.bg
@@ -361,7 +362,7 @@ function cs.colorscheme()
 
   vim.o.background = "dark"
   vim.o.termguicolors = true
-  vim.g.colors_name = "nightsky"
+  vim.g.colors_name = "zephyr"
   set_hl(syntax)
   async_load_plugin:send()
 end
