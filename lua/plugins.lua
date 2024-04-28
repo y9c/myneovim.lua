@@ -315,20 +315,20 @@ require("lazy").setup(
         require("conf.lsp")
       end
     },
-    {
-      "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        local nls = require("null-ls")
-        nls.setup(
-          {
-            sources = {
-              nls.builtins.completion.spell,
-              nls.builtins.code_actions.gitsigns
-            }
-          }
-        )
-      end
-    },
+    -- {
+    --   "jose-elias-alvarez/null-ls.nvim",
+    --   config = function()
+    --     local nls = require("null-ls")
+    --     nls.setup(
+    --       {
+    --         sources = {
+    --           nls.builtins.completion.spell,
+    --           nls.builtins.code_actions.gitsigns
+    --         }
+    --       }
+    --     )
+    --   end
+    -- },
     {
       "nvimdev/lspsaga.nvim",
       config = function()
