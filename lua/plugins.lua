@@ -27,7 +27,7 @@ require("lazy").setup(
     },
     -- NerdIcons
     {
-      "kyazdani42/nvim-web-devicons",
+      "nvim-tree/nvim-web-devicons",
       config = function()
         require("conf.devicons")
       end
@@ -38,7 +38,7 @@ require("lazy").setup(
       config = function()
         require("conf.bufferline")
       end,
-      dependencies = {"kyazdani42/nvim-web-devicons", lazy = true}
+      dependencies = {"nvim-tree/nvim-web-devicons", lazy = true}
     },
     -- UI: Status Line (bottom)
     {
@@ -46,7 +46,7 @@ require("lazy").setup(
       config = function()
         require("conf.statusline")
       end,
-      dependencies = {"kyazdani42/nvim-web-devicons", lazy = true}
+      dependencies = {"nvim-tree/nvim-web-devicons", lazy = true}
     },
     -- UI: Startup window
     {
@@ -248,9 +248,9 @@ require("lazy").setup(
 
     -- File explorer
     {
-      "kyazdani42/nvim-tree.lua",
+      "nvim-tree/nvim-tree.lua",
       cmd = {"NvimTreeToggle", "NvimTreeOpen"},
-      dependencies = {"kyazdani42/nvim-web-devicons"},
+      dependencies = {"nvim-tree/nvim-web-devicons"},
       config = function()
         require "nvim-tree".setup {
           view = {
