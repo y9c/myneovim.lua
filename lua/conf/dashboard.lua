@@ -19,8 +19,8 @@ dashboard.section.header.val = {
 dashboard.section.buttons.val = {
   dashboard.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
   dashboard.button("f", "  Find File", ":Telescope find_files find_command=rg,--hidden,--files,--glob,!.git<CR>"),
-  dashboard.button("h", "  Recent File", ":Telescope oldfiles preview=false<CR>"),
-  dashboard.button("q", "  Quit NVIM", ":qa<CR>")
+  dashboard.button("h", "  Recent File", ":Telescope oldfiles preview=false<CR>"),
+  dashboard.button("q", "󰩈  Quit NVIM", ":qa<CR>")
 }
 
 -- make the opt run

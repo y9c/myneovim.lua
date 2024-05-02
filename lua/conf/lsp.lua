@@ -141,7 +141,7 @@ end
 
 -- backup config
 --
--- if vim.tbl_contains({"pyright"}, servers) then
+-- if vim.tbl_contains({"efm"}, servers) then
 -- lspconfig.efm.setup {
 --   -- filetypes = {"yaml", "snakemake"},
 --   filetypes = {"yaml"},
