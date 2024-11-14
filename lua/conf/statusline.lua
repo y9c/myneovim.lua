@@ -1,6 +1,6 @@
 local function lsp_servers()
   local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-  local servers = vim.lsp.get_active_clients()
+  local servers = vim.lsp.get_clients()
   local result = {}
   if #servers == 0 then
     table.insert(result, "...")
