@@ -94,8 +94,8 @@ elseif vim.fn.executable("xsel") == 1 then
       ["*"] = "xsel -i -p"
     },
     paste = {
-      ["+"] = "xsel -o -b",
-      ["*"] = "xsel -o -p"
+      -- ["+"] = "xsel -o -b",
+      -- ["*"] = "xsel -o -p"
     },
     cache_enabled = 0
   }

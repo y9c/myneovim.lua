@@ -104,10 +104,10 @@ end
 
 if has_value(servers, "pyright") then
   lspconfig.pyright.setup {
-    before_init = function(_, config)
-      config.settings.python.analysis.stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs"
-      config.settings.python.pythonPath = get_python_path(config.root_dir)
-    end,
+    -- before_init = function(_, config)
+    --   -- config.settings.python.analysis.stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs"
+    --   config.settings.python.pythonPath = get_python_path(config.root_dir)
+    -- end,
     on_attach = function(client, bufnr)
       vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
       client.server_capabilities.documentFormattingProvider = false
@@ -125,7 +125,10 @@ if has_value(servers, "pyright") then
     settings = {
       pyright = {
         -- Using Ruff's import organizer
-        disableOrganizeImports = true
+        disableOrganizeImports = true,
+        analysis = {
+          stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs"
+        }
       },
       python = {
         analysis = {
